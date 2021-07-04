@@ -1,0 +1,23 @@
+.link{
+    font-size: 22px;
+    font-weight: bold;
+/*     color: white; */
+
+}
+.link a {
+    text-decoration: none;
+    margin: 0 0px 0 40px;
+    color: white;
+
+}
+.link_active {
+    color: rgb(120, 0, 178)  !important;
+    font-size: 20px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid  rgb(120, 0, 178);
+}
+.img{
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+}
