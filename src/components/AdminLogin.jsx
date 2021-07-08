@@ -26,9 +26,10 @@ export default function SignIn() {
     if (email,password) {
       login(email, password)
       .then((res) => {
+        console.log("res :",res.data);
         localStorage.setItem("token", res.data.token);
         history.push("/admin/control")
-        /* window.location.reload(); */
+        window.location.reload();
       })
       .catch((err) => console.error(err));
     }else{
@@ -48,7 +49,7 @@ export default function SignIn() {
         <Typography /* component="h1" */ variant="h4" className={classes.text}>
          ورود
         </Typography>
-        <form className={classes.form} noValidate onSubmit={handleLogin}>
+        <form className={classes.form}  onSubmit={handleLogin}>
           <TextField
             variant="outlined"
             margin="normal"

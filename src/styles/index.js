@@ -11,7 +11,6 @@ export const loginUseStyle = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    height: "50vh",
   },
   avatar: {
     margin: theme.spacing(1),

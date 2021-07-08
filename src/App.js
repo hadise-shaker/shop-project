@@ -9,24 +9,26 @@ import { isLoggedIn } from "./utils/auth";
 import ControlPanel from "./pages/ControlPanel";
 import { ProtectedRoute } from "./pages/ProtectedRoute";
 import Price from "./pages/Price";
-import Products from "./pages/Products";
+import ProductsTablePage from "./pages/ProductsTablePage";
+import ControlPanelHeader from "./pages/ControlPanelHeader";
+import { ModalProvider } from "./context/modalContext";
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Header />
-        <Switch>
-          <Route path="/" exact component={Home}></Route>
-          <Route path="/admin/login" exact component={AdminLogin}></Route>
-          <ProtectedRoute
-            path="/admin/control"
-            exact
-            component={ControlPanel}
-          ></ProtectedRoute>
-          <Route path="/control/products" exact component={Products}></Route>
-          <Route path="/control/price" exact component={Price}></Route>
-        </Switch>
-      </Router>
+      <ModalProvider>
+        <Router>
+          <Header />
+          <Switch>
+            <Route path="/" exact component={Home}></Route>
+            <Route path="/admin-login" exact component={AdminLogin}></Route>
+            <ProtectedRoute
+              path="/admin/control/"
+              exact
+              component={ControlPanel}
+            ></ProtectedRoute>
+          </Switch>
+        </Router>
+      </ModalProvider>
     </div>
   );
 }

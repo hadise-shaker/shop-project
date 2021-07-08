@@ -8,6 +8,8 @@ import { create } from "jss";
 import rtl from "jss-rtl";
 import { StylesProvider, jssPreset } from "@material-ui/core/styles";
 import Bnazanin from "./styles/fonts/BNazanin.woff2";
+import store from "./redux/store";
+import { Provider } from "react-redux";
 import "./styles/fonts/font.css";
 const raleway = {
   fontFamily: "B Nazanin",
@@ -39,12 +41,14 @@ const theme = createMuiTheme({
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <StylesProvider jss={jss}>
-        <App />
-      </StylesProvider>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <StylesProvider jss={jss}>
+          <App />
+        </StylesProvider>
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

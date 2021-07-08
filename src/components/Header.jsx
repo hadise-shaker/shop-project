@@ -69,7 +69,7 @@ export default function BackToTop(props) {
           
 
         
-          <NavLink to="/admin/login" exact activeClassName="link_active">ورود ادمین</NavLink>
+          <NavLink to="/admin-login" exact activeClassName="link_active">ورود ادمین</NavLink>
           
           <ShoppingCartTwoTone/>
           <NavLink to="/cart" activeClassName="link_active" exact>سبد خرید</NavLink>

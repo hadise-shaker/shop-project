@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {Link, NavLink,useHistory} from "react-router-dom"
-import Products from "./Products"
+
 import Price from "./Price"
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar(props) {
   const classes = useStyles();
 
   return (

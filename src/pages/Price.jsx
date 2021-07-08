@@ -3,7 +3,7 @@ import ControlPanelHeader from "./ControlPanelHeader"
 const Price = () => {
     return (
         <div >
-<ControlPanelHeader/>
+{/* <ControlPanelHeader/> */}
             <h1>price</h1>
             <h1>price</h1>
             <h1>price</h1>
