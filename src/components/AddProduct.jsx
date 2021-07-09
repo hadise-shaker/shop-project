@@ -2,6 +2,8 @@ import React,{useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from "react-redux";
 import {addProduct,getProducts}from "../redux/actions/productActions"
+import ImageUpload from 'image-upload-react';
+import 'image-upload-react/dist/index.css';
 const useStyles = makeStyles((theme)=>({
     table: {
       minWidth: 650,
@@ -39,7 +41,6 @@ const AddProduct = ({handleClose,action}) => {
       const [price, setPrice] = useState("")
       const [description, setDescription] = useState("")
       const [category, setCategory] = useState("")
-      const [image, setImage] = useState("")
      /*  const products = useSelector((state) => state.allProducts.products); */
       const dispatch= useDispatch();
       const handleSave=(e)=>{
@@ -48,6 +49,12 @@ const AddProduct = ({handleClose,action}) => {
          /*  dispatch(getProducts()) */
           window.location.reload();
 
+      }
+
+      const [image, setImage] = useState("")
+ 
+      const handleImageSelect = (e) => {
+        setImage(URL.createObjectURL(e.target.files[0]))
       }
     return (
         <div style={modalStyle} className={classes.paper}>
@@ -60,7 +67,20 @@ const AddProduct = ({handleClose,action}) => {
           <input placeholder="توضیحات" value={description} onChange={(e)=>setDescription(e.target.value)}/>
           
           <input placeholder="دسته بندی" value={category} onChange={(e)=>setCategory(e.target.value)}/>
-          <input placeholder="عکس" value={image} onChange={(e)=>setImage(e.target.value)}/>
+          {/* <input placeholder="عکس" value={image} onChange={(e)=>setImage(e.target.value)}/> */}
+          <label>:تصویر کالا </label><br></br>
+                <ImageUpload 
+                    handleImageSelect={handleImageSelect}
+                    image={image}
+                    setImageSrc={setImage}
+                    style={{
+                        width: 120,
+                        height: 120,
+                        background: 'blue',
+                        // marginLeft: "200%",
+                    }}
+                    />
+                    <br></br><br></br>
           <button type="submit"> ذخیره</button>
         </form>
 

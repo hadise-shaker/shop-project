@@ -7,7 +7,8 @@ import { useParams } from "react-router-dom";
 import {deleteproduct} from "../redux/actions/productActions"
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import {Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper,Button,Avatar,TablePagination,makeStyles,withStyles} from '@material-ui/core';
+/* import EditProduct from "./EditProduct" */
+import {Table,TableBody,Modal,TableCell,TableContainer,TableHead,TableRow,Paper,Button,Avatar,TablePagination,makeStyles,withStyles} from '@material-ui/core';
 const ProductsTable = () => {
     const products = useSelector((state) => state.allProducts.products);
 
@@ -63,6 +64,38 @@ const dispatch = useDispatch();
         dispatch(deleteproduct(id))
         dispatch(getProducts())
       }
+
+/*       const [selected, setSelected] = useState();
+
+      const [open, setOpen] = useState(false);
+    
+    
+      const handleClose = () => {
+        setOpen(false);
+      };
+
+      function handleEditAddBtn(rw) {
+        setOpen(true);
+        setSelected(rw);
+    } */
+
+/*     const handleEditSubmit = () => {
+      dispatch(deleteproduct(selected.id));
+      let prodoct = {
+          "id":selected.id,
+          "title":nameProd, 
+          "category":categProd,
+          "image":imageSrc,
+        }
+        // for edit section
+        if(selected.id != (rows.length+1)){
+          update(prodoct);
+        }else{  // for add section
+          add(prodoct);
+        }
+        dispatch(editProd(prodoct));
+    setOpen(false);
+} */
     return (
         <Paper style={{width:"50%",margin:"auto"}} square="true" >
          <TablePagination
@@ -111,7 +144,7 @@ const dispatch = useDispatch();
               </TableCell>
               <TableCell align="center">
                 
-                <Button style={{cursor:"pointer"}} onClick={()=>{handleDeleteAProduct(row.id)}} ><EditIcon/></Button>
+                <Button style={{cursor:"pointer"}}  ><EditIcon/></Button>
               
                 {/* <button style={{cursor:"pointer"}} onClick={()=>{dispatch(removeTodo(index))}} >{test1.delete}</button> */}
               </TableCell>
@@ -123,7 +156,15 @@ const dispatch = useDispatch();
            </TableBody>
         
       </Table>
-            
+{/*       <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description" 
+        children={<EditProduct handleClose={handleClose} action={handleEditSubmit}/> }
+      >
+       
+      </Modal> */}
         </Paper>
     )
 }

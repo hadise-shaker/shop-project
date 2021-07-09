@@ -17,14 +17,14 @@ export const update = async (product) => {
     .catch((err) => console.log(err));
 };
 
-/* export const getAProductById = async (id) => {
+export const getAProductById = async (id) => {
   let res = await axios({
     method: "get",
     url: `http://localhost:5000/products/${id}`,
     headers: { "content-type": "application/json" },
   }).catch((err) => console.log(err));
   return res;
-}; */
+};
 
 /* export const deleteAproduct = async (id) => {
   await axios({
