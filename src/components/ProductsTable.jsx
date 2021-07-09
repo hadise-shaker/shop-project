@@ -1,14 +1,13 @@
 import React,{useEffect,useState,useContext} from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../redux/actions/productActions";
-import { ModalContext } from "../context/modalContext";
+
 import { useParams } from "react-router-dom";
-import Form from "./Form"
-import Modal from "./Modal"
+
 import {deleteproduct} from "../redux/actions/productActions"
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import {Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper,Button,Avatar,TablePagination,makeStyles} from '@material-ui/core';
+import {Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper,Button,Avatar,TablePagination,makeStyles,withStyles} from '@material-ui/core';
 const ProductsTable = () => {
     const products = useSelector((state) => state.allProducts.products);
 
@@ -18,6 +17,7 @@ const dispatch = useDispatch();
 
         dispatch(getProducts());
       }, []);
+      console.log("products:",products);
       const useStyles = makeStyles((theme)=>({
         table: {
           minWidth: 650,
@@ -26,7 +26,7 @@ const dispatch = useDispatch();
         },
         root:{
           fontSize:"30px",
-          backgroundColor:"pink"
+          backgroundColor:"#6980fc"
         },
         large: {
             width: theme.spacing(8),
@@ -34,6 +34,18 @@ const dispatch = useDispatch();
           },
       })
       );
+      const StyledTableRow = withStyles((theme) => ({
+        root: {
+          fontSize:"36px",
+          "&:nth-of-type(odd)": {
+            backgroundColor: "#c6cffe",
+          },
+          "&:nth-of-type(even)": {
+            backgroundColor: "#e0e4fa",
+          },
+        },
+      }))(TableRow);
+      
       const classes = useStyles();
       const [page, setPage] = useState(0);
       const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -46,7 +58,7 @@ const dispatch = useDispatch();
         setRowsPerPage(+event.target.value);
         setPage(0);
       };
-      const { modal, handleModal, modalContent } = useContext(ModalContext);
+
       const handleDeleteAProduct=(id)=>{
         dispatch(deleteproduct(id))
         dispatch(getProducts())
@@ -70,6 +82,7 @@ const dispatch = useDispatch();
           <TableCell align="center" /* className={classes.root} */>تصویر :)</TableCell>
             <TableCell align="center" /* className={classes.root} */>نام کالا :)</TableCell>
             <TableCell align="center">دسته بندی :) </TableCell>
+            <TableCell align="center">حذف </TableCell>
             <TableCell align="center">ویرایش </TableCell>
 {/*             <TableCell align="right">description :) &nbsp;</TableCell>
             <TableCell align="right">category :) &nbsp;</TableCell>
@@ -78,7 +91,7 @@ const dispatch = useDispatch();
         </TableHead>
         <TableBody>
              {products?.slice(page*rowsPerPage,page*rowsPerPage+rowsPerPage).map((row,index) => (
-            <TableRow key={row.id}>
+            <StyledTableRow key={row.id}>
                 <TableCell align="center"/* component="th" scope="row" */>
                 <Avatar alt="Remy Sharp" src={row.image} className={classes.large} />
               </TableCell>
@@ -92,13 +105,19 @@ const dispatch = useDispatch();
               <TableCell align="center">
                 
                 <Button style={{cursor:"pointer"}} onClick={()=>{handleDeleteAProduct(row.id)}} ><DeleteIcon/></Button>
+
+              
+                {/* <button style={{cursor:"pointer"}} onClick={()=>{dispatch(removeTodo(index))}} >{test1.delete}</button> */}
+              </TableCell>
+              <TableCell align="center">
+                
                 <Button style={{cursor:"pointer"}} onClick={()=>{handleDeleteAProduct(row.id)}} ><EditIcon/></Button>
               
                 {/* <button style={{cursor:"pointer"}} onClick={()=>{dispatch(removeTodo(index))}} >{test1.delete}</button> */}
               </TableCell>
               
 
-            </TableRow>
+            </StyledTableRow>
            
           ))}
            </TableBody>

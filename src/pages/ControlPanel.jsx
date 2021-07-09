@@ -4,17 +4,26 @@ import {isLoggedIn}from "../utils/auth"
 import ControlPanelHeader from "./ControlPanelHeader"
 import Price from "./Price"
 import ProductsTablePage from "./ProductsTablePage"
+import {Link, NavLink,useHistory} from "react-router-dom"
 const ControlPanel = () => {
     return (
 
-            <Router>
+            <><Router>
                 <ControlPanelHeader/>
-                <Switch>
-                    <Route path="/control/products" exact component={ProductsTablePage}></Route>
-                    <Route path="/control/price" exact component={Price}></Route>
-                </Switch>
+
+                          
+
+
+       
+               <Route exact path="/products" component={ProductsTablePage} />
+		    <Route exact path="/price" component={Price} />
+
+     
+            
 
             </Router>
+            
+            </>
             
             
 

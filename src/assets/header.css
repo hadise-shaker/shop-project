@@ -4,6 +4,13 @@
 /*     color: white; */
 
 }
+.link-admin{
+    font-size: 22px;
+    font-weight: bold;
+/*     color: white; */
+text-align: center;
+
+}
 .link a {
     text-decoration: none;
     margin: 0 0px 0 40px;

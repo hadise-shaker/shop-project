@@ -28,7 +28,7 @@ export default function SignIn() {
       .then((res) => {
         console.log("res :",res.data);
         localStorage.setItem("token", res.data.token);
-        history.push("/admin/control")
+        history.push("/control")
         window.location.reload();
       })
       .catch((err) => console.error(err));

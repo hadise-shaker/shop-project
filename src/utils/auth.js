@@ -1,3 +1,5 @@
+import { useHistory } from "react-router-dom";
+
 export const isLoggedIn = () => {
   /*
    * Check if user is logged in and has token
@@ -9,11 +11,12 @@ export const isLoggedIn = () => {
   return false;
 };
 
-export const logout = () => {
+export const Logout = () => {
   /*
    * Clear localStorage
    */
 
   localStorage.clear();
   window.location.reload();
+  /*   history.push("/home"); */
 };

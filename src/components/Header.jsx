@@ -55,7 +55,7 @@ ScrollTop.propTypes = {
   window: PropTypes.func,
 };
 
-export default function BackToTop(props) {
+export default function BackToTop({children,props}) {
   let history = useHistory()
   const classes = loginUseStyle();
   return (
@@ -65,14 +65,14 @@ export default function BackToTop(props) {
         <Toolbar className="link">
            <img className="img" src={logo} onClick={()=>history.push("/")} />
           
-          <Link /* variant="h6" */ className={classes.root} to="/" >فروشگاه فلان</Link>
+          <Link /* variant="h6" */ className={classes.root} to="/home" >فروشگاه فلان</Link>
           
 
         
-          <NavLink to="/admin-login" exact activeClassName="link_active">ورود ادمین</NavLink>
+          <Link to="/login" exact activeClassName="link_active">ورود ادمین</Link>
           
           <ShoppingCartTwoTone/>
-          <NavLink to="/cart" activeClassName="link_active" exact>سبد خرید</NavLink>
+          <Link to="/cart" activeClassName="link_active" exact>سبد خرید</Link>
 
         </Toolbar>
 
@@ -104,6 +104,8 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>
+
+
     </React.Fragment>
   );
 }

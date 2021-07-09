@@ -2,6 +2,7 @@ import {
   getAProductById,
   getAllProducts,
   deleteAproduct,
+  addAproduct,
 } from "../../api/products";
 
 import { ActionTypes } from "../types/actionTypes";
@@ -25,6 +26,24 @@ export function removeProduct(id) {
     payload: id,
   };
 }
+export function createProduct(data) {
+  return {
+    type: ActionTypes.ADD_PRODUCT,
+    payload: data,
+  };
+}
+
+export const editItem = (item) => {
+  return {
+    type: ActionTypes.EDIT_ITEM,
+    payload: item,
+  };
+};
+export const setEdit = () => {
+  return {
+    type: ActionTypes.SET_EDIT,
+  };
+};
 
 // export const getProducts = () => (dispatch, getState) => {
 //   getAllProducts().then((res) => {
@@ -46,4 +65,8 @@ export const getAProduct = (id) => async (dispatch) => {
 export const deleteproduct = (id) => async (dispatch) => {
   await deleteAproduct(id);
   dispatch(removeProduct(id));
+};
+export const addProduct = (data) => async (dispatch) => {
+  await createProduct(data);
+  dispatch(addAproduct(data));
 };

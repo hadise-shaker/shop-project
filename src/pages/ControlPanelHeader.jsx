@@ -6,10 +6,12 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { COLORS, FONTS } from "../styles/constantsVariables";
 import {Link, NavLink,useHistory} from "react-router-dom"
-
+import {Logout}from "../utils/auth"
 import Price from "./Price"
-
+import {loginUseStyle} from "../styles/index"
+import "../assets/header.css"
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -20,29 +22,40 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  header: {
+    position: "fixed",
+/*     bottom: theme.spacing(2),
+    right: theme.spacing(2), */
+    backgroundColor: COLORS.mainColor,
+  }
 }));
 
 
 export default function ButtonAppBar(props) {
+  const history =useHistory();
   const classes = useStyles();
+const handlLogOut=()=>{
+    localStorage.clear();
+    history.push("/home");
+    window.location.reload();
+}
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            News
-          </Typography>
-          {/* <NavLink to="/" exact></NavLink> */}
+      <AppBar position="static" className={classes.header} >
+        <Toolbar className="link link-admin">
 
-          <NavLink to="/control/products"  /* component={Products} */> کالا</NavLink>
-          <NavLink to="/control/price"  /* component={Price} */ > قیمت </NavLink>
-          <Button color="inherit">Login</Button>
+
+          {/* <NavLink to="/" exact></NavLink> */}
+<Link to="/products"  /* component={Products} */> کالا</Link>
+          <Link to="/price"  /* component={Price} */ > قیمت </Link>
+          <Link to="/home"  /* component={Price} */ > خانه </Link>
+          <Button color="inherit" onClick={handlLogOut}>Log Out</Button>  
+
+
         </Toolbar>
       </AppBar>
+      
     </div>
   );
 }

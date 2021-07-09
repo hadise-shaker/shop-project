@@ -11,24 +11,21 @@ import { ProtectedRoute } from "./pages/ProtectedRoute";
 import Price from "./pages/Price";
 import ProductsTablePage from "./pages/ProductsTablePage";
 import ControlPanelHeader from "./pages/ControlPanelHeader";
-import { ModalProvider } from "./context/modalContext";
+import { useLocation } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-      <ModalProvider>
-        <Router>
+      <Router>
+        {!isLoggedIn() && <Header />}
+
+        <Route path="/home" exact /* component={Home} */>
           <Header />
-          <Switch>
-            <Route path="/" exact component={Home}></Route>
-            <Route path="/admin-login" exact component={AdminLogin}></Route>
-            <ProtectedRoute
-              path="/admin/control/"
-              exact
-              component={ControlPanel}
-            ></ProtectedRoute>
-          </Switch>
-        </Router>
-      </ModalProvider>
+          <Home />
+        </Route>
+        <Route path="/login" exact component={AdminLogin}></Route>
+
+        <Route path="/control" exact component={ControlPanel}></Route>
+      </Router>
     </div>
   );
 }

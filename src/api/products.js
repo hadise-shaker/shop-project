@@ -8,15 +8,23 @@ export const getAllProducts = async () => {
   }).catch((err) => console.log(err));
   return res;
 };
+export const update = async (product) => {
+  const data = await axios
+    .put(`http://localhost:5000/products/${product.id}`, product)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => console.log(err));
+};
 
-export const getAProductById = async (id) => {
+/* export const getAProductById = async (id) => {
   let res = await axios({
     method: "get",
     url: `http://localhost:5000/products/${id}`,
     headers: { "content-type": "application/json" },
   }).catch((err) => console.log(err));
   return res;
-};
+}; */
 
 /* export const deleteAproduct = async (id) => {
   await axios({
@@ -26,6 +34,9 @@ export const getAProductById = async (id) => {
   }).catch((err) => console.log(err));
 };
  */
+export const addAproduct = async (data) => {
+  return await axios.post(`http://localhost:5000/products`, data);
+};
 export const deleteAproduct = async (id) => {
   /*   fetch(`http://localhost:5000/products/${taskId}`, {
     method: "DELETE",
