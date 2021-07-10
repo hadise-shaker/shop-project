@@ -5,7 +5,9 @@ import ProductsTable from "../components/ProductsTable"
 import Test from "../components/Test"
 import AddProduct from "../components/AddProduct"
 import { useDispatch, useSelector } from "react-redux";
-import {addProduct,getProducts}from "../redux/actions/productActions"
+import {update,addAproduct}from "../api/products"
+
+import {addProduct,getProducts,deleteproduct,editItem}from "../redux/actions/productActions"
 const useStyles = makeStyles((theme)=>({
     table: {
       minWidth: 650,
@@ -24,7 +26,7 @@ const useStyles = makeStyles((theme)=>({
   }));
   
 
-/*   function rand() {
+  function rand() {
     return Math.round(Math.random() * 20) - 10;
   }
   
@@ -37,7 +39,7 @@ const useStyles = makeStyles((theme)=>({
       left: `${left}%`,
       transform: `translate(-${top}%, -${left}%)`,
     };
-  } */
+  }
 const Products = () => {
 
  const products = useSelector((state) => state.allProducts.products);
@@ -49,8 +51,10 @@ const dispatch = useDispatch();
 
 
       const classes = useStyles();
-/*       const [modalStyle] = React.useState(getModalStyle); */
+      const [modalStyle] = React.useState(getModalStyle);
       const [open, setOpen] = React.useState(false);
+      const [open2, setOpen2] = useState(false);
+      const [selected, setSelected] = useState();
     
       const handleOpen = () => {
         setOpen(true);
@@ -58,6 +62,16 @@ const dispatch = useDispatch();
     
       const handleClose = () => {
         setOpen(false);
+      };
+      const handleOpen2 = (row) => {
+        setOpen2(true);
+        setSelected(row);
+
+        
+      };
+    
+      const handleClose2 = () => {
+        setOpen2(false);
       };
       /* const body = (
         <div style={modalStyle} className={classes.paper}>
@@ -80,7 +94,41 @@ const dispatch = useDispatch();
           <button onClick={handleClose}>close</button>
         </div>
       ); */
+      function setdisplay() {
+        return{
+          width:"100%"
+        }
+        
+      }
+      const [title, setTitle] = useState("")
+      const [price, setPrice] = useState("")
+      const [description, setDescription] = useState("")
+      const [category, setCategory] = useState("")
+      const [image, setImage] = useState("")
+      const onImageChange=(event)=>{
+        if (event.target.files&& event.target.files[0]) {
+          let img = event.target.files[0];
+          setImage(URL.createObjectURL(img))
+        }
+      }
+      const handleEditSubmit = (e) => {
+        e.preventDefault() ;
 
+        let product = {
+            "id":selected.id,
+            "title":title, 
+            "category":category,
+            "image":image,
+          }
+
+
+            update(product);
+
+          dispatch(editItem(product));
+          dispatch(getProducts());
+/*           window.location.reload() */
+      setOpen2(false);
+  }
     return (
         <div >
             
@@ -98,8 +146,37 @@ const dispatch = useDispatch();
        {/*  {body} */}
        
       </Modal>
+
            {/*  <TableContainer component={Paper} > */}
-            <ProductsTable/>
+            <ProductsTable action={handleOpen2}/>
+
+
+            <Modal        
+        open={open2}
+        onClose={handleClose2}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description" >
+
+          <div style={getModalStyle()} className={classes.paper}>
+          افزودن/ ویرایش کالا <br></br><br></br>
+            <form style={setdisplay()} noValidate autoComplete="off">
+            <input placeholder="نام کالا" value={title} onChange={(e)=>setTitle(e.target.value)}/>
+          
+          <input placeholder="قیمت" value={price} onChange={(e)=>setPrice(e.target.value)}/>
+          
+          <input placeholder="توضیحات" value={description} onChange={(e)=>setDescription(e.target.value)}/>
+          
+          <input placeholder="دسته بندی" value={category} onChange={(e)=>setCategory(e.target.value)}/>
+          <img src={image}/>
+                    <h1>select image</h1>
+                    <input type="file" name="myImage" onChange={onImageChange}/>
+
+                    <br></br><br></br>
+                    <button type="submit" onClick={handleEditSubmit}>ذخیره</button>
+            </form>
+          </div>
+
+      </Modal>
             <br></br>
             <br></br>
             <br></br>

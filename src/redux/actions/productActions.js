@@ -33,17 +33,17 @@ export function createProduct(data) {
   };
 }
 
-export const editItem = (item) => {
+export const editItem = (product) => {
   return {
-    type: ActionTypes.EDIT_ITEM,
-    payload: item,
+    type: ActionTypes.EDIT_PRODUCT,
+    payload: product,
   };
 };
-export const setEdit = () => {
+/* export const setEdit = () => {
   return {
     type: ActionTypes.SET_EDIT,
   };
-};
+}; */
 
 // export const getProducts = () => (dispatch, getState) => {
 //   getAllProducts().then((res) => {

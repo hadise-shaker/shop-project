@@ -9,7 +9,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 /* import EditProduct from "./EditProduct" */
 import {Table,TableBody,Modal,TableCell,TableContainer,TableHead,TableRow,Paper,Button,Avatar,TablePagination,makeStyles,withStyles} from '@material-ui/core';
-const ProductsTable = () => {
+const ProductsTable = ({action}) => {
     const products = useSelector((state) => state.allProducts.products);
 
 const dispatch = useDispatch();
@@ -144,7 +144,7 @@ const dispatch = useDispatch();
               </TableCell>
               <TableCell align="center">
                 
-                <Button style={{cursor:"pointer"}}  ><EditIcon/></Button>
+                <Button style={{cursor:"pointer"}}  onClick={()=>action(row,index)}><EditIcon/></Button>
               
                 {/* <button style={{cursor:"pointer"}} onClick={()=>{dispatch(removeTodo(index))}} >{test1.delete}</button> */}
               </TableCell>

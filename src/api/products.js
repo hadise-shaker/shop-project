@@ -34,8 +34,14 @@ export const getAProductById = async (id) => {
   }).catch((err) => console.log(err));
 };
  */
-export const addAproduct = async (data) => {
-  return await axios.post(`http://localhost:5000/products`, data);
+export const addAproduct = async (product) => {
+  const data = await axios
+    .post(`http://localhost:5000/products`, product)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => console.log("error"));
+  /*   return await axios.post(`http://localhost:5000/products`, data); */
 };
 export const deleteAproduct = async (id) => {
   /*   fetch(`http://localhost:5000/products/${taskId}`, {

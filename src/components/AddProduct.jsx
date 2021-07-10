@@ -41,6 +41,7 @@ const AddProduct = ({handleClose,action}) => {
       const [price, setPrice] = useState("")
       const [description, setDescription] = useState("")
       const [category, setCategory] = useState("")
+    
      /*  const products = useSelector((state) => state.allProducts.products); */
       const dispatch= useDispatch();
       const handleSave=(e)=>{
@@ -53,8 +54,14 @@ const AddProduct = ({handleClose,action}) => {
 
       const [image, setImage] = useState("")
  
-      const handleImageSelect = (e) => {
+/*       const handleImageSelect = (e) => {
         setImage(URL.createObjectURL(e.target.files[0]))
+      } */
+      const onImageChange=(event)=>{
+        if (event.target.files&& event.target.files[0]) {
+          let img = event.target.files[0];
+          setImage(URL.createObjectURL(img))
+        }
       }
     return (
         <div style={modalStyle} className={classes.paper}>
@@ -69,9 +76,9 @@ const AddProduct = ({handleClose,action}) => {
           <input placeholder="دسته بندی" value={category} onChange={(e)=>setCategory(e.target.value)}/>
           {/* <input placeholder="عکس" value={image} onChange={(e)=>setImage(e.target.value)}/> */}
           <label>:تصویر کالا </label><br></br>
-                <ImageUpload 
+{/*                 <ImageUpload 
                     handleImageSelect={handleImageSelect}
-                    image={image}
+                    imageSrc={image}
                     setImageSrc={setImage}
                     style={{
                         width: 120,
@@ -79,7 +86,12 @@ const AddProduct = ({handleClose,action}) => {
                         background: 'blue',
                         // marginLeft: "200%",
                     }}
-                    />
+                    /> */}
+
+                    <img src={image}/>
+                    <h1>select image</h1>
+                    <input type="file" name="myImage" onChange={onImageChange}/>
+
                     <br></br><br></br>
           <button type="submit"> ذخیره</button>
         </form>
