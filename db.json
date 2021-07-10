@@ -2,27 +2,21 @@
   "products": [
     {
       "id": 5,
-      "title": "دستبند زنجیره ای",
-      "price": 695,
-      "description": "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
-      "category": "جواهرات",
-      "image": "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg"
+      "title": "aa",
+      "category": "",
+      "image": ""
     },
     {
       "id": 6,
-      "title": "انگشتر نقره ",
-      "price": 168,
-      "description": "Satisfaction Guaranteed. Return or exchange any order within 30 days.Designed and sold by Hafeez Center in the United States. Satisfaction Guaranteed. Return or exchange any order within 30 days.",
-      "category": "جواهرات",
-      "image": "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg"
+      "title": "aa",
+      "category": "",
+      "image": ""
     },
     {
       "id": 7,
-      "title": "حلقه الماس",
-      "price": 9.99,
-      "description": "",
-      "category": "جواهرات",
-      "image": "https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg"
+      "title": "",
+      "category": "",
+      "image": "blob:http://localhost:3000/8fdfebe4-59bb-4b0a-9a3d-d6ea69f40e4d"
     },
     {
       "id": 8,
@@ -121,11 +115,11 @@
       "image": "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg"
     },
     {
-      "title": "",
-      "price": "",
-      "description": "",
-      "category": "",
-      "image": "blob:http://localhost:3000/a58beefb-8db9-449d-a080-fd31248f1aff",
+      "title": "aaaaaaaa",
+      "price": "aaaaaaaaaaaaaaaaa",
+      "description": "aaaaaaaaaaaaa",
+      "category": "aaa",
+      "image": "blob:http://localhost:3000/3af2149b-8caa-47ae-ac11-a37b0f77cfaa",
       "id": 21
     }
   ]

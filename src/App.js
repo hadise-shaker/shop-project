@@ -16,15 +16,29 @@ function App() {
   return (
     <div className="App">
       <Router>
-        {!isLoggedIn() && <Header />}
+        <Switch>
+          <Route path="/" exact /* component={Home} */>
+            <Home />
+          </Route>
+          {!isLoggedIn() ? (
+            <>
+              <Header />
+              <Route path="/login" exact component={AdminLogin}></Route>
+            </>
+          ) : (
+            <>
+              <ControlPanelHeader />
+              <ProtectedRoute
+                exact
+                path="/products"
+                component={ProductsTablePage}
+              />
+              <ProtectedRoute exact path="/price" component={Price} />
+            </>
+          )}
 
-        <Route path="/home" exact /* component={Home} */>
-          <Header />
-          <Home />
-        </Route>
-        <Route path="/login" exact component={AdminLogin}></Route>
-
-        <Route path="/control" exact component={ControlPanel}></Route>
+          {/* <Route path="/control" exact component={ControlPanel}></Route> */}
+        </Switch>
       </Router>
     </div>
   );

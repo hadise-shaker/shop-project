@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   header: {
-    position: "fixed",
+
 /*     bottom: theme.spacing(2),
     right: theme.spacing(2), */
     backgroundColor: COLORS.mainColor,
@@ -36,7 +36,7 @@ export default function ButtonAppBar(props) {
   const classes = useStyles();
 const handlLogOut=()=>{
     localStorage.clear();
-    history.push("/home");
+    history.push("/");
     window.location.reload();
 }
 
@@ -47,10 +47,10 @@ const handlLogOut=()=>{
 
 
           {/* <NavLink to="/" exact></NavLink> */}
-<Link to="/products"  /* component={Products} */> کالا</Link>
-          <Link to="/price"  /* component={Price} */ > قیمت </Link>
-          <Link to="/home"  /* component={Price} */ > خانه </Link>
-          <Button color="inherit" onClick={handlLogOut}>Log Out</Button>  
+          <NavLink to="/products"  /* component={Products} */> کالا</NavLink>
+          <NavLink to="/price"  /* component={Price} */ > قیمت </NavLink>
+          <NavLink to="/"  /* component={Price} */ > خانه </NavLink>
+          <Button color="inherit" onClick={handlLogOut}>خروج</Button>  
 
 
         </Toolbar>

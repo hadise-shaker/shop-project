@@ -8,19 +8,22 @@ import {Link, NavLink,useHistory} from "react-router-dom"
 const ControlPanel = () => {
     return (
 
-            <><Router>
-                <ControlPanelHeader/>
+            <>
+            <Router>
+{/*                 <ControlPanelHeader/> */}
 
                           
+                    <Switch>
+
 
 
        
-               <Route exact path="/products" component={ProductsTablePage} />
-		    <Route exact path="/price" component={Price} />
+{/*                <Route exact path="/products" component={ProductsTablePage} />
+		        <Route exact path="/price" component={Price} /> */}
 
      
             
-
+                </Switch>
             </Router>
             
             </>

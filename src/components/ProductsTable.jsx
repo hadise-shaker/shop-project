@@ -64,42 +64,10 @@ const dispatch = useDispatch();
         dispatch(deleteproduct(id))
         dispatch(getProducts())
       }
-
-/*       const [selected, setSelected] = useState();
-
-      const [open, setOpen] = useState(false);
-    
-    
-      const handleClose = () => {
-        setOpen(false);
-      };
-
-      function handleEditAddBtn(rw) {
-        setOpen(true);
-        setSelected(rw);
-    } */
-
-/*     const handleEditSubmit = () => {
-      dispatch(deleteproduct(selected.id));
-      let prodoct = {
-          "id":selected.id,
-          "title":nameProd, 
-          "category":categProd,
-          "image":imageSrc,
-        }
-        // for edit section
-        if(selected.id != (rows.length+1)){
-          update(prodoct);
-        }else{  // for add section
-          add(prodoct);
-        }
-        dispatch(editProd(prodoct));
-    setOpen(false);
-} */
     return (
         <Paper style={{width:"50%",margin:"auto"}} square="true" >
          <TablePagination
-        rowsPerPageOptions={[5, 10, 15]}
+        rowsPerPageOptions={[5, 10, 15,{ label: 'All', value: -1 }]}
         component="div"
         count={products?.length}
         rowsPerPage={rowsPerPage}

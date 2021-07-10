@@ -183,8 +183,8 @@ const dispatch = useDispatch();
             <br></br>
             <br></br>
             <br></br>
-            <h1 style={{textAlign:"center"}}> TABLE TEST </h1>
-            <Test/>
+{/*             <h1 style={{textAlign:"center"}}> TABLE TEST </h1>
+            <Test/> */}
             <br></br>
             <br></br>
             <br></br>

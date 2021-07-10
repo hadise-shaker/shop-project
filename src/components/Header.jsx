@@ -65,7 +65,7 @@ export default function BackToTop({children,props}) {
         <Toolbar className="link">
            <img className="img" src={logo} onClick={()=>history.push("/")} />
           
-          <Link /* variant="h6" */ className={classes.root} to="/home" >فروشگاه فلان</Link>
+          <Link /* variant="h6" */ className={classes.root} to="/" >فروشگاه فلان</Link>
           
 
         
