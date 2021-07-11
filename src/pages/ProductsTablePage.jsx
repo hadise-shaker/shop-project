@@ -4,6 +4,7 @@ import {Modal ,Button} from '@material-ui/core';
 import ProductsTable from "../components/ProductsTable"
 import Test from "../components/Test"
 import AddProduct from "../components/AddProduct"
+import EditProduct from "../components/EditProduct"
 import { useDispatch, useSelector } from "react-redux";
 import {update,addAproduct}from "../api/products"
 
@@ -148,35 +149,17 @@ const dispatch = useDispatch();
       </Modal>
 
            {/*  <TableContainer component={Paper} > */}
-            <ProductsTable action={handleOpen2}/>
+            <ProductsTable action={handleOpen2} />
 
 
             <Modal        
         open={open2}
         onClose={handleClose2}
         aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description" >
+        aria-describedby="simple-modal-description"
+        children={<EditProduct action={selected}/>}
+        />
 
-          <div style={getModalStyle()} className={classes.paper}>
-          افزودن/ ویرایش کالا <br></br><br></br>
-            <form style={setdisplay()} noValidate autoComplete="off">
-            <input placeholder="نام کالا" value={title} onChange={(e)=>setTitle(e.target.value)}/>
-          
-          <input placeholder="قیمت" value={price} onChange={(e)=>setPrice(e.target.value)}/>
-          
-          <input placeholder="توضیحات" value={description} onChange={(e)=>setDescription(e.target.value)}/>
-          
-          <input placeholder="دسته بندی" value={category} onChange={(e)=>setCategory(e.target.value)}/>
-          <img src={image}/>
-                    <h1>select image</h1>
-                    <input type="file" name="myImage" onChange={onImageChange}/>
-
-                    <br></br><br></br>
-                    <button type="submit" onClick={handleEditSubmit}>ذخیره</button>
-            </form>
-          </div>
-
-      </Modal>
             <br></br>
             <br></br>
             <br></br>

@@ -12,6 +12,8 @@ import Price from "./pages/Price";
 import ProductsTablePage from "./pages/ProductsTablePage";
 import ControlPanelHeader from "./pages/ControlPanelHeader";
 import { useLocation } from "react-router-dom";
+import Products from "./pages/ProductsTablePage";
+import Footer from "./components/Footer";
 function App() {
   return (
     <div className="App">
@@ -20,6 +22,7 @@ function App() {
           <Route path="/" exact /* component={Home} */>
             <Home />
           </Route>
+
           {!isLoggedIn() ? (
             <>
               <Header />
@@ -29,11 +32,15 @@ function App() {
             <>
               <ControlPanelHeader />
               <ProtectedRoute
-                exact
-                path="/products"
-                component={ProductsTablePage}
+                path="/login/products"
+                /* exact */
+                component={Products}
               />
-              <ProtectedRoute exact path="/price" component={Price} />
+
+              <ProtectedRoute
+                path="/login/price"
+                /* exact */ component={Price}
+              />
             </>
           )}
 

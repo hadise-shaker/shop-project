@@ -16,10 +16,10 @@ const ControlPanel = () => {
                     <Switch>
 
 
-
+{/* <ProductsTablePage/> */}
        
-{/*                <Route exact path="/products" component={ProductsTablePage} />
-		        <Route exact path="/price" component={Price} /> */}
+                <Route exact path="/control/products" component={ProductsTablePage} />
+		        <Route exact path="/price" component={Price} />
 
      
             

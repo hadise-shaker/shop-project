@@ -47,9 +47,9 @@ const handlLogOut=()=>{
 
 
           {/* <NavLink to="/" exact></NavLink> */}
-          <NavLink to="/products"  /* component={Products} */> کالا</NavLink>
-          <NavLink to="/price"  /* component={Price} */ > قیمت </NavLink>
-          <NavLink to="/"  /* component={Price} */ > خانه </NavLink>
+          <NavLink to="/login/products"  exact activeClassName="link_active" /* component={Products} */> کالا</NavLink>
+          <NavLink to="/login/price" exact activeClassName="link_active"/* component={Price} */ > قیمت </NavLink>
+          <NavLink to="/" exact activeClassName="link_active"/* component={Price} */ > خانه </NavLink>
           <Button color="inherit" onClick={handlLogOut}>خروج</Button>  
 
 

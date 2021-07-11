@@ -15,8 +15,10 @@ import Container from '@material-ui/core/Container';
 import {loginUseStyle} from "../styles/index"
 import { useHistory } from 'react-router-dom';
 import {login} from "../api/login"
+import Header from "./Header"
 
 export default function SignIn() {
+
   const [email,setEmail]=useState();
   const [password,setPassword]=useState();
   const history = useHistory();
@@ -28,7 +30,7 @@ export default function SignIn() {
       .then((res) => {
         console.log("res :",res.data);
         localStorage.setItem("token", res.data.token);
-        history.push("/control")
+        history.push("/login/products")
         window.location.reload();
       })
       .catch((err) => console.error(err));
@@ -40,6 +42,8 @@ export default function SignIn() {
 /*   let history=useHistory(); */
 /*   console.log(useHistory()); */
   return (
+  <>
+{/*     <Header/> */}
     <Container component="main" maxWidth="xs" color="primary"  className={classes.container}>
       {/* <CssBaseline /> */}
       <div className={classes.paper}>
@@ -106,5 +110,6 @@ export default function SignIn() {
         <Copyright />
       </Box> */}
     </Container>
+    </>
   );
 }

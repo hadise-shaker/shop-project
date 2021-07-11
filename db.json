@@ -1,30 +1,10 @@
 {
   "products": [
     {
-      "id": 5,
-      "title": "aa",
-      "category": "",
-      "image": ""
-    },
-    {
-      "id": 6,
-      "title": "aa",
-      "category": "",
-      "image": ""
-    },
-    {
-      "id": 7,
-      "title": "",
-      "category": "",
-      "image": "blob:http://localhost:3000/8fdfebe4-59bb-4b0a-9a3d-d6ea69f40e4d"
-    },
-    {
       "id": 8,
-      "title": "انگشتر طلایی",
-      "price": 10.99,
-      "description": "Rose Gold Plated Double Flared Tunnel Plug Earrings. Made of 316L Stainless Steel",
-      "category": "جواهرات",
-      "image": "https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg"
+      "title": "سسس",
+      "category": "",
+      "image": ""
     },
     {
       "id": 10,
@@ -113,14 +93,6 @@
       "description": "95%Cotton,5%Spandex, Features: Casual, Short Sleeve, Letter Print,V-Neck,Fashion Tees, The fabric is soft and has some stretch., Occasion: Casual/Office/Beach/School/Home/Street. Season: Spring,Summer,Autumn,Winter.",
       "category": "لباس زنانه",
       "image": "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg"
-    },
-    {
-      "title": "aaaaaaaa",
-      "price": "aaaaaaaaaaaaaaaaa",
-      "description": "aaaaaaaaaaaaa",
-      "category": "aaa",
-      "image": "blob:http://localhost:3000/3af2149b-8caa-47ae-ac11-a37b0f77cfaa",
-      "id": 21
     }
   ]
 }
