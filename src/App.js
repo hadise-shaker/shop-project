@@ -32,13 +32,13 @@ function App() {
             <>
               <ControlPanelHeader />
               <ProtectedRoute
-                path="/login/products"
+                path="/admin/products"
                 /* exact */
                 component={Products}
               />
 
               <ProtectedRoute
-                path="/login/price"
+                path="/admin/price"
                 /* exact */ component={Price}
               />
             </>
