@@ -1,15 +1,15 @@
 import React,{useEffect,useState,useContext} from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../redux/actions/productActions";
+
 
 import { useParams } from "react-router-dom";
-
-import {deleteproduct} from "../redux/actions/productActions"
+import {update,addAproduct}from "../api/products"
+import {addProduct,getProducts,deleteproduct,editItem}from "../redux/actions/productActions"
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 /* import EditProduct from "./EditProduct" */
 import {Table,TableBody,Modal,TableCell,TableContainer,TableHead,TableRow,Paper,Button,Avatar,TablePagination,makeStyles,withStyles} from '@material-ui/core';
-const ProductsTable = ({action}) => {
+const SimpleTable = ({action}) => {
     const products = useSelector((state) => state.allProducts.products);
 
 const dispatch = useDispatch();
@@ -50,7 +50,8 @@ const dispatch = useDispatch();
       const classes = useStyles();
       const [page, setPage] = useState(0);
       const [rowsPerPage, setRowsPerPage] = useState(5);
-    
+      const [edit, setEdit] = useState(false)
+      const [price, setPrice] = useState()
       const handleChangePage = (event, newPage) => {
         setPage(newPage);
       };
@@ -60,9 +61,31 @@ const dispatch = useDispatch();
         setPage(0);
       };
 
-      const handleDeleteAProduct=(id)=>{
+/*       const handleDeleteAProduct=(id)=>{
         dispatch(deleteproduct(id))
         dispatch(getProducts())
+      } */
+      const handleEditPrice=(id)=>{
+        setEdit(true)
+
+      }
+      const handleEditSave=(row)=>{
+        let product = {
+            "id":row.id,
+            "price":price, 
+            "title":row.title,
+            "image":row.image,
+            "category":row.category,
+            "number":row.number
+          }
+  
+  
+            update(product).then( dispatch(getProducts()));
+            
+          /* dispatch(editItem(product)); */
+        /*   window.location.reload() */
+         
+           
       }
     return (
         <Paper style={{width:"50%",margin:"auto"}} square="true" >
@@ -79,12 +102,13 @@ const dispatch = useDispatch();
       />
       <Table className={classes.table} aria-label="simple table">
         <TableHead >
+            <Button variant="contained" color="primary" disabled={!edit}> ذخیره </Button>
           <TableRow  className={classes.root}>
           <TableCell align="center" /* className={classes.root} */>تصویر :)</TableCell>
             <TableCell align="center" /* className={classes.root} */>نام کالا :)</TableCell>
-            <TableCell align="center">دسته بندی :) </TableCell>
-            <TableCell align="center">حذف </TableCell>
-            <TableCell align="center">ویرایش </TableCell>
+            <TableCell align="center">قیمت </TableCell>
+{/*             <TableCell align="center">حذف </TableCell>
+            <TableCell align="center">ویرایش </TableCell> */}
 {/*             <TableCell align="right">description :) &nbsp;</TableCell>
             <TableCell align="right">category :) &nbsp;</TableCell>
             <TableCell align="right">edit :) &nbsp;</TableCell> */}
@@ -99,23 +123,37 @@ const dispatch = useDispatch();
               <TableCell align="center"/* component="th" scope="row" */>
                 {row.title}
               </TableCell>
-{/*               <TableCell align="center">{row.price}</TableCell>
-              <TableCell align="center">{row.description}</TableCell> */}
-              <TableCell align="center">{row.category}</TableCell>
+
+
+              <TableCell align="center" onClick={()=>handleEditPrice()} >
+                  
+                  {edit?
+                  <>
+                  
+                  <input placeholder="price" value={price} onChange={(e)=>setPrice(e.target.value)} /> 
+                  <button onClick={()=>handleEditSave(row)}>save</button>
+                   {/* <button onClick={()=>setEdit(false)}>cancel</button> */}
+                   </> :
+                   <p>
+                        {row.price}
+                   </p>
+                   }
+                   </TableCell>
+              {/* <TableCell align="center">{row.description}</TableCell> */}
+              {/* <TableCell align="center">{row.category}</TableCell> */}
               
-              <TableCell align="center">
+{/*               <TableCell align="center">
                 
                 <Button style={{cursor:"pointer"}} onClick={()=>{handleDeleteAProduct(row.id)}} ><DeleteIcon/></Button>
 
               
-                {/* <button style={{cursor:"pointer"}} onClick={()=>{dispatch(removeTodo(index))}} >{test1.delete}</button> */}
+               
               </TableCell>
               <TableCell align="center">
                 
                 <Button style={{cursor:"pointer"}}  onClick={()=>action(row)}><EditIcon/></Button>
               
-                {/* <button style={{cursor:"pointer"}} onClick={()=>{dispatch(removeTodo(index))}} >{test1.delete}</button> */}
-              </TableCell>
+              </TableCell> */}
               
 
             </StyledTableRow>
@@ -137,4 +175,4 @@ const dispatch = useDispatch();
     )
 }
 
-export default ProductsTable
+export default SimpleTable

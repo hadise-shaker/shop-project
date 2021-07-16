@@ -7,7 +7,7 @@ import AddProduct from "../components/AddProduct"
 import EditProduct from "../components/EditProduct"
 import { useDispatch, useSelector } from "react-redux";
 import {update,addAproduct}from "../api/products"
-
+import MainModal from "../components/MainModal"
 import {addProduct,getProducts,deleteproduct,editItem}from "../redux/actions/productActions"
 const useStyles = makeStyles((theme)=>({
     table: {
@@ -27,20 +27,7 @@ const useStyles = makeStyles((theme)=>({
   }));
   
 
-  function rand() {
-    return Math.round(Math.random() * 20) - 10;
-  }
-  
-  function getModalStyle() {
-    const top = 50 + rand();
-    const left = 50 + rand();
-  
-    return {
-      top: `${top}%`,
-      left: `${left}%`,
-      transform: `translate(-${top}%, -${left}%)`,
-    };
-  }
+
 const Products = () => {
 
  const products = useSelector((state) => state.allProducts.products);
@@ -52,11 +39,17 @@ const dispatch = useDispatch();
 
 
       const classes = useStyles();
-      const [modalStyle] = React.useState(getModalStyle);
-      const [open, setOpen] = React.useState(false);
+/*       const [modalStyle] = React.useState(getModalStyle); */
+      const [open, setOpen] = useState(false);
       const [open2, setOpen2] = useState(false);
+      const [option, setOption] = useState(false)
       const [selected, setSelected] = useState();
-    
+      const [selectedProduct, setSelectedProduct] = useState({
+        title:"",
+        category:"",
+        description:"",
+        image:"",
+      });
       const handleOpen = () => {
         setOpen(true);
       };
@@ -64,101 +57,48 @@ const dispatch = useDispatch();
       const handleClose = () => {
         setOpen(false);
       };
-      const handleOpen2 = (row) => {
-        setOpen2(true);
-        setSelected(row);
+      const handleEdit = (row) => {
+        setSelectedProduct(row);
+        setOption(true);
+        setOpen(true);
 
         
       };
     
-      const handleClose2 = () => {
+/*       const handleClose2 = () => {
         setOpen2(false);
-      };
-      /* const body = (
-        <div style={modalStyle} className={classes.paper}>
-          <form>
-            <lable>تصویر کالا</lable>
-            <input onChange={(e)}/>
-            <lable>نام کالا</lable>
-            <input/>
-            <lable>price</lable>
-            <input/>
-            <lable>description</lable>
-            <input/>
-            <lable>category</lable>
-            <input/>
-          </form>
-          <h2 id="simple-modal-title">Text in a modal</h2>
-          <p id="simple-modal-description">
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </p>
-          <button onClick={handleClose}>close</button>
-        </div>
-      ); */
-      function setdisplay() {
-        return{
-          width:"100%"
-        }
-        
-      }
-      const [title, setTitle] = useState("")
-      const [price, setPrice] = useState("")
-      const [description, setDescription] = useState("")
-      const [category, setCategory] = useState("")
-      const [image, setImage] = useState("")
-      const onImageChange=(event)=>{
-        if (event.target.files&& event.target.files[0]) {
-          let img = event.target.files[0];
-          setImage(URL.createObjectURL(img))
-        }
-      }
-      const handleEditSubmit = (e) => {
-        e.preventDefault() ;
-
-        let product = {
-            "id":selected.id,
-            "title":title, 
-            "category":category,
-            "image":image,
-          }
-
-
-            update(product);
-
-          dispatch(editItem(product));
-          dispatch(getProducts());
-/*           window.location.reload() */
-      setOpen2(false);
-  }
+      }; */
+  
     return (
         <div >
             
             <h1>products</h1>
-            <Button variant="contained" color="primary" onClick={handleOpen}>
+            <Button variant="contained" color="primary" onClick={()=>handleOpen()}>
              افزودن کالا
            </Button>
-           <Modal
+           <ProductsTable action={handleEdit} />
+{/*            <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description" 
         children={<AddProduct handleClose={handleClose} />}
       >
-       {/*  {body} */}
+
        
-      </Modal>
+      </Modal> */}
+{open&&(<MainModal openModal={open} handleClose={handleClose} selectedProduct={selectedProduct} option={option}/>)}
+         
+            
 
-           {/*  <TableContainer component={Paper} > */}
-            <ProductsTable action={handleOpen2} />
 
-
-            <Modal        
+{/*             <Modal        
         open={open2}
         onClose={handleClose2}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
-        children={<EditProduct action={selected}/>}
-        />
+        children={<EditProduct action={selectedProduct}/>}
+        /> */}
 
             <br></br>
             <br></br>

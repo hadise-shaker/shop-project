@@ -16,6 +16,7 @@ const raleway = {
   fontStyle: "normal",
   fontDisplay: "swap",
   fontWeight: 600,
+  fontSize: "20px",
   src: `
     local('B Nazanin'),
     url(${Bnazanin}) format('woff2')

@@ -22,18 +22,13 @@ const useStyles = makeStyles((theme)=>({
   }));
 const AddProduct = ({handleClose,action}) => {
     const classes = useStyles();
-    function rand() {
-        return Math.round(Math.random() * 20) - 10;
-      }
-      
+
       function getModalStyle() {
-        const top = 50 + rand();
-        const left = 50 + rand();
       
         return {
-          top: `${top}%`,
-          left: `${left}%`,
-          transform: `translate(-${top}%, -${left}%)`,
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
         };
       }
       const [modalStyle] = React.useState(getModalStyle);
@@ -41,14 +36,11 @@ const AddProduct = ({handleClose,action}) => {
       const [price, setPrice] = useState("")
       const [description, setDescription] = useState("")
       const [category, setCategory] = useState("")
-    
-     /*  const products = useSelector((state) => state.allProducts.products); */
+  
       const dispatch= useDispatch();
       const handleSave=(e)=>{
         e.preventDefault() ;
-          dispatch(addProduct({title,price,description,category,image}))
-         /*  dispatch(getProducts()) */
-          window.location.reload();
+          dispatch(addProduct({title,price,description,category,image})).then(dispatch(getProducts()))
 
       }
 

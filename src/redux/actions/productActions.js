@@ -3,6 +3,7 @@ import {
   getAllProducts,
   deleteAproduct,
   addAproduct,
+  update,
 } from "../../api/products";
 
 import { ActionTypes } from "../types/actionTypes";
@@ -62,8 +63,14 @@ export const getAProduct = (id) => async (dispatch) => {
   console.log(res.data);
   dispatch(selectedProduct(res.data));
 };
+
+export const editProduct = (id) => async (dispatch) => {
+  console.log(id);
+  await update(id);
+  dispatch(editItem(id));
+};
 export const deleteproduct = (id) => async (dispatch) => {
-  await deleteAproduct(id);
+  await deleteAproduct(id).then((res) => console.log("res", res));
   dispatch(removeProduct(id));
 };
 export const addProduct = (data) => async (dispatch) => {

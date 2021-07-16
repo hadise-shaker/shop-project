@@ -28,22 +28,22 @@ function rand() {
     const left = 50 + rand();
   
     return {
-      top: `${top}%`,
-      left: `${left}%`,
-      transform: `translate(-${top}%, -${left}%)`,
+      top: "50%",
+      left: "50%",
+      transform: `translate(-50%, -50%)`,
     };
   }
 const EditProduct = ({action}) => {
     const dispatch = useDispatch();
     const classes = useStyles();
-    const [modalStyle] = React.useState(getModalStyle);
+    const [modalStyle] = useState(getModalStyle);
 /*     const [open2, setOpen2] = useState(false); */
     const [selected, setSelected] = useState();
-    const [title, setTitle] = useState("")
-    const [price, setPrice] = useState("")
-    const [description, setDescription] = useState("")
-    const [category, setCategory] = useState("")
-    const [image, setImage] = useState("")
+    const [title, setTitle] = useState(action.title)
+/*     const [price, setPrice] = useState(action.title) */
+    const [description, setDescription] = useState(action.description)
+    const [category, setCategory] = useState(action.category)
+    const [image, setImage] = useState(action.image)
     const onImageChange=(event)=>{
       if (event.target.files&& event.target.files[0]) {
         let img = event.target.files[0];
@@ -61,12 +61,8 @@ console.log("action",action);
         }
 
 
-          update(product);
+          update(product).then(dispatch(getProducts()));
 
-        dispatch(editItem(product));
-        dispatch(getProducts());
-          window.location.reload()
-/*     setOpen2(false); */
 }
 function setdisplay() {
     return{
@@ -80,12 +76,12 @@ function setdisplay() {
             <form style={setdisplay()} noValidate autoComplete="off">
             <input placeholder="نام کالا" value={title} onChange={(e)=>setTitle(e.target.value)}/>
           
-          <input placeholder="قیمت" value={price} onChange={(e)=>setPrice(e.target.value)}/>
+          {/* <input placeholder="قیمت" value={price} onChange={(e)=>setPrice(e.target.value)}/> */}
           
           <input placeholder="توضیحات" value={description} onChange={(e)=>setDescription(e.target.value)}/>
           
           <input placeholder="دسته بندی" value={category} onChange={(e)=>setCategory(e.target.value)}/>
-          <img src={image}/>
+          <img style={{width:"100px",height:"100px"}} src={image}/>
                     <h1>select image</h1>
                     <input type="file" name="myImage" onChange={onImageChange}/>
 

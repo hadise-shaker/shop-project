@@ -1,5 +1,10 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import { isLoggedIn } from "../utils/auth";
 export const ProtectedRoute = ({ component: Component, ...rest }) => {
   return (

@@ -9,7 +9,6 @@ import { isLoggedIn } from "./utils/auth";
 import ControlPanel from "./pages/ControlPanel";
 import { ProtectedRoute } from "./pages/ProtectedRoute";
 import Price from "./pages/Price";
-import OrdersManagment from "./pages/OrdersManagment";
 import ProductsTablePage from "./pages/ProductsTablePage";
 import ControlPanelHeader from "./pages/ControlPanelHeader";
 import { useLocation } from "react-router-dom";
@@ -22,40 +21,35 @@ import ControlPanelLayout from "./Layout/ControlPanelLayout";
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Switch>
-          <Route path="/" exact /* component={Home} */>
-            <Home />
-          </Route>
-
-          {!isLoggedIn() ? (
-            <>
-              <Header />
-              <Route path="/login" exact component={AdminLogin}></Route>
-            </>
-          ) : (
-            <>
-              <ControlPanelHeader />
+      {isLoggedIn() ? (
+        <Router>
+          <ControlPanelLayout>
+            <Switch>
               <ProtectedRoute
                 path="/admin/products"
-                /* exact */
-                component={Products}
+                exact
+                component={ProductsTable}
               />
 
-              <ProtectedRoute
-                path="/admin/price"
-                /* exact */ component={Price}
-              />
-              <ProtectedRoute
-                path="/admin/orders"
-                /* exact */ component={OrdersManagment}
-              />
-            </>
-          )}
+              <ProtectedRoute path="/admin/price" exact component={Price} />
+            </Switch>
+          </ControlPanelLayout>
+        </Router>
+      ) : (
+        <Router>
+          <MainLayout>
+            <Switch>
+              <Route path="/" exact component={Home}></Route>
+              <Route path="/login" exact component={AdminLogin}></Route>
+              {/* <Home /> */}
 
-          {/* <Route path="/control" exact component={ControlPanel}></Route> */}
-        </Switch>
-      </Router>
+              <Route path="/cart" exact component={Cart}>
+                {/* <Cart /> */}
+              </Route>
+            </Switch>
+          </MainLayout>
+        </Router>
+      )}
     </div>
   );
 }

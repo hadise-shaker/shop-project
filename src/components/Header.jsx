@@ -16,6 +16,7 @@ import {loginUseStyle} from "../styles/index"
 import {ShoppingCartTwoTone} from '@material-ui/icons/';
 import logo from "../styles/img/online-shop2.png"
 import "../assets/header.css"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 /* import {img} from "../styles/img/download.jfif" */
 function ScrollTop(props) {
   const { children, window } = props;
@@ -64,15 +65,19 @@ export default function BackToTop({children,props}) {
       <AppBar className={classes.backgroundColor}>
         <Toolbar className="link">
            <img className="img" src={logo} onClick={()=>history.push("/")} />
+
+
+           
           
           <Link /* variant="h6" */ className={classes.root} to="/" >فروشگاه فلان</Link>
           
 
         
-          <Link to="/login" exact activeClassName="link_active">ورود ادمین</Link>
+          <Link pa to="/login" exact activeClassName="link_active">ورود ادمین</Link>
           
           <ShoppingCartTwoTone/>
           <Link to="/cart" activeClassName="link_active" exact>سبد خرید</Link>
+
 
         </Toolbar>
 

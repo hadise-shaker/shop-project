@@ -24,7 +24,7 @@ export const loginUseStyle = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
     backgroundColor: COLORS.mainColor,
     color: "green",
-    fontSize: "1.5rem",
+    fontSize: "2rem",
     /*     fontFamily: FONTS.mainFont, */
   },
   container: {
