@@ -23,10 +23,10 @@ const UserDeliveredOrder = () => {
           fontSize:"30px",
           backgroundColor:"#6980fc"
         },
-        large: {
+/*         large: {
             width: theme.spacing(8),
             height: theme.spacing(8),
-          },
+          }, */
       })
       );
       const StyledTableRow = withStyles((theme) => ({
@@ -79,7 +79,7 @@ const UserDeliveredOrder = () => {
     return (
         <div>
             <h1>UserOrder</h1>
-            <Paper style={{width:"50%",margin:"auto"}} square="true" >
+            <Paper square="true" >
          <TablePagination
         rowsPerPageOptions={[5, 10, 15,{ label: 'All', value: -1 }]}
         component="div"
@@ -89,7 +89,7 @@ const UserDeliveredOrder = () => {
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
         dir="rtl"
-        style={{margin:"auto"}}
+        /* style={{margin:"auto"}} */
       />
       <Table className={classes.table} aria-label="simple table">
         <TableHead >
@@ -110,9 +110,9 @@ const UserDeliveredOrder = () => {
                   {order.username} 
               </TableCell>
               <TableCell align="center">
-                {order.products.map((product)=>
+{/*                 {order.products.map((product)=>
                     product.price*product.number
-                )}
+                )} */}
               </TableCell>
               <TableCell align="center">{order.ordertime}</TableCell>
               
@@ -128,7 +128,7 @@ const UserDeliveredOrder = () => {
            </TableBody>
         
       </Table>
-{open&&<OrdersModal openModal={open} handleClose={handleClose} selectedProduct={selectedProduct}/>}
+{open&&<OrdersModal openModal={open} handleClose={handleClose} selectedProduct={selectedProduct} isDeliver={false}/>}
         </Paper>
         </div>
     )

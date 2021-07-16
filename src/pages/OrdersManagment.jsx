@@ -20,8 +20,7 @@ const useStyles = makeStyles((theme) => ({
     },
     container1:{
         margin:"auto",
-        backgroundColor:"pink",
-        width:"50%",
+        /* backgroundColor:"pink", */
         textAlign:"center",
         alignItems:"center",
     }

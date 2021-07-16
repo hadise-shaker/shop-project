@@ -7,7 +7,7 @@ export const userReducer = (state = initialState, { type, payload }) => {
     case ActionTypes.GET_ORDERS:
       return payload;
     case ActionTypes.DELETE_ORDERS:
-      return state.orders.filter((item) => item.id != payload);
+      return { orders: state.orders.filter((item) => item.id != payload) };
     default:
       return state;
   }

@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {addProduct,getProducts,editItem,editProduct}from "../redux/actions/productActions"
 import MenuItem from '@material-ui/core/MenuItem';
 import UserProductTable from "./UserProductTable"
-const MainModal = ({ openModal,handleClose,selectedProduct}) => {
+const OrdersModal = ({ openModal,handleClose,selectedProduct,isDeliver,action}) => {
 /*   const orders = useSelector((state) => state.userOrders); */
 
     const useStyles = makeStyles((theme)=>({
@@ -23,7 +23,6 @@ const MainModal = ({ openModal,handleClose,selectedProduct}) => {
         }, 
          paper: {
           position: 'absolute',
-          /* width: 400, */
           backgroundColor: theme.palette.background.paper,
           border: '2px solid #000',
           boxShadow: theme.shadows[5],
@@ -83,7 +82,7 @@ const MainModal = ({ openModal,handleClose,selectedProduct}) => {
         /* children={<UserProductTable products={selectedProduct.products}/>} */
       >
          <div style={modalStyle} className={classes.paper}>
-         <UserProductTable products={selectedProduct.products}/>
+        
         <form /* onSubmit={(e)=>e.preventDefault()} */ >
         
         <h1 >
@@ -103,8 +102,10 @@ const MainModal = ({ openModal,handleClose,selectedProduct}) => {
       </h1>   
          {/*  <button    onClick={()=>handleSave(selectedProduct.id)}> ذخیره</button> */}
         </form>
-        {/* <button onClick={handleClose}>close</button> */}
        
+        {/* <button onClick={handleClose}>close</button> */}
+        <UserProductTable products={selectedProduct.products}/>
+        {isDeliver&&<Button onClick={action} variant="contained" color="primary" >تحویل شد</Button>}
       </div>
       
       </Modal>
@@ -112,4 +113,4 @@ const MainModal = ({ openModal,handleClose,selectedProduct}) => {
     </div>
   );
 };
-export default MainModal;
+export default OrdersModal;

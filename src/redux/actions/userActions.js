@@ -22,3 +22,12 @@ export const Orders = () => async (dispatch, getState) => {
   let res = await getDeliveredOrders();
   dispatch(getOrders(res.data));
 };
+export const WaitingOrders = () => async (dispatch, getState) => {
+  let res = await getWaitingOrders();
+  dispatch(getOrders(res.data));
+};
+
+export const DeleteWaitingOrder = (id) => async (dispatch) => {
+  await updateOrders(id);
+  dispatch(getWaitingOrders(id));
+};

@@ -55,7 +55,7 @@ const UserProductTable = ({products}) => {
     return (
         <div>
             <h1>UserOrder</h1>
-            <Paper style={{width:"50%",margin:"auto"}} square="true" >
+            <Paper  square="true" >
          <TablePagination
         rowsPerPageOptions={[5, 10, 15,{ label: 'All', value: -1 }]}
         component="div"
