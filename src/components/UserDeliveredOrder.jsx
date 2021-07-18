@@ -5,8 +5,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import OrdersModal from "./OrdersModal"
 import {Table,TableBody,Modal,TableCell,TableContainer,TableHead,TableRow,Paper,Button,Avatar,TablePagination,makeStyles,withStyles} from '@material-ui/core';
 const UserDeliveredOrder = () => {
-    const orders = useSelector((state) => state.userOrders);
-    console.log(useSelector((state) => state.userOrders));
+    const orders = useSelector((state) => state.userOrders.orders);
+    console.log("orders",orders);
 
     const dispatch = useDispatch();
     useEffect(() => {

@@ -9,11 +9,11 @@ const Price = () => {
 {/* <ControlPanelHeader/> */}
             <h1>price</h1>
 
-            <PriceTable/>
+{/*             <PriceTable/>
             <br></br>
             <br></br>
             <br></br>
-            <TestPrice/>
+            <TestPrice/> */}
             <br></br>
             <br></br>
             <br></br>

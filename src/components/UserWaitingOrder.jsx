@@ -6,7 +6,7 @@ import OrdersModal from "./OrdersModal"
 import {updateOrders}from "../api/user"
 import {Table,TableBody,Modal,TableCell,TableContainer,TableHead,TableRow,Paper,Button,Avatar,TablePagination,makeStyles,withStyles} from '@material-ui/core';
 const UserDeliveredOrder = () => {
-    const orders = useSelector((state) => state.userOrders);
+    const orders = useSelector((state) => state.userOrders.orders);
     console.log(useSelector((state) => state.userOrders));
 
     const dispatch = useDispatch();
@@ -123,9 +123,9 @@ const UserDeliveredOrder = () => {
                   {order.username} 
               </TableCell>
               <TableCell align="center">
-{/*                 {order.products.map((product)=>
+                {order.products.map((product)=>
                     product.price*product.number
-                )} */}
+                )}
               </TableCell>
               <TableCell align="center">{order.ordertime}</TableCell>
               

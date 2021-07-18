@@ -80,13 +80,13 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
         description,
         image,
         id
-      })):
+      })).then( dispatch(getProducts())):
       dispatch(addProduct({
         title,
         category,
         description,
         image,
-      }));
+      })).then( dispatch(getProducts()));
     }
     /* if(option){
        
@@ -106,7 +106,7 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
       image,
     }));
   } */
-  window.location.reload();
+/*   window.location.reload(); */
     handleClose();
 
   }
@@ -152,23 +152,40 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
           
           <TextField label="توضیحات" value={description} onChange={(e)=>setDescription(e.target.value)} fullWidth/>
           <InputLabel id="demo-simple-select-label">دسته بندی</InputLabel>
-          <Select
+         {/*  <Select
                 labelId="demo-simple-select-label"
                 value={category}
                 onChange={(e)=>setCategory(e.target.value)}
-/*                 inputProps={{
+                inputProps={{
                   name: "category",
                   id: "category",
-                }} */
+                }}
                 fullWidth
               >
-               {/*  <option aria-label="None" value=""  /> */}
                 <MenuItem>{category}</MenuItem>
                 <MenuItem>لباس مردانه</MenuItem>
                 <MenuItem>الکترونیک</MenuItem>
                 <MenuItem>جواهرات</MenuItem>
                 <MenuItem>لباس زنانه</MenuItem>
-              </Select>
+              </Select> */}
+
+              <select style={{width:"100%"}} name="دسته بندی" value={category} onChange={(e)=>setCategory(e.target.value)}>
+                <option>
+                {category}
+                </option>
+                <option>
+                لباس مردانه
+                </option>
+                <option>
+                الکترونیک
+                </option>
+                <option>
+                جواهرات
+                </option>
+                <option>
+                لباس زنانه
+                </option>
+              </select>
           
        {/*    <input placeholder="دسته بندی" value={category} onChange={(e)=>setCategory(e.target.value)}/> */}
           {/* <input placeholder="عکس" value={image} onChange={(e)=>setImage(e.target.value)}/> */}

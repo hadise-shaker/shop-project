@@ -79,14 +79,17 @@ const dispatch = useDispatch();
             "number":row.number
           }
   
-  
+          
             update(product).then( dispatch(getProducts()));
-            
+           
           /* dispatch(editItem(product)); */
-        /*   window.location.reload() */
+          window.location.reload()
          
            
       }
+/*       const handleclose=()=>{
+        setEdit(false)
+      } */
     return (
         <Paper style={{width:"50%",margin:"auto"}} square="true" >
          <TablePagination
@@ -102,7 +105,7 @@ const dispatch = useDispatch();
       />
       <Table className={classes.table} aria-label="simple table">
         <TableHead >
-            <Button variant="contained" color="primary" disabled={!edit}> ذخیره </Button>
+            <Button  variant="contained" color="primary" disabled={!edit}> ذخیره </Button>
           <TableRow  className={classes.root}>
           <TableCell align="center" /* className={classes.root} */>تصویر :)</TableCell>
             <TableCell align="center" /* className={classes.root} */>نام کالا :)</TableCell>
@@ -130,8 +133,9 @@ const dispatch = useDispatch();
                   {edit?
                   <>
                   
-                  <input placeholder="price" value={price} onChange={(e)=>setPrice(e.target.value)} /> 
+                  <input  placeholder="price" value={price} onChange={(e)=>setPrice(e.target.value)} /> 
                   <button onClick={()=>handleEditSave(row)}>save</button>
+                  {/* <button onClick={handleclose}>close</button> */}
                    {/* <button onClick={()=>setEdit(false)}>cancel</button> */}
                    </> :
                    <p>

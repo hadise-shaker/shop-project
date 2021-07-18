@@ -8,14 +8,14 @@ export const productReducer = (state = initialState, { type, payload }) => {
   console.log(state.products);
   switch (type) {
     case ActionTypes.ADD_PRODUCT:
-      return { ...state, products: payload };
+      return { ...state.products, products: payload };
 
     case ActionTypes.REMOVE_PRODUCT:
       return {
         products: state.products.filter(({ id }) => id !== payload),
       };
     case ActionTypes.EDIT_PRODUCT:
-      return [...payload, ...state.products];
+      return [...state.products, payload];
     /*     case ActionTypes.EDIT_PRODUCT:
       return {
         ...state,
