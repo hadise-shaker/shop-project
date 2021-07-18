@@ -5,12 +5,20 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import TextField from "@material-ui/core/TextField";
 import InputLabel from "@material-ui/core/InputLabel";
+import Input from "@material-ui/core/Input"
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
+import NativeSelect from "@material-ui/core/NativeSelect"
 import { useDispatch } from "react-redux";
 import {addProduct,getProducts,editItem,editProduct}from "../redux/actions/productActions"
 import MenuItem from '@material-ui/core/MenuItem';
+import CancelIcon from '@material-ui/icons/Cancel';
+import {COLORS}from "../styles/constantsVariables"
+import Avatar from '@material-ui/core/Avatar';
+import Box from "@material-ui/core/Box"
+import Fab from "@material-ui/core/Fab";
+import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
 
 
@@ -20,14 +28,45 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
         },
         root:{
           fontSize:"30px",
+          color: "rgba(0, 0, 0, 0.54)",
+          paddingBottom: "20px",
+          fontSize: "1.3rem",
+          fontFamily: "B Nazanin",
+          fontWeight: 400,
+          lineHeight: 1,
+
         }, 
          paper: {
           position: 'absolute',
-          width: 400,
-          backgroundColor: theme.palette.background.paper,
-          border: '2px solid #000',
+          minWidth: "300px",
+          backgroundColor: COLORS.bg_modal,
+          border: `3px  solid ${COLORS.border_modal}`,
+          borderRadius:"10px",
           boxShadow: theme.shadows[5],
-          padding: theme.spacing(2, 4, 3),
+          padding: theme.spacing(2, 2, 3),
+        },
+        closebtn:{
+          float:"right",
+          width:"8%",
+          height:"8%",
+          cursor:"pointer"
+        },
+        image:{
+         width:"115px",
+         height:"0%",
+          margin:"auto",
+          borderRadius:"10px",
+          minWidth:"20%"
+        },
+        input:{
+          textAlign:"center"
+        },
+        select:{
+          marginBottom:"20px"
+        },
+        button: {
+          color: "blue",
+          margin: 10
         },
       }));
       function getModalStyle() {
@@ -36,6 +75,7 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
+          width:"27%"
         };
       }
   console.log(selectedProduct);
@@ -88,40 +128,34 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
         image,
       })).then( dispatch(getProducts()));
     }
-    /* if(option){
-       
-      dispatch(editProduct({
-        title,
-        category,
-        description,
-        image,
-        id
-      }))
-    }
-    else{
-    dispatch(addProduct({
-      title,
-      category,
-      description,
-      image,
-    }));
-  } */
-/*   window.location.reload(); */
+
+  window.location.reload();
     handleClose();
 
   }
-/*   useEffect(() => {
-            dispatch(addProduct({
-        title,
-        category,
-        description,
-        image,
-      }));
+  const getBase64 = (file) => {
+    return new Promise(resolve => {
+      let fileInfo;
+      let baseURL = "";
+      // Make new FileReader
+      let reader = new FileReader();
 
-  }, [        title,
-    category,
-    description,
-    image,]) */
+      // Convert the file to base64 text
+      reader.readAsDataURL(file);
+
+      // on reader load somthing...
+      reader.onload = () => {
+        // Make a fileInfo Object
+        console.log("Called", reader);
+        baseURL = reader.result;
+        console.log(baseURL);
+        resolve(baseURL);
+      };
+      console.log(fileInfo);
+    });
+  };
+  
+
   
   const onImageChange=(event)=>{
     if (event.target.files&& event.target.files[0]) {
@@ -145,34 +179,47 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
       >
          <div style={modalStyle} className={classes.paper}>
         <form onSubmit={(e)=>e.preventDefault()} >
-        
-          <TextField label="نام کالا" value={title} onChange={(e)=>setTitle(e.target.value)} fullWidth/>
-          
+
+          <CancelIcon  color="primary"  onClick={handleClose} className={classes.closebtn} />
+
+
+                  
+
+       
+          <TextField className={classes.root} label="نام کالا" value={title} onChange={(e)=>setTitle(e.target.value)} fullWidth/>
+
           {/* <input placeholder="قیمت" value={price} onChange={(e)=>setPrice(e.target.value)}/> */}
           
-          <TextField label="توضیحات" value={description} onChange={(e)=>setDescription(e.target.value)} fullWidth/>
-          <InputLabel id="demo-simple-select-label">دسته بندی</InputLabel>
-         {/*  <Select
-                labelId="demo-simple-select-label"
-                value={category}
-                onChange={(e)=>setCategory(e.target.value)}
-                inputProps={{
-                  name: "category",
-                  id: "category",
-                }}
-                fullWidth
-              >
-                <MenuItem>{category}</MenuItem>
-                <MenuItem>لباس مردانه</MenuItem>
-                <MenuItem>الکترونیک</MenuItem>
-                <MenuItem>جواهرات</MenuItem>
-                <MenuItem>لباس زنانه</MenuItem>
-              </Select> */}
+          <TextField className={classes.root} label="توضیحات" value={description} onChange={(e)=>setDescription(e.target.value)} fullWidth/>
+          <InputLabel id="demo-simple-select-label">تصویر کالا</InputLabel>
+          <Avatar src={image}  variant="square" className={classes.image}/>
+         
+          <div className={classes.input}>
+         
+          <input             
+          id="btn-upload"
+            name="btn-upload"  accept="image/*" type="file" multiple onChange={onImageChange}/>
+             <label htmlFor="btn-upload">
+             <Fab component="span" className={classes.button}>
+                <AddPhotoAlternateIcon />
+              </Fab>
+{/*         <Button
+            className="btn-choose"
+            variant="outlined"
+            component="span" >
+             Choose Image
+          </Button> */}
+          </label>
+          </div>
+         
+               
+          <InputLabel id="demo-simple-select-label" >دسته بندی</InputLabel>
 
-              <select style={{width:"100%"}} name="دسته بندی" value={category} onChange={(e)=>setCategory(e.target.value)}>
-                <option>
+
+              <NativeSelect  className={classes.select} fullWidth  name="دسته بندی" value={category} onChange={(e)=>setCategory(e.target.value)}>
+{/*                 <option>
                 {category}
-                </option>
+                </option> */}
                 <option>
                 لباس مردانه
                 </option>
@@ -185,11 +232,7 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
                 <option>
                 لباس زنانه
                 </option>
-              </select>
-          
-       {/*    <input placeholder="دسته بندی" value={category} onChange={(e)=>setCategory(e.target.value)}/> */}
-          {/* <input placeholder="عکس" value={image} onChange={(e)=>setImage(e.target.value)}/> */}
-          <label>:تصویر کالا </label><br></br>
+              </NativeSelect>
 {/*                 <ImageUpload 
                     handleImageSelect={handleImageSelect}
                     imageSrc={image}
@@ -202,14 +245,9 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
                     }}
                     /> */}
 
-                    <img src={image} style={{width:"100px",height:"100px"}}/>
-                    <h1>select image</h1>
-                    <input type="file" name="myImage" onChange={onImageChange}/>
-
-                    <br></br><br></br>
-          <button    onClick={()=>handleSave(selectedProduct.id)}> ذخیره</button>
+          <Button   variant="contained"  color="primary" onClick={()=>handleSave(selectedProduct.id)}> ذخیره</Button>
         </form>
-        <button onClick={handleClose}>close</button>
+        
       </div>
       </Modal>
     </div>

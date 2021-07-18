@@ -110,9 +110,9 @@ const UserDeliveredOrder = () => {
                   {order.username} 
               </TableCell>
               <TableCell align="center">
-{/*                 {order.products.map((product)=>
+                {order.products.map((product)=>
                     product.price*product.number
-                )} */}
+                )}
               </TableCell>
               <TableCell align="center">{order.ordertime}</TableCell>
               

@@ -1,6 +1,7 @@
 @import '../src/styles/fonts/font.css';
 body {
   margin: 0;
+  font-size: 1.5rem !important;
 /*   font-family: 'B Nazanin'!important; */
 /*   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
