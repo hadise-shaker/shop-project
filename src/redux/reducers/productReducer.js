@@ -2,6 +2,7 @@ import { ActionTypes } from "../types/actionTypes";
 
 const initialState = {
   products: [],
+  selectedProduct: {},
 };
 
 export const productReducer = (state = initialState, { type, payload }) => {
@@ -16,13 +17,15 @@ export const productReducer = (state = initialState, { type, payload }) => {
       };
     case ActionTypes.EDIT_PRODUCT:
       return [...state.products, payload];
-    /*     case ActionTypes.EDIT_PRODUCT:
+
+    case ActionTypes.SELECTED_PRODUCT:
+      return { ...state.products, selectedProduct: payload };
+
+    case ActionTypes.REMOVE_SELECTED_PRODUCT:
       return {
         ...state,
-        products: state.products.map((content, i) =>
-          i === 1 ? { ...content, products: payload } : content
-        ),
-      }; */
+        products: state.products.filter(({ id }) => id !== payload),
+      };
     default:
       return state;
   }

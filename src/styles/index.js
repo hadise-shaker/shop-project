@@ -5,6 +5,14 @@ export const loginUseStyle = makeStyles((theme) => ({
   backgroundColor: {
     backgroundColor: COLORS.mainColor,
     flexGrow: 1,
+    marginBottom: "20px",
+    zIndex: "999999",
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
+    },
   },
   paper: {
     marginTop: theme.spacing(8),
@@ -43,7 +51,9 @@ export const loginUseStyle = makeStyles((theme) => ({
     position: "fixed",
     bottom: theme.spacing(2),
     right: theme.spacing(2),
+    /*     marginBottom: "20px", */
     backgroundColor: COLORS.mainColor,
+    marginBottom: theme.spacing(2),
   },
   root: {
     flexGrow: 1,

@@ -19,6 +19,8 @@ import Footer from "./components/Footer";
 import Cart from "./pages/Cart";
 import MainLayout from "./Layout/MainLayout";
 import ControlPanelLayout from "./Layout/ControlPanelLayout";
+import AllProductsInGroup from "./pages/AllProductsInGroup";
+import ProductDetail from "./components/ProductDetail";
 function App() {
   return (
     <div className="App">
@@ -27,6 +29,14 @@ function App() {
           <Route path="/" exact /* component={Home} */>
             <Home />
           </Route>
+          <Route path="/AllProductsInGroup/لباس مردانه" exact>
+            <AllProductsInGroup />
+          </Route>
+          <Route
+            path="/AllProductsInGroup/:id"
+            exact
+            component={ProductDetail}
+          />
 
           {!isLoggedIn() ? (
             <>

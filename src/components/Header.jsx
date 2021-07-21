@@ -16,6 +16,8 @@ import {loginUseStyle} from "../styles/index"
 import {ShoppingCartTwoTone} from '@material-ui/icons/';
 import logo from "../styles/img/online-shop2.png"
 import "../assets/header.css"
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 /* import {img} from "../styles/img/download.jfif" */
 function ScrollTop(props) {
@@ -56,14 +58,22 @@ ScrollTop.propTypes = {
   window: PropTypes.func,
 };
 
-export default function BackToTop({children,props}) {
+export default function BackToTop({children,props,handleDrawerToggle}) {
   let history = useHistory()
   const classes = loginUseStyle();
   return (
     <React.Fragment /* className={classes.root} */>
-      <CssBaseline />
+    {/*   <CssBaseline /> */}
       <AppBar className={classes.backgroundColor}>
         <Toolbar className="link">
+        <IconButton
+              color="inherit"
+              edge="start"
+              onClick={handleDrawerToggle}
+              className={classes.menuButton}
+            >
+              <MenuIcon />
+            </IconButton>
            <img className="img" src={logo} onClick={()=>history.push("/")} />
 
 
