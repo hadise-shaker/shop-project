@@ -9,7 +9,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 /* import EditProduct from "./EditProduct" */
 import {Table,TableBody,Modal,TableCell,TableContainer,TableHead,TableRow,Paper,Button,Avatar,TablePagination,makeStyles,withStyles} from '@material-ui/core';
-const ProductsTable = ({action}) => {
+const ProductsTable = ({action,handleOpen}) => {
     const products = useSelector((state) => state.allProducts.products);
 
 const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const dispatch = useDispatch();
       const useStyles = makeStyles((theme)=>({
         table: {
           minWidth: 650,
-          width:"50%",
+          width:"80%",
           margin:"auto",
         },
         root:{
@@ -33,6 +33,9 @@ const dispatch = useDispatch();
             width: theme.spacing(8),
             height: theme.spacing(8),
           },
+          pagination:{
+            width:"35%"
+          }
       })
       );
       const StyledTableRow = withStyles((theme) => ({
@@ -65,20 +68,15 @@ const dispatch = useDispatch();
         dispatch(getProducts())
       }
     return (
-        <Paper style={{width:"50%",margin:"auto"}} square="true" >
-         <TablePagination
-        rowsPerPageOptions={[5, 10, 15,{ label: 'All', value: -1 }]}
-        component="div"
-        count={products?.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-        dir="rtl"
-        style={{margin:"auto"}}
-      />
+        
+        <div   style={{ height: 400, width: '100%',marginTop:"20px" }} /* className={classes.root} */>
+
       <Table className={classes.table} aria-label="simple table">
+
         <TableHead >
+        <Button variant="contained" color="primary" onClick={handleOpen}>
+             افزودن کالا
+           </Button>
           <TableRow  className={classes.root}>
           <TableCell align="center" /* className={classes.root} */>تصویر :)</TableCell>
             <TableCell align="center" /* className={classes.root} */>نام کالا :)</TableCell>
@@ -133,7 +131,21 @@ const dispatch = useDispatch();
       >
        
       </Modal> */}
-        </Paper>
+               <TablePagination
+        rowsPerPageOptions={[5, 10, 15,{ label: 'All', value: -1 }]}
+        component="div"
+        count={products?.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+        dir="rtl"
+/*         style={{margin:"auto"}} */
+className={classes.pagination}
+        labelRowsPerPage='تعداد سطر های هر صفحه'
+      />
+      </div>
+
     )
 }
 

@@ -17,12 +17,15 @@ const useStyles = makeStyles((theme) => ({
     },
     container:{
         margin:"auto",
+        marginBottom:"20px",
     },
     container1:{
         margin:"auto",
         /* backgroundColor:"pink", */
         textAlign:"center",
         alignItems:"center",
+        marginTop:"20px",
+        
     }
   }));
 const OrdersManagment = () => {

@@ -18,6 +18,9 @@ import logo from "../styles/img/online-shop2.png"
 import "../assets/header.css"
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import Badge from '@material-ui/core/Badge';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 /* import {img} from "../styles/img/download.jfif" */
 function ScrollTop(props) {
@@ -58,15 +61,17 @@ ScrollTop.propTypes = {
   window: PropTypes.func,
 };
 
-export default function BackToTop({children,props,handleDrawerToggle}) {
+export default function BackToTop({children,props,handleDrawerToggle,count}) {
   let history = useHistory()
   const classes = loginUseStyle();
+ /*   const [count, setCount] = React.useState(1); */
   return (
     <React.Fragment /* className={classes.root} */>
     {/*   <CssBaseline /> */}
       <AppBar className={classes.backgroundColor}>
         <Toolbar className="link">
-        <IconButton
+         
+          <IconButton
               color="inherit"
               edge="start"
               onClick={handleDrawerToggle}
@@ -74,6 +79,7 @@ export default function BackToTop({children,props,handleDrawerToggle}) {
             >
               <MenuIcon />
             </IconButton>
+
            <img className="img" src={logo} onClick={()=>history.push("/")} />
 
 
@@ -84,8 +90,12 @@ export default function BackToTop({children,props,handleDrawerToggle}) {
 
         
           <Link pa to="/login" exact activeClassName="link_active">ورود ادمین</Link>
-          
+          <Badge badgeContent={count} color="primary" anchorOrigin={{
+    vertical: 'top',
+    horizontal: 'left',
+  }}>
           <ShoppingCartTwoTone/>
+          </Badge>
           <Link to="/cart" activeClassName="link_active" exact>سبد خرید</Link>
 
 

@@ -19,6 +19,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Box from "@material-ui/core/Box"
 import Fab from "@material-ui/core/Fab";
 import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
+import { useFilePicker } from "use-file-picker";
 const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
 
 
@@ -125,7 +126,7 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
         title,
         category,
         description,
-        image,
+        image: filesContent[0]?.content,
       })).then( dispatch(getProducts()));
     }
 
@@ -157,12 +158,27 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
   
 
   
-  const onImageChange=(event)=>{
+/*   const onImageChange=(event)=>{
     if (event.target.files&& event.target.files[0]) {
       let img = event.target.files[0];
       setImage(URL.createObjectURL(img))
     }
-  }
+  } */
+
+  const [openFileSelector, { filesContent }] = useFilePicker({
+    readAs: "DataURL",
+    accept: "image/*",
+    multiple: true,
+    // limitFilesConfig: { max: 1 },
+    // minFileSize: 0.1, // in megabytes
+    // maxFileSize: 50,
+    // imageSizeRestrictions: {
+    //   maxHeight: 900, // in pixels
+    //   maxWidth: 1600,
+    //   minHeight: 600,
+    //   minWidth: 768,
+    // },
+  });
   return (
     <div>
       <Modal
@@ -191,24 +207,55 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
           {/* <input placeholder="قیمت" value={price} onChange={(e)=>setPrice(e.target.value)}/> */}
           
           <TextField className={classes.root} label="توضیحات" value={description} onChange={(e)=>setDescription(e.target.value)} fullWidth/>
-          <InputLabel id="demo-simple-select-label">تصویر کالا</InputLabel>
-          <Avatar src={image}  variant="square" className={classes.image}/>
+{/*           <TextField
+                  variant="outlined"
+                  name="image"
+                  // margin="normal"
+                  // disabled
+                  className={classes.input}
+                  fullWidth
+                  value={image}
+                  onChange={(e) => setImage(e.target.value)}
+
+                /> */}
+{/*                 <TextField                   value={image}
+                  onChange={(e) => setImage(e.target.value)}> */}
+                <Avatar src={image}   variant="square" className={classes.image} /* onChange={(e) => setImage(e.target.value)} *//>
+{/*                 </TextField> */}
+         
+{/*           <img src={image}/> */}
          
           <div className={classes.input}>
-         
-          <input             
-          id="btn-upload"
-            name="btn-upload"  accept="image/*" type="file" multiple onChange={onImageChange}/>
+
+              <TextField
+                  variant="outlined"
+                  name="image"
+                  className={classes.image} 
+                  // margin="normal"
+                  // disabled
+                 /*  type="file" */
+                  className={classes.input}
+                  /* fullWidth */
+                  value={image}
+                  onChange={(e) => setImage(e.target.value)}
+/*                   onClick={() => {
+                    openFileSelector();
+                  }} */
+
+                />
              <label htmlFor="btn-upload">
-             <Fab component="span" className={classes.button}>
+{/*              <Fab component="span" className={classes.button}>
                 <AddPhotoAlternateIcon />
-              </Fab>
-{/*         <Button
-            className="btn-choose"
-            variant="outlined"
-            component="span" >
-             Choose Image
-          </Button> */}
+              </Fab> */}
+              <Button
+                  type="button"
+                  onClick={() => {
+                    openFileSelector();
+                  }}
+                  className={classes.btnFile}
+                >
+                  Browse
+              </Button> 
           </label>
           </div>
          

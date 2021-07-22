@@ -21,6 +21,8 @@ import MainLayout from "./Layout/MainLayout";
 import ControlPanelLayout from "./Layout/ControlPanelLayout";
 import AllProductsInGroup from "./pages/AllProductsInGroup";
 import ProductDetail from "./components/ProductDetail";
+import ResponsiveDrawer from "./pages/ResponsiveDrawer";
+import NotFound from "./pages/NotFound";
 function App() {
   return (
     <div className="App">
@@ -29,15 +31,16 @@ function App() {
           <Route path="/" exact /* component={Home} */>
             <Home />
           </Route>
-          <Route path="/AllProductsInGroup/لباس مردانه" exact>
-            <AllProductsInGroup />
-          </Route>
+
           <Route
             path="/AllProductsInGroup/:id"
             exact
             component={ProductDetail}
           />
-
+          <Route path="/cart" exact component={Cart} />
+          <Route path="/test" exact component={AllProductsInGroup} />
+          {/*           <Route path="/test" exact component={ResponsiveDrawer}>
+          </Route> */}
           {!isLoggedIn() ? (
             <>
               <Header />
@@ -47,23 +50,23 @@ function App() {
             <>
               <ControlPanelHeader />
               <ProtectedRoute
-                path="/admin/products"
+                path="/login/products"
                 /* exact */
                 component={Products}
               />
 
               <ProtectedRoute
-                path="/admin/price"
+                path="/login/price"
                 /* exact */ component={Price}
               />
               <ProtectedRoute
-                path="/admin/orders"
+                path="/login/orders"
                 /* exact */ component={OrdersManagment}
               />
             </>
           )}
 
-          {/* <Route path="/control" exact component={ControlPanel}></Route> */}
+          {/*           <Route path="*" exact component={NotFound}></Route> */}
         </Switch>
       </Router>
     </div>

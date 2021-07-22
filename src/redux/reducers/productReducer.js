@@ -26,6 +26,7 @@ export const productReducer = (state = initialState, { type, payload }) => {
         ...state,
         products: state.products.filter(({ id }) => id !== payload),
       };
+
     default:
       return state;
   }

@@ -44,6 +44,12 @@ const useStyles = makeStyles((theme) => ({
    }
   }));
 const Men = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+
+      dispatch(getProducts());
+
+    }, []); 
     const products = useSelector((state) => state.allProducts.products);
     const categories = products.map((cat,i)=>cat.category);
     let AllCategories = [...new Set(categories)]
@@ -51,28 +57,7 @@ const Men = () => {
     const classes = useStyles();
     return (
         <div>
-          <h2>{AllCategories.map((val,i)=>{
-            return(
-              <>
-              <Link /* href="/AllProductsInGroup" */ >    <Typography variant="h4" style={{display:"flex",alignItems:"center",padding:"30px 10px 20px 0"}}>{val} <ArrowLeftIcon style={{fontSize:"30px"}}  /></Typography>   </Link>
-              <div className={classes.container} >
-           
-           <br></br>
-      
-           <Grid container  justify="center">
-           <Grid container justify="center" item xs={12} spacing={3}>
-            {products.filter(person=>person.category===val)?.filter((val,i)=>i<6).map(filtered=>
-                       
-            
-                       <ProductCard item={filtered}/>
-                            
-                       )} 
-                                 </Grid>
-         </Grid>
-         </div>
-              </>
-            )
-          })}</h2>
+
             <h1>page1</h1>
             <Link /* href="/AllProductsInGroup" */ >    <Typography variant="h4" style={{display:"flex",alignItems:"center",padding:"30px 10px 20px 0"}}>{AllCategories[0]} <ArrowLeftIcon style={{fontSize:"30px"}}  /></Typography>   </Link>
             <div className={classes.container} >
@@ -81,11 +66,15 @@ const Men = () => {
       
            <Grid container  justify="center">
            <Grid container justify="center" item xs={12} spacing={3}>
-            {products.filter(person=>person.category===AllCategories[0])?.map(filtered=>
+            {products?.filter(person=>person.category===AllCategories[0])?.map((filtered)=>{
+              return(
+                <Link href={`/AllProductsInGroup/${filtered.id}`}>
+                <ProductCard item={filtered}/>
+                </Link>
+              )
+            }
                        
-            
-                       <ProductCard item={filtered}/>
-                            
+
                        )} 
                                  </Grid>
          </Grid>

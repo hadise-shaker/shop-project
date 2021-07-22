@@ -1,41 +1,27 @@
 import axios from "axios";
 
-export const getAllProducts = async () => {
+export const getAllCart = async () => {
   let res = await axios({
     method: "get",
-    url: "http://localhost:5000/products",
+    url: "http://localhost:5000/cart",
     headers: { "content-type": "application/json" },
   }).catch((err) => console.log(err));
   return res;
 };
-export const update = async (id, product) => {
+export const increaseAmount2 = async (product) => {
+  console.log("increase", product);
   const data = await axios
-    .put(`http://localhost:5000/products/${id}`, product)
+    .put(`http://localhost:5000/cart/${product.amount}`, product)
     .then((res) => {
       return res.data;
     })
     .catch((err) => console.log(err));
 };
 
-/* export const updateProduct = async (id, updateProduct) => {
-  try {
-    let res = await axiosConfig({
-      method: "put",
-      url: `/products/${id}`,
-      headers: { "content-type": "application/json" },
-      data: updateProduct,
-    });
-    return res;
-  } catch (err) {
-    throw err;
-  }
-  // console.log("res put api",res);
-}; */
-
-export const getAProductById = async (id) => {
+export const getAitemById = async (id) => {
   let res = await axios({
     method: "get",
-    url: `http://localhost:5000/products/${id}`,
+    url: `http://localhost:5000/cart/${id}`,
     headers: { "content-type": "application/json" },
   }).catch((err) => console.log(err));
   return res;
@@ -49,16 +35,16 @@ export const getAProductById = async (id) => {
   }).catch((err) => console.log(err));
 };
  */
-export const addAproduct = async (product) => {
+export const addAcart = async (cart) => {
   const data = await axios
-    .post(`http://localhost:5000/products`, product)
+    .post(`http://localhost:5000/cart`, cart)
     .then((res) => {
       return res.data;
     })
     .catch((err) => console.log("error"));
   /*   return await axios.post(`http://localhost:5000/products`, data); */
 };
-export const deleteAproduct = async (id) => {
+export const deleteAcart = async (id) => {
   /*   fetch(`http://localhost:5000/products/${taskId}`, {
     method: "DELETE",
   }); */
@@ -66,7 +52,7 @@ export const deleteAproduct = async (id) => {
     data: { id },
   });
   return res.data.json; */
-  await axios.delete(`http://localhost:5000/products/${id}`).then((res) => {
+  await axios.delete(`http://localhost:5000/cart/${id}`).then((res) => {
     console.log(res);
   });
 };

@@ -72,11 +72,9 @@ const dispatch = useDispatch();
     return (
         <div >
             
-            <h1>products</h1>
-            <Button variant="contained" color="primary" onClick={()=>handleOpen()}>
-             افزودن کالا
-           </Button>
-           <ProductsTable action={handleEdit} />
+
+
+           <ProductsTable action={handleEdit} handleOpen={()=>handleOpen()} />
 {/*            <Modal
         open={open}
         onClose={handleClose}

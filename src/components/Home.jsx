@@ -14,9 +14,9 @@ import SkipNextIcon from '@material-ui/icons/SkipNext';
 import Grid from "@material-ui/core/Grid"
 import {COLORS} from "../styles/constantsVariables"
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
-import Link from '@material-ui/core/Link';
+/* import Link from '@material-ui/core/Link'; */
 import ProductCard from "./ProductCard"
-import { useHistory } from 'react-router-dom';
+import { useHistory,Link } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
@@ -68,18 +68,20 @@ const Home = () => {
     const classes = useStyles();
     const theme = useTheme();
     const products = useSelector((state) => state.allProducts.products);
-    const categories = products.map((cat,i)=>cat.category);
+/*     console.log("products.category",products.map((item)=>item.category)); */
+    const categories = products?.map((cat,i)=>cat.category);
     let AllCategories = [...new Set(categories)]
     let LimitedProducts={}
      LimitedProducts=products.filter((val,i)=>val.category===AllCategories[0])
     const LimitedProducts2=products?.map((cat,i)=>cat.category).reduce((val,i)=>val.includes(i)?val:[...val,i],[])
-    console.log("LimitedProducts2",LimitedProducts2);
+/*     console.log("LimitedProducts2",LimitedProducts2); */
     const LimitedProducts3=products.filter((val,i)=>val.category===AllCategories[2])
     const LimitedProducts4=products.filter((val,i)=>val.category===AllCategories[3])
     const LimitedProducts5=products.filter((val,i)=>val.category===AllCategories[4])
-    console.log("LimitedProducts",LimitedProducts);
 
-    console.log("AllCategories",AllCategories);
+/*     console.log("LimitedProducts",LimitedProducts);
+
+    console.log("AllCategories",AllCategories); */
     const dispatch = useDispatch();
     useEffect(() => {
 
@@ -92,40 +94,47 @@ const Home = () => {
 
         <>
             <Header/>
-            
+
             {AllCategories.map((val,i)=>{
+/*                   const product = products?.map((item)=>item.category).find((item) => item.category===parseInt(LimitedProducts2))
+                  console.log("test category ",product) */
             return(
               <div key={i}>
-              <Link href={`/AllProductsInGroup/${val}`}>    <Typography variant="h4" style={{display:"flex",alignItems:"center",padding:"30px 10px 20px 0"}}>{val} <ArrowLeftIcon style={{fontSize:"30px"}}  /></Typography>   </Link>
+              <Link to={`/test`}>    <Typography variant="h4" style={{display:"flex",alignItems:"center",padding:"30px 10px 20px 0"}}>{val} <ArrowLeftIcon style={{fontSize:"30px"}}  /></Typography>   </Link>
               <div className={classes.container} >
            
            <br></br>
       
            <Grid container  justify="center">
+           <Grid container justify="center" item xs={12} spacing={3}>
            {products.filter(person=>person.category===val)?.filter((val,i)=>i<6).map((filtered)=>{
                return(
-                <Link href={`/AllProductsInGroup/${filtered.id}`}>
-               <Grid container justify="center" item xs={12} spacing={3}>
-           
+                
+             
+           <>
                 
                     
-                    {console.log("filtered id",filtered)}
+                  {/*   {console.log("filtered id",filtered)} */}
                    
-                      
+                    <Link  to={`/AllProductsInGroup/${filtered.id}`}>
                   
                     <ProductCard item={filtered}/>
                    
-                   
+                    </Link>
                 
             
                      
 
                        
-                                 </Grid>
-                                 </Link>
-                                 )}
-                                )  
-                            }
+                                
+                                
+                    </>    
+                              
+                               
+               )} ) 
+                        }
+                
+     </Grid>
          </Grid>
          </div>
          <br></br>

@@ -56,17 +56,7 @@ const UserProductTable = ({products}) => {
         <div>
             <h1>UserOrder</h1>
             <Paper  square="true" >
-         <TablePagination
-        rowsPerPageOptions={[5, 10, 15,{ label: 'All', value: -1 }]}
-        component="div"
-        count={products?.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-        dir="rtl"
-        style={{margin:"auto"}}
-      />
+
       <Table className={classes.table} aria-label="simple table">
         <TableHead >
           <TableRow  className={classes.root}>
@@ -96,7 +86,18 @@ const UserProductTable = ({products}) => {
            
           ))}
            </TableBody>
-        
+           <TablePagination
+        rowsPerPageOptions={[5, 10, 15,{ label: 'کل', value: -1 }]}
+        component="div"
+        count={products?.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+        dir="rtl"
+        style={{margin:"auto"}}
+        labelRowsPerPage='تعداد سطر های هر صفحه'
+      />
       </Table>
         </Paper>
         </div>

@@ -4,41 +4,41 @@ import Electronic from "./Electronic";
 import Jweri from "./Jweri";
 import Electronicis from "./Electronicis";
 import Women from "./Women";
-
+import LapTop from "./LapTop";
 const routes = [
   {
-    path: "/AllProductsInGroup/لباس مردانه",
+    path: "/test",
     exact: true,
     name: "لباس مردانه",
     toolbar: () => <p>Invoices</p>,
     main: () => <Men />,
   },
   {
-    path: "/AllProductsInGroup/الکترونیکی",
+    path: "/test/الکترونیکی",
     name: "الکترونیکی",
     toolbar: () => <p>Purchase Orders</p>,
     main: () => <Electronic />,
   },
   {
-    path: "/AllProductsInGroup/لباس زنانه",
+    path: "/test/لباس زنانه",
     name: "لباس زنانه",
     toolbar: () => <p>Purchase Orders</p>,
     main: () => <Women />,
   },
   {
-    path: "/AllProductsInGroup/جواهرات",
+    path: "/test/جواهرات",
     name: "جواهرات",
     toolbar: () => <p>Purchase Orders</p>,
     main: () => <Jweri />,
   },
-  /*   {
-    path: "/AllProductsInGroup",
-    name: "لباس مردانه",
-    toolbar: () => <p>Purchase Orders</p>,
-    main: () => <Men />,
-  }, */
   {
-    path: "/AllProductsInGroup/الکترونیک",
+    path: "/test/لپتاپ",
+    name: "لپتاپ",
+    toolbar: () => <p>Purchase Orders</p>,
+    main: () => <LapTop />,
+  },
+  {
+    path: "/test/الکترونیک",
     name: "الکترونیک",
     toolbar: () => <p>Purchase Orders</p>,
     main: () => <Electronicis />,

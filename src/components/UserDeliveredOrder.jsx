@@ -14,11 +14,11 @@ const UserDeliveredOrder = () => {
 
       }, [])
     const useStyles = makeStyles((theme)=>({
-        table: {
-          minWidth: 650,
-          width:"50%",
-          margin:"auto",
-        },
+      table: {
+        minWidth: 650,
+        width:"80%",
+        margin:"auto",
+      },
         root:{
           fontSize:"30px",
           backgroundColor:"#6980fc"
@@ -27,6 +27,9 @@ const UserDeliveredOrder = () => {
             width: theme.spacing(8),
             height: theme.spacing(8),
           }, */
+          pagination:{
+            width:"35%"
+          }
       })
       );
       const StyledTableRow = withStyles((theme) => ({
@@ -78,19 +81,8 @@ const UserDeliveredOrder = () => {
       };
     return (
         <div>
-            <h1>UserOrder</h1>
-            <Paper square="true" >
-         <TablePagination
-        rowsPerPageOptions={[5, 10, 15,{ label: 'All', value: -1 }]}
-        component="div"
-        count={orders?.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-        dir="rtl"
-        /* style={{margin:"auto"}} */
-      />
+{/*             <Paper square="true" > */}
+
       <Table className={classes.table} aria-label="simple table">
         <TableHead >
           <TableRow  className={classes.root}>
@@ -128,8 +120,21 @@ const UserDeliveredOrder = () => {
            </TableBody>
         
       </Table>
+      <TablePagination
+        rowsPerPageOptions={[5, 10,25,{ label: 'همه', value: -1 }]}
+        component="div"
+        count={orders?.length}
+        rowsPerPage={rowsPerPage}
+        className={classes.pagination}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+        dir="rtl"
+        labelRowsPerPage='تعداد سطر های هر صفحه'
+        /* style={{margin:"auto"}} */
+      />
 {open&&<OrdersModal openModal={open} handleClose={handleClose} selectedProduct={selectedProduct} isDeliver={false}/>}
-        </Paper>
+{/*         </Paper> */}
         </div>
     )
 }

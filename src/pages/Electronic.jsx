@@ -58,10 +58,16 @@ const Electronic = () => {
       
            <Grid container  justify="center">
            <Grid container justify="center" item xs={12} spacing={3}>
-            {products.filter(person=>person.category===AllCategories[1])?.map(filtered=>
+            {products?.filter(person=>person.category===AllCategories[1])?.map((filtered)=>{
+              return(
+                <Link href={`/AllProductsInGroup/${filtered.id}`}>
+                <ProductCard item={filtered}/>
+                </Link>
+              )
+            }
                        
             
-                       <ProductCard item={filtered}/>
+                      
                             
                        )} 
                                  </Grid>
