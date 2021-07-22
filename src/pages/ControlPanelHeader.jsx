@@ -11,6 +11,8 @@ import {Link, NavLink,useHistory} from "react-router-dom"
 import {Logout}from "../utils/auth"
 import Price from "./Price"
 import {loginUseStyle} from "../styles/index"
+import logo from "../styles/img/online-shop2.png"
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import "../assets/header.css"
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   header: {
-
+justifyContent:"center",
 /*     bottom: theme.spacing(2),
     right: theme.spacing(2), */
     backgroundColor: COLORS.mainColor,
@@ -43,15 +45,20 @@ const handlLogOut=()=>{
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.header} >
+     
         <Toolbar className="link link-admin">
-
-
+        <Link to="/" className="right" >فروشگاه فلان</Link>
+        <img className="admin-img" src={logo} onClick={()=>history.push("/")} />
           {/* <NavLink to="/" exact></NavLink> */}
           <NavLink to="/login/products"  exact activeClassName="link_active" /* component={Products} */> کالا</NavLink>
           <NavLink to="/login/price" exact activeClassName="link_active"/* component={Price} */ > قیمت </NavLink>
           <NavLink to="/login/orders" exact activeClassName="link_active"/* component={Price} */ > سفارش ها </NavLink>
-          <NavLink to="/" exact activeClassName="link_active"/* component={Price} */ > خانه </NavLink>
-          <Button color="inherit" onClick={handlLogOut}>خروج</Button>  
+          {/* <NavLink to="/" exact className="left" activeClassName="link_active" > بازگشت به سایت </NavLink> */}
+          <Button variant="contained" color="primary" className="left" onClick={handlLogOut}>
+          <ExitToAppIcon/>
+            
+            
+             خروج از پنل مدیریت</Button>  
 
 
         </Toolbar>

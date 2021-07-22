@@ -91,17 +91,8 @@ console.log("cart",cart);
         <section className="cart-items section">
             <h2>your cart</h2>
 <Paper style={{width:"100%",margin:"auto"}} square="true" >
-                  <TablePagination
-                 rowsPerPageOptions={[5, 10, 15,{ label: 'All', value: -1 }]}
-                 component="div"
-                 count={cart?.length}
-                 rowsPerPage={rowsPerPage}
-                 page={page}
-                 onChangePage={handleChangePage}
-                 onChangeRowsPerPage={handleChangeRowsPerPage}
-                 dir="rtl"
-                 style={{margin:"auto"}}
-               />
+
+
                <Table className={classes.table} aria-label="simple table">
                  <TableHead >
                    <TableRow  className={classes.root}>
@@ -158,11 +149,23 @@ console.log("cart",cart);
                >
                 
                </Modal> */}
+                                <TablePagination
+                 rowsPerPageOptions={[5, 10, 15,{ label: 'All', value: -1 }]}
+                 component="div"
+                 count={cart?.length}
+                 rowsPerPage={rowsPerPage}
+                 page={page}
+                 onChangePage={handleChangePage}
+                 onChangeRowsPerPage={handleChangeRowsPerPage}
+                 dir="rtl"
+                 style={{margin:"auto"}}
+                 labelRowsPerPage='تعداد سطر های هر صفحه'
+               />
                  </Paper>
                   )
                 
-                  
-
+                
+                  <Button  style={{float:"left"}} variant="contained" color="primary">نهایی کردن سبد خرید</Button>
             <h2>جمع {total}</h2>
 {/*             {
                 user
