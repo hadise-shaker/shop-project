@@ -15,18 +15,20 @@ import Grid from "@material-ui/core/Grid"
 import {COLORS} from "../styles/constantsVariables"
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import Link from '@material-ui/core/Link';
+import Box from "@material-ui/core/Box"
 const useStyles = makeStyles((theme) => ({
     root: {
-      display: 'flex',
-      width: "400px",
+      /* display: 'flex', */
+      width: "230px",
+/*       height: "230px", */
       padding: "10px 10px 10px 30px",
       borderRadius:"10px",
-      border:`3px solid ${COLORS.mainColor}`,
+      border:`3px solid #f1c752`,
       margin:"0 0 10px 10px"
     },
     details: {
       display: 'flex',
-      flexDirection: 'column',
+      /* flexDirection: 'column', */
     },
     content: {
       flex: '1 0 auto',
@@ -47,39 +49,59 @@ const useStyles = makeStyles((theme) => ({
     gridcontainer:{
         display:"flex",
         justifyContent:"space-evenly"
-    }
+    },
+    box:{
+      // width:"150px",
+      height:"100%",
+      border:"1px solid rgba(234,149,63,0.9)",
+      borderRadius:"5px",
+      // margin:"5px auto",
+      textAlign:"center",
+      background:"white"
+  },
+  img:{
+    objectFit:"cover",
+    objectPosition:"center",
+    height:"100%",
+    width:"80%"
+    },
   }));
 const ProductCard = ({item}) => {
     const classes = useStyles();
 
     return (
+      <>
+
         <Card className={classes.root} >
-        <div className={classes.details}>
+{/*         <CardMedia
+      className={classes.cover}
+      
+      image={item.image}
+      
+      title="Live from space album cover"
+    /> */}
+                                   {/*  <Box className={classes.box}> */}
+                                    <img className={classes.img}
+                                        //  style={{ width: "80%", height: "100Px" ,margin:"auto"}}
+                                        src={item.image} alt="کالا" />
+                                                <div className={classes.details}>
           <CardContent className={classes.content}>
             <Typography component="h5" variant="h5">
               {item.title}
             </Typography>
-            <Typography component="h5" variant="h5">
-              {item.category}
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
-            {item.description}
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
-            {item.price}
+            <Typography variant="subtitle1" color="primary">
+            {item.price}  تومان
             </Typography>
           </CardContent>
 
         </div>
-        <CardMedia
-          className={classes.cover}
-          
-          image={item.image}
-          
-          title="Live from space album cover"
-        />
+                             {/*    </Box> */}
+        <br></br>
+
+
 
       </Card>
+      </>
     )
 }
 

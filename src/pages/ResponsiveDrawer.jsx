@@ -87,11 +87,13 @@ const ResponsiveDrawer = props => {
   );
 
   return (
+    <>
+    <Header  className={classes.appBar} handleDrawerToggle={handleDrawerToggle}/>
     <Router>
       <div className={classes.root}>
         <CssBaseline />
 
-          <Header  className={classes.appBar} handleDrawerToggle={handleDrawerToggle}/>
+         
 
 
         <nav className={classes.drawer}>
@@ -138,6 +140,7 @@ const ResponsiveDrawer = props => {
         </main>
       </div>
     </Router>
+    </>
   );
 };
 

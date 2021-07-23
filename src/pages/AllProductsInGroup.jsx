@@ -79,7 +79,7 @@ const AllProductsInGroup=()=> {
          <Header />
       </AppBar> */}
 
-<ResponsiveDrawer/>
+<ResponsiveDrawer product={products}/>
     </div>
   );
 }

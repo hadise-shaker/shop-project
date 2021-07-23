@@ -79,6 +79,9 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
           width:"27%"
         };
       }
+      useEffect(() => {
+        dispatch(getProducts());
+      }, [])
   console.log(selectedProduct);
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
@@ -114,23 +117,20 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
         "category":category,
         "image":image,
       } */
+      let updatedProductObj={...selectedProduct, title,image:filesContent[0]?.content || image ,category,description};
     {option?      
-        dispatch(editProduct({
-        title,
-        category,
-        description,
-        image,
-        id
-      })).then( dispatch(getProducts())):
+        dispatch(editProduct(selectedProduct.id,updatedProductObj)).then(dispatch(getProducts()))
+        :
       dispatch(addProduct({
         title,
         category,
         description,
-        image: filesContent[0]?.content,
-      })).then( dispatch(getProducts()));
+        image: filesContent[0]?.content||image,
+      })).then(dispatch(getProducts()));
+     
     }
-
-  window.location.reload();
+    dispatch(getProducts())
+/*   window.location.reload(); */
     handleClose();
 
   }
@@ -220,7 +220,7 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
                 /> */}
 {/*                 <TextField                   value={image}
                   onChange={(e) => setImage(e.target.value)}> */}
-                <Avatar src={image}   variant="square" className={classes.image} /* onChange={(e) => setImage(e.target.value)} *//>
+               {/*  <Avatar src={image}   variant="square" className={classes.image} /> */}
 {/*                 </TextField> */}
          
 {/*           <img src={image}/> */}
@@ -233,11 +233,13 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
                   className={classes.image} 
                   // margin="normal"
                   // disabled
-                 /*  type="file" */
+                  /* type="file" */
                   className={classes.input}
+                  defaultValue={image}
                   /* fullWidth */
-                  value={image}
                   onChange={(e) => setImage(e.target.value)}
+                  /* value={image} */
+                 
 /*                   onClick={() => {
                     openFileSelector();
                   }} */

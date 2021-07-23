@@ -7,10 +7,13 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
+import {COLORS}from "../styles/constantsVariables"
+import CancelIcon from '@material-ui/icons/Cancel';
 import { useDispatch, useSelector } from "react-redux";
 import {addProduct,getProducts,editItem,editProduct}from "../redux/actions/productActions"
 import MenuItem from '@material-ui/core/MenuItem';
 import UserProductTable from "./UserProductTable"
+import Typography from "@material-ui/core/Typography"
 const OrdersModal = ({ openModal,handleClose,selectedProduct,isDeliver,action}) => {
 /*   const orders = useSelector((state) => state.userOrders); */
 
@@ -23,10 +26,18 @@ const OrdersModal = ({ openModal,handleClose,selectedProduct,isDeliver,action}) 
         }, 
          paper: {
           position: 'absolute',
-          backgroundColor: theme.palette.background.paper,
-          border: '2px solid #000',
+          backgroundColor: COLORS.bg_modal,
+          border: `2px solid ${COLORS.border_modal}`,
           boxShadow: theme.shadows[5],
           padding: theme.spacing(2, 4, 3),
+          borderRadius:"10px"
+        },
+        closebtn:{
+          float:"right",
+          width:"5%",
+          height:"6%",
+          cursor:"pointer",
+          fontSize:"22px"
         },
       }));
       function getModalStyle() {
@@ -84,22 +95,23 @@ const OrdersModal = ({ openModal,handleClose,selectedProduct,isDeliver,action}) 
          <div style={modalStyle} className={classes.paper}>
         
         <form /* onSubmit={(e)=>e.preventDefault()} */ >
-        
-        <h1 >
+        <CancelIcon  color="primary"  onClick={handleClose} className={classes.closebtn} />
+        <Typography component="h5" variant="h5" >
           نام مشتری :  {selectedProduct.username}
-      </h1>
-      <h1 >
+      </Typography>
+      <Typography component="h5" variant="h5">
         آدرس :  {selectedProduct.address}
-      </h1>
-      <h1 >
+      </Typography>
+      <Typography component="h6" variant="h6">
         تلفن : {selectedProduct.phone}
-      </h1>
-      <h1 >
+      </Typography>
+      <Typography component="h6" variant="h6">
         زمان تحویل :{selectedProduct.handleTime}
-      </h1>
-      <h1 >
+      </Typography>
+      <Typography component="h6" variant="h6">
        زمان سفارش :{selectedProduct.ordertime}
-      </h1>   
+      </Typography>   
+ 
          {/*  <button    onClick={()=>handleSave(selectedProduct.id)}> ذخیره</button> */}
         </form>
        

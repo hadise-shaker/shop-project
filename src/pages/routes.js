@@ -7,38 +7,38 @@ import Women from "./Women";
 import LapTop from "./LapTop";
 const routes = [
   {
-    path: "/test",
+    path: "/categorylist/لباس مردانه",
     exact: true,
     name: "لباس مردانه",
     toolbar: () => <p>Invoices</p>,
     main: () => <Men />,
   },
   {
-    path: "/test/الکترونیکی",
-    name: "الکترونیکی",
+    path: "/categorylist/مانیتور",
+    name: "مانیتور",
     toolbar: () => <p>Purchase Orders</p>,
     main: () => <Electronic />,
   },
   {
-    path: "/test/لباس زنانه",
+    path: "/categorylist/لباس زنانه",
     name: "لباس زنانه",
     toolbar: () => <p>Purchase Orders</p>,
     main: () => <Women />,
   },
   {
-    path: "/test/جواهرات",
+    path: "/categorylist/جواهرات",
     name: "جواهرات",
     toolbar: () => <p>Purchase Orders</p>,
     main: () => <Jweri />,
   },
   {
-    path: "/test/لپتاپ",
+    path: "/categorylist/لپتاپ",
     name: "لپتاپ",
     toolbar: () => <p>Purchase Orders</p>,
     main: () => <LapTop />,
   },
   {
-    path: "/test/الکترونیک",
+    path: "/categorylist/الکترونیک",
     name: "الکترونیک",
     toolbar: () => <p>Purchase Orders</p>,
     main: () => <Electronicis />,

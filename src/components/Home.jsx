@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     },
     details: {
       display: 'flex',
-      flexDirection: 'column',
+      flexDirection: 'row',
     },
     content: {
       flex: '1 0 auto',
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     },
     container:{
        /*  display: "flex", */
-        backgroundColor:` ${COLORS.bg_modal}`,
+/*         backgroundColor:` ${COLORS.bg_modal}`, */
 /*         height: "600px", */
         alignItems:"center",
         justifyContent:"center",
@@ -60,6 +60,14 @@ const useStyles = makeStyles((theme) => ({
         maxHeight:"100%",
         maxWidth:"100%",
 
+    },
+    title:{
+      backgroundColor:"#ff8842",
+      textAlign:"center",
+      borderRadius:"10px",
+      display:"flex",
+      justifyContent:"center",
+      marginTop:"20px",
     }
   }));
 const Home = () => {
@@ -99,8 +107,13 @@ const Home = () => {
 /*                   const product = products?.map((item)=>item.category).find((item) => item.category===parseInt(LimitedProducts2))
                   console.log("test category ",product) */
             return(
-              <div key={i}>
-              <Link to={`/test`}>    <Typography variant="h4" style={{display:"flex",alignItems:"center",padding:"30px 10px 20px 0"}}>{val} <ArrowLeftIcon style={{fontSize:"30px"}}  /></Typography>   </Link>
+              <div  key={i}>
+                <div className={classes.title}>
+
+                
+              <Link to={`/categorylist/${val}`} style={{color:"white",textDecoration:"none",
+            padding:"5px"}}>    <Typography variant="h4" style={{fontSize:"2.5rem",display:"flex",alignItems:"center",/* padding:"30px 10px 20px 0", */textAlign:"center"}}>{val} {/* <ArrowLeftIcon style={{fontSize:"30px"}}  /> */}</Typography>   </Link>
+              </div>
               <div className={classes.container} >
            
            <br></br>
@@ -116,7 +129,7 @@ const Home = () => {
                     
                   {/*   {console.log("filtered id",filtered)} */}
                    
-                    <Link  to={`/AllProductsInGroup/${filtered.id}`}>
+                    <Link  style={{textDecoration:"none",textAlign:"center"}} to={`/AllProductsInGroup/${filtered.id}`}>
                   
                     <ProductCard item={filtered}/>
                    

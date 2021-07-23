@@ -23,15 +23,18 @@ import { addToCart,increaseAmount} from "../redux/actions/cart.reducer";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    width: "100%",
-    padding: "0",
-
+    width: "80%",
+    padding: "10px",
+    justifyContent:"center",
+    alignItems:"center",
+    border: "2px solid",
     /* border:`3px solid ${COLORS.mainColor}`, */
 /*     margin:"0 0 10px 10px", */
 /*     backgroundColor:"aqua", */
-    backgroundImage: "linear-gradient(180deg, #b06ab3,#4568dc)",
+/*     backgroundImage: "linear-gradient(180deg, #b06ab3,#4568dc)", */
 
     transition: "backgroundImage 0.2s linear",
+
   },
   details: {
     display: 'flex',
@@ -45,6 +48,10 @@ const useStyles = makeStyles((theme) => ({
   cover: {
     width: "20%",
    /*  height:"400px", */
+   border:"2px solid black",
+   boxShadow: "0px 0px 7px 5px #ca7c1c",
+   /* padding:"10px" */
+   marginLeft:"20px"
   },
   controls: {
     display: 'flex',
@@ -58,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
   },
   imgContainer:{
     display:"flex",
+    
   },
   space:{
     paddingBottom:"10px"
@@ -70,6 +78,20 @@ const useStyles = makeStyles((theme) => ({
   input:{
     fontSize:"21px",
     width:"25%"
+  },
+  container:{
+    width: "54%",
+    display: "flex",
+    flexWrap: "wrap",
+    boxSizing: "border-box",
+
+    margin: "20px 30px",
+
+
+  },
+  container2:{
+/*     border: "2px solid", */
+    textAlign:"center"
   }
 }));
 const ProductDetail = ({image,title,description,action}) => {
@@ -125,16 +147,19 @@ const ProductDetail = ({image,title,description,action}) => {
 {/*         <Grid container spacing={3}> */}
 {/*           <Grid item xs={12}> */}
 
+          <div style={{display:"flex"}}>
+
           
 {/*           <Card className={classes.root}> */}
-<Grid container  justify="center">
-           <Grid container justify="center" item xs={12} spacing={4} >
-<Card className={classes.root} >
 {product?.image? <img className={classes.cover} src={product?.image}/>
 :
 
 null
 }
+<Grid className={classes.container} container  justify="center">
+           <Grid className={classes.container2} container justify="center" item xs={12} spacing={4} >
+<Card className={classes.root} >
+
    {/*  <img className={classes.cover} src={product?.image}/> */}
         <div className={classes.details}>
           <CardContent className={classes.content}>
@@ -169,6 +194,7 @@ null
       </Card>
       </Grid>
          </Grid>
+         </div>
         </>
     )
 }

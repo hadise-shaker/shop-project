@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {Orders}from "../redux/actions/userActions"
 import DeleteIcon from '@material-ui/icons/Delete';
 import OrdersModal from "../components/OrdersModal"
+import {COLORS}from "../styles/constantsVariables"
 import {Table,TableBody,Modal,TableCell,TableContainer,TableHead,TableRow,Paper,Button,Avatar,TablePagination,makeStyles,withStyles} from '@material-ui/core';
 const UserProductTable = ({products}) => {
 /*     const orders = useSelector((state) => state.userOrders); */
@@ -27,6 +28,9 @@ const UserProductTable = ({products}) => {
             width: theme.spacing(8),
             height: theme.spacing(8),
           },
+          pagination:{
+            backgroundColor:COLORS.bg_modal
+          }
       })
       );
       const StyledTableRow = withStyles((theme) => ({
@@ -54,8 +58,7 @@ const UserProductTable = ({products}) => {
       };
     return (
         <div>
-            <h1>UserOrder</h1>
-            <Paper  square="true" >
+           {/*  <Paper  square="true" > */}
 
       <Table className={classes.table} aria-label="simple table">
         <TableHead >
@@ -92,6 +95,7 @@ const UserProductTable = ({products}) => {
         count={products?.length}
         rowsPerPage={rowsPerPage}
         page={page}
+        className={classes.pagination}
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
         dir="rtl"
@@ -99,7 +103,7 @@ const UserProductTable = ({products}) => {
         labelRowsPerPage='تعداد سطر های هر صفحه'
       />
       </Table>
-        </Paper>
+       {/*  </Paper> */}
         </div>
     )
 }

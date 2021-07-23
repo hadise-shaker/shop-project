@@ -108,10 +108,10 @@ export const getAProduct = (id) => async (dispatch) => {
   dispatch(selectedProduct(res.data));
 };
 
-export const editProduct = (id) => async (dispatch) => {
+export const editProduct = (id, updatedProduct) => async (dispatch) => {
   console.log(id);
-  await update(id);
-  dispatch(editItem(id));
+  let res = await update(id, updatedProduct);
+  dispatch(editItem(update));
 };
 export const deleteproduct = (id) => async (dispatch) => {
   await deleteAproduct(id).then((res) => console.log("res", res));

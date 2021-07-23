@@ -38,7 +38,11 @@ function App() {
             component={ProductDetail}
           />
           <Route path="/cart" exact component={Cart} />
-          <Route path="/test" exact component={AllProductsInGroup} />
+          <Route
+            path="/categorylist/:category"
+            exact
+            component={AllProductsInGroup}
+          />
           {/*           <Route path="/test" exact component={ResponsiveDrawer}>
           </Route> */}
           {!isLoggedIn() ? (

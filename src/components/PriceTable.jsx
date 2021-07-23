@@ -136,7 +136,7 @@ export default function DataGridDemo() {
         columns={columns}
         pageSize={5}
         onEditCellChangeCommitted={handleEditCellChange}
-/*         hideFooterSelectedRowCount={true} */
+        hideFooterSelectedRowCount={true}
         disableColumnMenu={true}
 pagination
 
