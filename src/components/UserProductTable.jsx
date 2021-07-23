@@ -76,7 +76,8 @@ const UserProductTable = ({products}) => {
                   {order.producttitle} 
               </TableCell>
               <TableCell align="center">
-                 {order.price}
+              {(Number(order.price)).toLocaleString()}
+                 تومان
               </TableCell>
               <TableCell align="center">
                  {order.number}

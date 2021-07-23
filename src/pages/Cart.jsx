@@ -116,7 +116,7 @@ console.log("cart",cart);
                        </TableCell>
          {/*               <TableCell align="center">{row.price}</TableCell>
                        <TableCell align="center">{row.description}</TableCell> */}
-                       <TableCell align="center">{row.price}</TableCell>
+                       <TableCell align="center">   {(Number(row.price)).toLocaleString()} تومان</TableCell>
                        <TableCell align="center">{row.amount}</TableCell>
                        
                        <TableCell align="center">
@@ -166,7 +166,7 @@ console.log("cart",cart);
                 
                 
                   <Button  style={{float:"left"}} variant="contained" color="primary">نهایی کردن سبد خرید</Button>
-            <h2>جمع {total}</h2>
+            <h2>جمع {(Number(total)).toLocaleString()}</h2>
 {/*             {
                 user
                     ?

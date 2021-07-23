@@ -46,12 +46,16 @@ const useStyles = makeStyles((theme) => ({
     flex: '1 0 auto',
   },
   cover: {
-    width: "20%",
+    width: "30%",
    /*  height:"400px", */
    border:"2px solid black",
    boxShadow: "0px 0px 7px 5px #ca7c1c",
    /* padding:"10px" */
-   marginLeft:"20px"
+   marginLeft:"20px",
+   height: "50%",
+   borderRadius: "10px",
+   /* align-items: center; */
+   alignSelf: "center",
   },
   controls: {
     display: 'flex',
@@ -80,12 +84,12 @@ const useStyles = makeStyles((theme) => ({
     width:"25%"
   },
   container:{
-    width: "54%",
+    width: "75%",
     display: "flex",
     flexWrap: "wrap",
     boxSizing: "border-box",
 
-    margin: "20px 30px",
+    margin: "20px 20px",
 
 
   },
@@ -100,6 +104,7 @@ const ProductDetail = ({image,title,description,action}) => {
   const theme = useTheme()
   const { id } = useParams();
   const [count, setCount] = useState(0);
+  const [amount1, setAmount1] = useState(0)
   const dispatch = useDispatch();
       useEffect(() => {
 
@@ -127,15 +132,15 @@ const ProductDetail = ({image,title,description,action}) => {
     console.log("cart",cart);
     const handleAddToCartClick = () => {
       setCount(count+1)
-      const {id, image, title, price} = product
+      const {id, image, title, price,number} = product
       const item = cart.find(item => item.id === id)
-      if (item) {
+/*       if (item) {
           cart.map(item => item.id === id && dispatch(increaseAmount(item.id)))
-      } else {
-          const newItem = {id, image, title, price, amount: 1}
+      } else { */
+          const newItem = {id, image, title, price, amount: amount1}
           dispatch(addToCart(newItem))
-          
-      }
+/*           
+      } */
 /*       history.push("/cart") */
   }
 
@@ -147,7 +152,7 @@ const ProductDetail = ({image,title,description,action}) => {
 {/*         <Grid container spacing={3}> */}
 {/*           <Grid item xs={12}> */}
 
-          <div style={{display:"flex"}}>
+          <div style={{display:"flex",width:"70%",margin:"auto"}}>
 
           
 {/*           <Card className={classes.root}> */}
@@ -173,19 +178,39 @@ null
             {product?.description}
             </Typography>
             <Typography className={classes.space} variant="h4" >
-              {product?.price} تومان
+            {(Number(product?.price)).toLocaleString()}
+               تومان
             </Typography>
             <Typography className={classes.space} variant="h4" >
-            <Input type="number" defaultValue={1} onChange={(e)=>handleCountProduct(e)} className={classes.input}/>
+            
+            <Input type="number"
+             onChange={(e)=>setAmount1(e.target.value)} 
+            InputProps={{
+                inputProps: { 
+                  max: product?.number, min: 0 
+                        }
+                  }}    
+            onkeydown={(e) => {
+                 e.preventDefault();
+                      }}
+             onKeyPress={(e) => {
+                 e.preventDefault();
+                 }} 
+                 defaultValue={1}
+                 
+                  className={classes.input}/>
             </Typography>
            
 
-            <Button onClick={handleAddToCartClick}
+            <Button disabled={product?.number===0} onClick={handleAddToCartClick}
+
              className={classes.btn} variant="contained" color="primary">
+
             <AddCircleIcon/>افزودن به سبد خرید
              
             </Button>
            
+{product?.number === 0 ? <Typography variant="h5" component="h5" style={{color:"red"}}>اتمام موجودی</Typography> : null}
           </CardContent>
 
         </div>

@@ -118,7 +118,8 @@ const UserDeliveredOrder = () => {
               <TableCell align="center">
                 {order.products.map((product)=>
                     product.price*product.number
-                )}
+                ).toLocaleString()}
+                تومان
               </TableCell>
               <TableCell align="center">{order.ordertime}</TableCell>
               
