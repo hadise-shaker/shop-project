@@ -101,7 +101,7 @@ const Home = () => {
     return (
 
         <>
-            <Header/>
+            {/* <Header/> */}
 
             {AllCategories.map((val,i)=>{
 /*                   const product = products?.map((item)=>item.category).find((item) => item.category===parseInt(LimitedProducts2))
@@ -144,7 +144,7 @@ const Home = () => {
                     </>    
                               
                                
-               )} ) 
+              )} ) 
                         }
                 
      </Grid>
@@ -154,7 +154,7 @@ const Home = () => {
               </div>
             )
           })}
-            )
+            
         </>
     )
 }

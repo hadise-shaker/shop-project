@@ -3,5 +3,7 @@
   margin: 0;
 /*   padding-right: 10px;
   padding-left: 10px; */
+  position: relative;
+    min-height: 100vh;
 }
 

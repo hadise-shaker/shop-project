@@ -30,7 +30,7 @@ export default function SignIn() {
       .then((res) => {
         console.log("res :",res.data);
         localStorage.setItem("token", res.data.token);
-        history.push("/admin/products")
+        history.push("/admin")
         /* window.location.reload(); */
       })
       .catch((err) => console.error(err));

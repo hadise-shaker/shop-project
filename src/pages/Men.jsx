@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     },
     container:{
       /*  display: "flex", */
-       backgroundColor:` ${COLORS.bg_modal}`,
+/*        backgroundColor:` ${COLORS.bg_modal}`, */
   /*         height: "600px", */
        alignItems:"center",
        justifyContent:"center",
@@ -57,9 +57,7 @@ const Men = () => {
     const classes = useStyles();
     return (
         <div>
-
-            <h1>page1</h1>
-            <Link /* href="/AllProductsInGroup" */ >    <Typography variant="h4" style={{display:"flex",alignItems:"center",padding:"30px 10px 20px 0"}}>{AllCategories[0]} <ArrowLeftIcon style={{fontSize:"30px"}}  /></Typography>   </Link>
+            <Link /* href="/AllProductsInGroup" */ >    <Typography variant="h4" style={{display:"flex",alignItems:"center",padding:"10px 10px 20px 0"}}>{AllCategories[0]} <ArrowLeftIcon style={{fontSize:"30px"}}  /></Typography>   </Link>
             <div className={classes.container} >
            
            <br></br>

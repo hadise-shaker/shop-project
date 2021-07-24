@@ -8,6 +8,7 @@ const CartReducer = createSlice({
     cart: getCartFromLocalStorage(),
     total: 0,
     cartItems: 0,
+    count: 0,
   },
   reducers: {
     addToCart: (state, action) => {
@@ -28,6 +29,9 @@ const CartReducer = createSlice({
     setTotal: (state, action) => {
       state.total = action.payload;
     },
+    setCount: (state, action) => {
+      state.count = action.payload;
+    },
   },
 });
 
@@ -38,6 +42,7 @@ export const {
   removeItem,
   setCartItems,
   setTotal,
+  setCount,
 } = CartReducer.actions;
 
 export default CartReducer.reducer;

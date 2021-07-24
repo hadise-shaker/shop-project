@@ -90,7 +90,8 @@ const ProductCard = ({item}) => {
               {item.title}
             </Typography>
             <Typography variant="subtitle1" color="primary">
-            {(Number(item.price)).toLocaleString()}
+               {item?.price?  (Number(item?.price)).toLocaleString() : " - "}
+           
               تومان
             </Typography>
           </CardContent>

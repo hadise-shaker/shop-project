@@ -117,7 +117,7 @@ export const deleteproduct = (id) => async (dispatch) => {
   await deleteAproduct(id).then((res) => console.log("res", res));
   dispatch(removeProduct(id));
 };
-export const addProduct = (data) => async (dispatch) => {
-  await createProduct(data);
-  dispatch(addAproduct(data));
+export const addProduct = (data) => async (dispatch, getState) => {
+  let result = await addAproduct(data);
+  dispatch(createProduct(data));
 };

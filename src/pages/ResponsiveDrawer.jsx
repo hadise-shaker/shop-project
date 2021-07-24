@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -17,7 +17,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Header from "../components/Header"
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-
+import { useDispatch,useSelector } from "react-redux";
+import {addProduct,getProducts,deleteproduct,editItem}from "../redux/actions/productActions"
+import {getCategoryList} from "../api/products"
 import routes from "./routes";
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
@@ -57,10 +59,24 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ResponsiveDrawer = props => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+
+      dispatch(getProducts());
+
+    }, []); 
+/*   useEffect(() => {
+
+    getCategoryList();
+
+    }, []); */ 
   const { container } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const products = useSelector((state) => state.allProducts.products);
+  const categories = products.map((cat,i)=>cat.category);
+  let AllCategories = [...new Set(categories)]
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);

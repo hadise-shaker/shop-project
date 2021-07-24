@@ -2,17 +2,17 @@ import React from 'react'
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-const MainLayout = ({children}) => {
+const MainLayout = (props) => {
     return (
         <div>
 
 
-<Header/>
+         <Header />
 
-        {children}
+        {props.children}
 
 
-
+        <Footer/>
         </div>
 
     )

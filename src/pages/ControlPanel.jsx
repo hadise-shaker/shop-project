@@ -4,6 +4,7 @@ import {isLoggedIn}from "../utils/auth"
 import ControlPanelHeader from "./ControlPanelHeader"
 import Price from "./Price"
 import ProductsTablePage from "./ProductsTablePage"
+import OrdersManagment from "./OrdersManagment"
 import {Link, NavLink,useHistory} from "react-router-dom"
 const ControlPanel = () => {
     return (
@@ -18,8 +19,9 @@ const ControlPanel = () => {
 
 {/* <ProductsTablePage/> */}
        
-                <Route exact path="/control/products" component={ProductsTablePage} />
-		        <Route exact path="/price" component={Price} />
+                <Route exact path="/admin" component={ProductsTablePage} />
+		        <Route exact path="/admin/price" component={Price} />
+		        <Route exact path="/admin/orders" component={OrdersManagment} />
 
      
             

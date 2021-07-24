@@ -27,51 +27,38 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Switch>
-          <Route path="/" exact /* component={Home} */>
-            <Home />
-          </Route>
+        <MainLayout>
+          <Switch>
+            <Route path="/" exact /* component={Home} */>
+              <Home />
+            </Route>
 
-          <Route
-            path="/AllProductsInGroup/:id"
-            exact
-            component={ProductDetail}
-          />
-          <Route path="/cart" exact component={Cart} />
-          <Route
-            path="/categorylist/:category"
-            exact
-            component={AllProductsInGroup}
-          />
-          {/*           <Route path="/test" exact component={ResponsiveDrawer}>
+            <Route
+              path="/AllProductsInGroup/:id"
+              exact
+              component={ProductDetail}
+            />
+            <Route path="/cart" exact component={Cart} />
+            <Route
+              path="/categorylist/:category"
+              exact
+              component={AllProductsInGroup}
+            />
+
+            {/*           <Route path="/test" exact component={ResponsiveDrawer}>
           </Route> */}
-          {!isLoggedIn() ? (
-            <>
-              <Header />
-              <Route path="/login" exact component={AdminLogin}></Route>
-            </>
-          ) : (
-            <>
-              <ControlPanelHeader />
-              <ProtectedRoute
-                path="/login/products"
-                /* exact */
-                component={Products}
-              />
+            {/*             {!isLoggedIn() && (
+              <> */}
+            <Route path="/login" exact component={AdminLogin}></Route>
+            {/*               </>
+            )} */}
 
-              <ProtectedRoute
-                path="/login/price"
-                /* exact */ component={Price}
-              />
-              <ProtectedRoute
-                path="/login/orders"
-                /* exact */ component={OrdersManagment}
-              />
-            </>
-          )}
-
-          {/*           <Route path="*" exact component={NotFound}></Route> */}
-        </Switch>
+            <Route exact path="/admin" component={ProductsTablePage} />
+            <Route exact path="/admin/price" component={Price} />
+            <Route exact path="/admin/orders" component={OrdersManagment} />
+            {/*           <Route path="*" exact component={NotFound}></Route> */}
+          </Switch>
+        </MainLayout>
       </Router>
     </div>
   );

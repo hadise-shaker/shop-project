@@ -18,7 +18,7 @@ import Grid from '@material-ui/core/Grid';
 import Input from "@material-ui/core/Input"
 import {COLORS} from "../styles/constantsVariables"
 import { SettingsCellOutlined } from "@material-ui/icons";
-import { addToCart,increaseAmount} from "../redux/actions/cart.reducer";
+import { addToCart,increaseAmount,setCount} from "../redux/actions/cart.reducer";
 /* import {AddCart,increaseAmount} from "../redux/actions/cartActions" */
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -103,8 +103,8 @@ const ProductDetail = ({image,title,description,action}) => {
   const history = useHistory()
   const theme = useTheme()
   const { id } = useParams();
-  const [count, setCount] = useState(0);
-  const [amount1, setAmount1] = useState(0)
+/*   const [count, setCount] = useState(0); */
+  const [amount1, setAmount1] = useState(1)
   const dispatch = useDispatch();
       useEffect(() => {
 
@@ -127,11 +127,13 @@ const ProductDetail = ({image,title,description,action}) => {
     }
     const products = useSelector((state) => state.allProducts.products)
     const product = products?.find(item => item.id === parseInt(id))
-    console.log("product",products);
     const cart = useSelector((state) => state.cart.cart)
+    const count = useSelector(state => state.cart.count)
     console.log("cart",cart);
     const handleAddToCartClick = () => {
-      setCount(count+1)
+
+      console.log("count",count);
+      dispatch(setCount(count+1))
       const {id, image, title, price,number} = product
       const item = cart.find(item => item.id === id)
 /*       if (item) {
@@ -144,9 +146,10 @@ const ProductDetail = ({image,title,description,action}) => {
 /*       history.push("/cart") */
   }
 
+
     return (
       <>
-      <Header count={count}/>
+     {/*  <Header count={count}/> */}
       <br></br>
 
 {/*         <Grid container spacing={3}> */}
@@ -178,14 +181,26 @@ null
             {product?.description}
             </Typography>
             <Typography className={classes.space} variant="h4" >
-            {(Number(product?.price)).toLocaleString()}
+              {product?.price?  (Number(product?.price)).toLocaleString() : " - "}
+           {/*  {(Number(product?.price)).toLocaleString()} */}
                تومان
             </Typography>
             <Typography className={classes.space} variant="h4" >
             
             <Input type="number"
              onChange={(e)=>setAmount1(e.target.value)} 
-            InputProps={{
+             inputProps={{
+             
+                max: product?.number, min: 1 
+                    
+                }}    
+          onkeydown={(e) => {
+               e.preventDefault();
+                    }}
+           onKeyPress={(e) => {
+               e.preventDefault();
+               }} 
+            /* InputProps={{
                 inputProps: { 
                   max: product?.number, min: 0 
                         }
@@ -195,14 +210,14 @@ null
                       }}
              onKeyPress={(e) => {
                  e.preventDefault();
-                 }} 
-                 defaultValue={1}
-                 
+                 }}  */
+                /*  defaultValue={1} */
+                 value={amount1}
                   className={classes.input}/>
             </Typography>
            
 
-            <Button disabled={product?.number===0} onClick={handleAddToCartClick}
+            <Button disabled={product?.number==="0"} onClick={handleAddToCartClick}
 
              className={classes.btn} variant="contained" color="primary">
 
@@ -210,7 +225,7 @@ null
              
             </Button>
            
-{product?.number === 0 ? <Typography variant="h5" component="h5" style={{color:"red"}}>اتمام موجودی</Typography> : null}
+{product?.number ==="0"? <Typography variant="h5" component="h5" style={{color:"red"}}>اتمام موجودی</Typography> : null}
           </CardContent>
 
         </div>

@@ -50,9 +50,9 @@ const handlLogOut=()=>{
         <Link to="/" className="right" >فروشگاه فلان</Link>
         <img className="admin-img" src={logo} onClick={()=>history.push("/")} />
           {/* <NavLink to="/" exact></NavLink> */}
-          <NavLink to="/login/products"  exact activeClassName="link_active" /* component={Products} */> کالا</NavLink>
-          <NavLink to="/login/price" exact activeClassName="link_active"/* component={Price} */ > قیمت </NavLink>
-          <NavLink to="/login/orders" exact activeClassName="link_active"/* component={Price} */ > سفارش ها </NavLink>
+          <NavLink to="/admin"  exact activeClassName="link_active" /* component={Products} */> کالا</NavLink>
+          <NavLink to="/admin/price" exact activeClassName="link_active"/* component={Price} */ > قیمت </NavLink>
+          <NavLink to="/admin/orders" exact activeClassName="link_active"/* component={Price} */ > سفارش ها </NavLink>
           {/* <NavLink to="/" exact className="left" activeClassName="link_active" > بازگشت به سایت </NavLink> */}
           <Button variant="contained" color="primary" className="left" onClick={handlLogOut}>
           <ExitToAppIcon/>

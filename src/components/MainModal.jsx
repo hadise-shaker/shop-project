@@ -122,11 +122,13 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
         dispatch(editProduct(selectedProduct.id,updatedProductObj)).then(dispatch(getProducts()))
         :
       dispatch(addProduct({
-        title,
-        category,
-        description,
-        image: filesContent[0]?.content||image,
-      })).then(dispatch(getProducts()));
+        title:title,
+        category:category,
+        description:description,
+        image: filesContent[0]?.content,
+        number:"",
+        price:""
+      }))/* .then(dispatch(getProducts())) */;
      
     }
     dispatch(getProducts())

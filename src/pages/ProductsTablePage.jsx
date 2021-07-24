@@ -87,30 +87,7 @@ const dispatch = useDispatch();
       </Modal> */}
 {open&&(<MainModal openModal={open} handleClose={handleClose} selectedProduct={selectedProduct} option={option}/>)}
          
-            
 
-
-{/*             <Modal        
-        open={open2}
-        onClose={handleClose2}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-        children={<EditProduct action={selectedProduct}/>}
-        /> */}
-
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-{/*             <h1 style={{textAlign:"center"}}> TABLE TEST </h1>
-            <Test/> */}
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-           {/*  </TableContainer> */}
 
         </div>
     )

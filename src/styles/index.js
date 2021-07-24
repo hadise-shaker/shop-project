@@ -52,8 +52,9 @@ export const loginUseStyle = makeStyles((theme) => ({
     bottom: theme.spacing(2),
     right: theme.spacing(2),
     /*     marginBottom: "20px", */
-    backgroundColor: COLORS.mainColor,
+    /*  backgroundColor: COLORS.mainColor, */
     marginBottom: theme.spacing(2),
+    zIndex: "99999",
   },
   root: {
     flexGrow: 1,

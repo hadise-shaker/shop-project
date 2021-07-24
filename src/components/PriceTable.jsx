@@ -37,6 +37,18 @@ const columns = [
     headerAlign: 'left',
     align:"left"
   },
+  {
+    field: 'number',
+    headerName: 'تعداد',
+    type:'number',
+    /* width: 150, */
+    editable: true,
+    headerClassName:"header",
+    cellClassName: 'super-app-theme--cell',
+    flex:0.5,
+    headerAlign: 'left',
+    align:"left"
+  },
 
 ];
 
@@ -101,9 +113,9 @@ export default function DataGridDemo() {
       // console.log(updatedObj);
       let obj = products.filter((item) => item.id === id)
   
-      if (updatedObj.field === "amount") {
+      if (updatedObj.field === "number") {
   
-        obj[0].amount = updatedObj.value
+        obj[0].number = updatedObj.value
   
       } else {
         obj[0].price = updatedObj.value
@@ -113,10 +125,10 @@ export default function DataGridDemo() {
   
     }
     const handleEdit = () => {
-      Promise.all(updatedata.map(product => update(product.id, product)
+      updatedata.map(product => update(product.id, product)
         .then(res => console.log(res.data))
         .catch(err => console.log(err))
-      ))
+      )
     }
   return (
 

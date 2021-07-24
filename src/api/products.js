@@ -17,6 +17,16 @@ export const update = async (id, product) => {
     .catch((err) => console.log(err));
 };
 
+export const getCategoryList = async (category) => {
+  let res = await axios({
+    method: "get",
+    url: `"http://localhost:5000/products?category=${category}&start=0&_limit=6`,
+    headers: { "content-type": "application/json" },
+  }).catch((err) => console.log(err));
+  return res;
+  // console.log(res.data);
+  // setData(res.data)
+};
 /* export const updateProduct = async (id, updateProduct) => {
   try {
     let res = await axiosConfig({
@@ -50,12 +60,14 @@ export const getAProductById = async (id) => {
 };
  */
 export const addAproduct = async (product) => {
-  const data = await axios
-    .post(`http://localhost:5000/products`, product)
-    .then((res) => {
-      return res.data;
-    })
-    .catch((err) => console.log("error"));
+  let res = await axios({
+    method: "post",
+    url: `http://localhost:5000/products`,
+    headers: { "content-type": "application/json" },
+    data: product,
+  }).catch((err) => console.log(err));
+  return res;
+
   /*   return await axios.post(`http://localhost:5000/products`, data); */
 };
 export const deleteAproduct = async (id) => {

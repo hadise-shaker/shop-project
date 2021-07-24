@@ -7,7 +7,9 @@ import {setCartItems, setTotal,removeItem,decreaseAmount,increaseAmount} from ".
 import {Table,TableBody,Modal,TableCell,TableContainer,TableHead,TableRow,Paper,Button,Avatar,TablePagination,makeStyles,withStyles} from '@material-ui/core';
 import {getCart,getAitem,deletecart} from "../redux/actions/cartActions"
 import Header from "../components/Header"
+import Typography from "@material-ui/core/Typography"
 import DeleteIcon from '@material-ui/icons/Delete';
+import shoppingBasket from "../assets/shopping-basket-2-512.png"
 function Cart() {
   const useStyles = makeStyles((theme)=>({
     table: {
@@ -87,9 +89,20 @@ console.log("cart",cart);
 
     return (
       <>
-      <Header/>
+     {/*  <Header/> */}
         <section className="cart-items section">
-            <h2>your cart</h2>
+         
+            <Typography component="h4" variant="h4" align="center">
+           
+           
+            <img src={shoppingBasket} style={{width:"100px",marginTop:"20px"}} />
+            <br></br>
+            {cart.length===0?"سبد خرید شما خالی است ! " : "سبد خرید شما" }
+             {/* سبد خرید شما */}
+              
+              </Typography>
+             
+             
 <Paper style={{width:"100%",margin:"auto"}} square="true" >
 
 
@@ -162,11 +175,14 @@ console.log("cart",cart);
                  labelRowsPerPage='تعداد سطر های هر صفحه'
                />
                  </Paper>
-                  )
+                  
                 
-                
-                  <Button  style={{float:"left"}} variant="contained" color="primary">نهایی کردن سبد خرید</Button>
-            <h2>جمع {(Number(total)).toLocaleString()}</h2>
+                <div>
+                <Button  disabled={cart.length===0} style={{float:"left"}} variant="contained" color="primary">نهایی کردن سبد خرید</Button>
+                  <h2 >  جمع : {(Number(total)).toLocaleString()} تومان</h2>
+                </div>
+
+           
 {/*             {
                 user
                     ?
