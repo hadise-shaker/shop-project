@@ -53,7 +53,7 @@ const Men = () => {
     const products = useSelector((state) => state.allProducts.products);
     const categories = products.map((cat,i)=>cat.category);
     let AllCategories = [...new Set(categories)]
-
+console.log("AllCategories",AllCategories);
     const classes = useStyles();
     return (
         <div>

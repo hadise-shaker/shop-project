@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     },
     container:{
       /*  display: "flex", */
-       backgroundColor:` ${COLORS.bg_modal}`,
+/*        backgroundColor:` ${COLORS.bg_modal}`, */
   /*         height: "600px", */
        alignItems:"center",
        justifyContent:"center",
@@ -43,22 +43,21 @@ const useStyles = makeStyles((theme) => ({
   
    }
   }));
-const Electronic = () => {
+const Monitor = () => {
     const products = useSelector((state) => state.allProducts.products);
     const categories = products.map((cat,i)=>cat.category);
     let AllCategories = [...new Set(categories)]
     const classes = useStyles();
     return (
         <div>
-            <h1>page2</h1>
-            <Link /* href="/AllProductsInGroup" */ >    <Typography variant="h4" style={{display:"flex",alignItems:"center",padding:"30px 10px 20px 0"}}>{AllCategories[1]} <ArrowLeftIcon style={{fontSize:"30px"}}  /></Typography>   </Link>
+            <Link /* href="/AllProductsInGroup" */ >    <Typography variant="h4" style={{display:"flex",alignItems:"center",padding:"10px 10px 20px 0"}}>{AllCategories[2]} <ArrowLeftIcon style={{fontSize:"30px"}}  /></Typography>   </Link>
             <div className={classes.container} >
            
            <br></br>
       
            <Grid container  justify="center">
            <Grid container justify="center" item xs={12} spacing={3}>
-            {products?.filter(person=>person.category===AllCategories[1])?.map((filtered)=>{
+            {products?.filter(person=>person.category===AllCategories[2])?.map((filtered)=>{
               return(
                 <Link href={`/AllProductsInGroup/${filtered.id}`}>
                 <ProductCard item={filtered}/>
@@ -77,4 +76,4 @@ const Electronic = () => {
     )
 }
 
-export default Electronic
+export default Monitor

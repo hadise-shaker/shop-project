@@ -22,7 +22,7 @@ import {addProduct,getProducts,deleteproduct,editItem}from "../redux/actions/pro
 import {getCategoryList} from "../api/products"
 import routes from "./routes";
 
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link,NavLink } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -55,7 +55,20 @@ const useStyles = makeStyles(theme => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3)
-  }
+  },
+
+  NavLink:{
+    color:"purple"
+  },
+  categoryTitle:{
+    color:"blue",
+    '&>li':{
+      backgroundColor:"#eaefff",
+      /* borderRadius:"0 40px 40px 0" */
+      borderBottom:"3px solid blue"
+    }
+   
+},
 }));
 
 const ResponsiveDrawer = props => {
@@ -87,20 +100,43 @@ const ResponsiveDrawer = props => {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {routes.map(route => (
-          <Link to={route.path}>
-            <ListItem button key={route.name}>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary={route.name} />
-            </ListItem>
-          </Link>
-        ))}
-      </List>
+        {routes.map((route) => {
+          return(
+            <>
+<NavLink exact to={route.path} className={classes.NavLink}  activeClassName={classes.categoryTitle}>
+            {/*   <ListItem button key={route.name}> */}
+  {/*               <ListItemIcon>
+                  <InboxIcon />
+                </ListItemIcon> */}
+                <ListItem > 
+               <Typography component="h4" variant="h5">
+               {route.name}
+               </Typography>
+               </ListItem>
+               </NavLink>
+  
+                  {route.sub.map(item=>
+                
+                  (              
+                      <Typography style={{padding:"5px 10px 0 0"}} /* component="h5" variant="h6" */>
+                          {item}
+                      </Typography>
+                      ))}
+  
+              {/* </ListItem> */}
+            </>
+            
+           
+          
+             )
+         })}
+
+
+  </List>
       <Divider />
-    </div>
-  );
+    </div>  
+    
+    );
 
   return (
     <>

@@ -1,47 +1,44 @@
 import React from "react";
 import Men from "./Men";
-import Electronic from "./Electronic";
-import Jweri from "./Jweri";
-import Electronicis from "./Electronicis";
-import Women from "./Women";
 import LapTop from "./LapTop";
+import Jweri from "./Jweri";
+import Monitor from "./Monitor";
+import Women from "./Women";
 const routes = [
   {
     path: "/categorylist/لباس مردانه",
     exact: true,
     name: "لباس مردانه",
+    sub: ["تیشرت ", "شلوار", "کت مردانه", "ساعت"],
     toolbar: () => <p>Invoices</p>,
     main: () => <Men />,
   },
   {
-    path: "/categorylist/مانیتور",
-    name: "مانیتور",
-    toolbar: () => <p>Purchase Orders</p>,
-    main: () => <Electronic />,
-  },
-  {
-    path: "/categorylist/لباس زنانه",
-    name: "لباس زنانه",
-    toolbar: () => <p>Purchase Orders</p>,
-    main: () => <Women />,
-  },
-  {
-    path: "/categorylist/جواهرات",
-    name: "جواهرات",
-    toolbar: () => <p>Purchase Orders</p>,
-    main: () => <Jweri />,
-  },
-  {
-    path: "/categorylist/لپتاپ",
-    name: "لپتاپ",
+    path: "/categorylist/لپ تاپ",
+    name: "لپ تاپ",
+    sub: ["ایسر ", "ایسوس", "لنوو "],
     toolbar: () => <p>Purchase Orders</p>,
     main: () => <LapTop />,
   },
   {
-    path: "/categorylist/الکترونیک",
-    name: "الکترونیک",
+    path: "/categorylist/لباس زنانه",
+    name: "لباس زنانه",
+    sub: ["تیشرت ", "شلوار", "کت زنانه"],
     toolbar: () => <p>Purchase Orders</p>,
-    main: () => <Electronicis />,
+    main: () => <Women />,
+  },
+  /*   {
+    path: "/categorylist/جواهرات",
+    name: "جواهرات",
+    toolbar: () => <p>Purchase Orders</p>,
+    main: () => <Jweri />,
+  }, */
+  {
+    path: "/categorylist/مانیتور",
+    name: "مانیتور",
+    sub: ["ال جی ", "سونی", "سامسونگ "],
+    toolbar: () => <p>Purchase Orders</p>,
+    main: () => <Monitor />,
   },
 ];
 
