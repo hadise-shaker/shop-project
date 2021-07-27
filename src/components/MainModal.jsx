@@ -275,10 +275,10 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
                 لباس مردانه
                 </option>
                 <option>
-                الکترونیک
+               لپتاپ
                 </option>
                 <option>
-                جواهرات
+                مانیتور
                 </option>
                 <option>
                 لباس زنانه

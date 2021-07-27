@@ -14,6 +14,12 @@ import SkipNextIcon from '@material-ui/icons/SkipNext';
 import Grid from "@material-ui/core/Grid"
 import {COLORS} from "../styles/constantsVariables"
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
+import doubleArrow from "../assets/double-left.png"
+import MainCarousel from "../components/MainCarousel"
+import SearchIcon from '@material-ui/icons/Search';
+import InputBase from '@material-ui/core/InputBase';
 /* import Link from '@material-ui/core/Link'; */
 import ProductCard from "./ProductCard"
 import { useHistory,Link } from 'react-router-dom';
@@ -62,19 +68,87 @@ const useStyles = makeStyles((theme) => ({
 
     },
     title:{
-      backgroundColor:"#ff8842",
+      backgroundColor:"#9dc5ff",
       textAlign:"center",
       borderRadius:"10px",
       display:"flex",
       justifyContent:"center",
       marginTop:"20px",
+    },
+    categoryListContainer:{
+      color:"white",
+      textDecoration:"none",
+      padding:"5px"
+    },
+    ProductCardContainer:{
+      textDecoration:"none",
+      textAlign:"center"
+    },
+    SeeMoreContainer:{
+      width:"100%",
+      textAlign:"right",
+      color:"red",
+      padding:"10px"
+    },
+    SeeMore:{
+      color:"black"
+    },
+    search: {
+      position: "relative",
+      borderRadius: theme.shape.borderRadius,
+      backgroundColor:COLORS.mainColor,
+      marginLeft: 0,
+      width: "100%",
+      height:"60px",
+      [theme.breakpoints.up("sm")]: {
+        marginLeft: theme.spacing(1),
+        width: "auto",
+      },
+      display:"flex"
+    },
+    searchIcon: {
+      padding: theme.spacing(0, 2),
+      height: "100%",
+      position: "absolute",
+      pointerEvents: "none",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    inputRoot: {
+      color: "black",
+      width: "100%",
+    },
+    inputInput: {
+      padding: theme.spacing(1, 1, 1, 0),
+      // vertical padding + font size from searchIcon
+      paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+      transition: theme.transitions.create("width"),
+      width: "100%",
+      [theme.breakpoints.up("sm")]: {
+        width: "100%",
+        "&:focus": {
+          width: "100%",
+        },
+      },
+      fontSize:"20px",
+      fontWeight:"bold",
+      color:"black"
+    },
+    NoData:{
+      textAlign:"center"
+      
     }
+
+
   }));
 const Home = () => {
     const [category, setCategory] = useState([])
     const history=useHistory()
     const classes = useStyles();
     const theme = useTheme();
+    const [search, setSearch] = useState("")
+    const [data, setData] = useState([])
     const products = useSelector((state) => state.allProducts.products);
 /*     console.log("products.category",products.map((item)=>item.category)); */
     const categories = products?.map((cat,i)=>cat.category);
@@ -96,65 +170,106 @@ const Home = () => {
         dispatch(getProducts());
 
       }, []); 
+useEffect(() => {
+  if (search !== '') {
+    console.log("search");
+    const filteredData = products.filter(item => item.title.toLowerCase().includes(search.toLowerCase()))
+    console.log("filteredData",filteredData);
+    setData(filteredData)
 
+}
+else{
+  setData(products)
+}
+}, [search,products])
 
     return (
 
         <>
             {/* <Header/> */}
-
-            {AllCategories.map((val,i)=>{
-/*                   const product = products?.map((item)=>item.category).find((item) => item.category===parseInt(LimitedProducts2))
-                  console.log("test category ",product) */
-            return(
-              <div  key={i}>
-                <div className={classes.title}>
-
-                
-              <Link to={`/categorylist/${val}`} style={{color:"white",textDecoration:"none",
-            padding:"5px"}}>    <Typography variant="h4" style={{fontSize:"2.5rem",display:"flex",alignItems:"center",/* padding:"30px 10px 20px 0", */textAlign:"center"}}>{val} {/* <ArrowLeftIcon style={{fontSize:"30px"}}  /> */}</Typography>   </Link>
-              </div>
-              <div className={classes.container} >
-           
-           <br></br>
-      
-           <Grid container  justify="center">
-           <Grid container justify="center" item xs={12} spacing={3}>
-           {products.filter(person=>person.category===val)?.filter((val,i)=>i<6).map((filtered)=>{
-               return(
-                
-             
-           <>
-                
+<MainCarousel/>
+<div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              placeholder="جستجو کنید ..."
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ 'aria-label': 'search' }}
+              onChange={(e)=>setSearch(e.target.value)}
+            />
+             {data.length<0&& <Typography variant="h4" component="h4">کالایی یافت نشد</Typography>}
+          </div>
+         
+          {data.length>0?
+            AllCategories.map((val,i)=>{
+              /*                   const product = products?.map((item)=>item.category).find((item) => item.category===parseInt(LimitedProducts2))
+                                console.log("test category ",product) */
+                          return(
+                            <div  key={i}>
+                              <div className={classes.title}>
+              
+                        
+                            <Link to={`/categorylist/${val}`}  className={classes.categoryListContainer} >    <Typography variant="h4" style={{fontSize:"2.5rem",display:"flex",alignItems:"center",/* padding:"30px 10px 20px 0", */textAlign:"center"}}>{val} {/* <ArrowLeftIcon style={{fontSize:"30px"}}  /> */}</Typography>   </Link>
+                            </div>
+                            <div className={classes.container} >
+                         
+                         <br></br>
                     
-                  {/*   {console.log("filtered id",filtered)} */}
-                   
-                    <Link  style={{textDecoration:"none",textAlign:"center"}} to={`/AllProductsInGroup/${filtered.id}`}>
-                  
-                    <ProductCard item={filtered}/>
-                   
-                    </Link>
-                
-            
-                     
-
-                       
-                                
-                                
-                    </>    
+                         <Grid container  justify="center">
+                         <Grid container justify="center" item xs={12} spacing={3}>
+                         {data.length>0&&data.filter(person=>person.category===val).filter((val,i)=>i<6).map((filtered)=>{
+                             return(
                               
-                               
-              )} ) 
-                        }
-                
-     </Grid>
-         </Grid>
-         </div>
-         <br></br>
-              </div>
-            )
-          })}
-            
+                           
+                         <>
+                              
+                                  
+                                {/*   {console.log("filtered id",filtered)} */}
+                                 
+                                  <Link   className={classes.ProductCardContainer}   to={`/AllProductsInGroup/${filtered.id}`}>
+                                
+                                  <ProductCard item={filtered}/>
+                                 
+                                  </Link>
+                              
+                          
+                                   
+              
+                                  
+                                              
+                                              
+                                  </>    
+                                            
+                                             
+                            )} ) 
+                                     
+                                     
+                                    
+                                     }
+                                     {
+                                       data.length>0&&                      
+                                         <div  className={classes.SeeMoreContainer} >
+                                       <Link  className={classes.SeeMore}  to={`/categorylist/${val}`} >  مشاهده بیشتر   <img style={{width:"9px"}} src={doubleArrow}/>{/*  <DoubleArrowIcon/> */} </Link>       
+                                       </div>
+                                     }
+              
+                        
+                   </Grid>
+                       </Grid>
+                       </div>
+                       <br></br>
+                            </div>
+                          )
+                        })
+                          
+:
+<Typography className={classes.NoData} color="error" variant="h4" component="h4">کالایی یافت نشد !</Typography>
+          }
+          
         </>
     )
 }

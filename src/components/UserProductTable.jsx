@@ -63,9 +63,9 @@ const UserProductTable = ({products}) => {
       <Table className={classes.table} aria-label="simple table">
         <TableHead >
           <TableRow  className={classes.root}>
-          <TableCell align="center" >نام کاربر</TableCell>
+          <TableCell align="center" >نام کالا</TableCell>
             <TableCell align="center" >مجموع مبلغ</TableCell>
-            <TableCell align="center">زمان ثبت سفارش </TableCell>
+            <TableCell align="center">تعداد</TableCell>
 
           </TableRow>
         </TableHead>
@@ -73,7 +73,7 @@ const UserProductTable = ({products}) => {
              {products?.slice(page*rowsPerPage,page*rowsPerPage+rowsPerPage).map((order) => (
             <StyledTableRow key={order.id}>
                 <TableCell align="center">
-                  {order.producttitle} 
+                  {order.title} 
               </TableCell>
               <TableCell align="center">
               {(Number(order.price)).toLocaleString()}

@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 /*       height: "230px", */
       padding: "10px 10px 10px 30px",
       borderRadius:"10px",
-      border:`3px solid #f1c752`,
+      border:`3px solid #2196f3`,
       margin:"0 0 10px 10px"
     },
     details: {

@@ -91,6 +91,7 @@ const UserDeliveredOrder = () => {
           }
 /*           dispatch(DeleteWaitingOrder(userInfo)).then(dispatch(WaitingOrders())) */
           updateOrders(userInfo).then(dispatch(WaitingOrders()))
+          setOpen(false);
       }
     return (
         <div style={{marginTop:"20px"}}>

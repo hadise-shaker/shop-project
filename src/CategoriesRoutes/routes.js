@@ -1,9 +1,10 @@
 import React from "react";
-import Men from "./Men";
-import LapTop from "./LapTop";
-import Jweri from "./Jweri";
-import Monitor from "./Monitor";
-import Women from "./Women";
+import Men from "../pages/Categories/Men";
+import LapTop from "../pages/Categories/LapTop";
+/* import LapTop from "../pages/Categories/LapTop"; */
+import Monitor from "../pages/Categories/Monitor";
+import Women from "../pages/Categories/Women";
+
 const routes = [
   {
     path: "/categorylist/لباس مردانه",
@@ -14,7 +15,7 @@ const routes = [
     main: () => <Men />,
   },
   {
-    path: "/categorylist/لپ تاپ",
+    path: "/categorylist/لپتاپ",
     name: "لپ تاپ",
     sub: ["ایسر ", "ایسوس", "لنوو "],
     toolbar: () => <p>Purchase Orders</p>,

@@ -21,8 +21,11 @@ import MainLayout from "./Layout/MainLayout";
 import ControlPanelLayout from "./Layout/ControlPanelLayout";
 import AllProductsInGroup from "./pages/AllProductsInGroup";
 import ProductDetail from "./components/ProductDetail";
-import ResponsiveDrawer from "./pages/ResponsiveDrawer";
+import ResponsiveDrawer from "./pages/CategoriesDrawer";
 import NotFound from "./pages/NotFound";
+import FinalShop from "./components/FinalShop";
+import CategoriesDrawer from "./pages/CategoriesDrawer";
+import Payment from "./pages/payment/Payment";
 function App() {
   return (
     <div className="App">
@@ -42,8 +45,9 @@ function App() {
             <Route
               path="/categorylist/:category"
               exact
-              component={AllProductsInGroup}
+              component={CategoriesDrawer}
             />
+            <Route path="/finalShop" exact component={FinalShop} />
 
             {/*           <Route path="/test" exact component={ResponsiveDrawer}>
           </Route> */}
@@ -56,6 +60,7 @@ function App() {
             <Route exact path="/admin" component={ProductsTablePage} />
             <Route exact path="/admin/price" component={Price} />
             <Route exact path="/admin/orders" component={OrdersManagment} />
+            <Route exact path="/shaparak/payment" component={Payment} />
             {/*           <Route path="*" exact component={NotFound}></Route> */}
           </Switch>
         </MainLayout>

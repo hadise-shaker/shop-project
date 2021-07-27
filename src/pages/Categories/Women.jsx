@@ -1,9 +1,9 @@
 import React,{useEffect,useState} from 'react'
 import { useDispatch,useSelector } from "react-redux";
-import {addProduct,getProducts,deleteproduct,editItem}from "../redux/actions/productActions"
-import ProductCard from "../components/ProductCard"
+import {addProduct,getProducts,deleteproduct,editItem}from "../../redux/actions/productActions"
+import ProductCard from "../../components/Products/ProductCard"
 import { makeStyles } from '@material-ui/core/styles';
-import {COLORS} from "../styles/constantsVariables"
+import {COLORS} from "../../styles/constantsVariables"
 import Grid from "@material-ui/core/Grid"
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import Link from '@material-ui/core/Link';
@@ -50,14 +50,14 @@ const Women = () => {
     const classes = useStyles();
     return (
         <div>
-            <Link /* href="/AllProductsInGroup" */ >    <Typography variant="h4" style={{display:"flex",alignItems:"center",padding:"10px 10px 20px 0"}}>{AllCategories[3]} <ArrowLeftIcon style={{fontSize:"30px"}}  /></Typography>   </Link>
+            <Link /* href="/AllProductsInGroup" */ >    <Typography variant="h4" style={{display:"flex",alignItems:"center",padding:"10px 10px 20px 0"}}>{AllCategories[2]} <ArrowLeftIcon style={{fontSize:"30px"}}  /></Typography>   </Link>
             <div className={classes.container} >
            
            <br></br>
       
            <Grid container  justify="center">
            <Grid container justify="center" item xs={12} spacing={3}>
-            {products?.filter(person=>person.category===AllCategories[3])?.map((filtered)=>{
+            {products?.filter(person=>person.category===AllCategories[2])?.map((filtered)=>{
               return(
                 <Link href={`/AllProductsInGroup/${filtered.id}`}>
                 <ProductCard item={filtered}/>

@@ -3,11 +3,13 @@ import { ActionTypes } from "../types/actionTypes";
 const initialState = {
   products: [],
   selectedProduct: {},
+  productsByCategory: {},
 };
 
 export const productReducer = (state = initialState, { type, payload }) => {
-  console.log(state.products);
   switch (type) {
+    case ActionTypes.SET_PRODUCT:
+      return { ...state.products, products: payload };
     case ActionTypes.ADD_PRODUCT:
       return { ...state.products, products: payload };
 
@@ -25,6 +27,13 @@ export const productReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         products: state.products.filter(({ id }) => id !== payload),
+      };
+    case ActionTypes.SET_PRODUCTS_BY_CATEGORY:
+      return {
+        ...state,
+        productsByCategory: state.products.filter(
+          (item) => item.category === payload
+        ),
       };
 
     default:

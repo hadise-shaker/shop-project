@@ -2,7 +2,6 @@ import React,{useEffect,useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import {Modal ,Button} from '@material-ui/core';
 import ProductsTable from "../components/ProductsTable"
-import Test from "../components/Test"
 import AddProduct from "../components/AddProduct"
 import EditProduct from "../components/EditProduct"
 import { useDispatch, useSelector } from "react-redux";

@@ -20,7 +20,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useDispatch,useSelector } from "react-redux";
 import {addProduct,getProducts,deleteproduct,editItem}from "../redux/actions/productActions"
 import {getCategoryList} from "../api/products"
-import routes from "./routes";
+import routes from "../CategoriesRoutes/routes";
 
 import { BrowserRouter as Router, Route, Link,NavLink } from "react-router-dom";
 
@@ -71,7 +71,7 @@ const useStyles = makeStyles(theme => ({
 },
 }));
 
-const ResponsiveDrawer = props => {
+const CategoriesDrawer = props => {
   const dispatch = useDispatch();
   useEffect(() => {
 
@@ -79,9 +79,7 @@ const ResponsiveDrawer = props => {
 
     }, []); 
 /*   useEffect(() => {
-
     getCategoryList();
-
     }, []); */ 
   const { container } = props;
   const classes = useStyles();
@@ -180,7 +178,6 @@ const ResponsiveDrawer = props => {
         </nav>
 
         <main className={classes.content}>
-          <div className={classes.toolbar} />
           {routes.map((route, index) => (
             <Route
               key={index}
@@ -196,8 +193,8 @@ const ResponsiveDrawer = props => {
   );
 };
 
-ResponsiveDrawer.propTypes = {
+CategoriesDrawer.propTypes = {
   container: PropTypes.object
 };
 
-export default ResponsiveDrawer;
+export default CategoriesDrawer;

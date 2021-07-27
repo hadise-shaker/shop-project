@@ -1,10 +1,10 @@
-import React from 'react';
+import React,{useState} from 'react';
 import PropTypes from 'prop-types';
 import {useDispatch, useSelector} from "react-redux";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles,alpha } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Box from '@material-ui/core/Box';
@@ -21,9 +21,11 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Badge from '@material-ui/core/Badge';
 import Button from '@material-ui/core/Button';
+
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AddIcon from '@material-ui/icons/Add'
 import {isLoggedIn} from "../utils/auth"
+
 import { useLocation } from "react-router-dom"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 /* import {img} from "../styles/img/download.jfif" */
@@ -68,8 +70,11 @@ ScrollTop.propTypes = {
 export default function BackToTop({children,props,handleDrawerToggle}) {
   let history = useHistory()
   const classes = loginUseStyle();
+  const [search, setSearch] = useState("")
  /*   const [count, setCount] = React.useState(1); */
- const count = useSelector(state => state.cart.count)
+/*  const count = useSelector(state => state.cart.count) */
+ const cartCount = useSelector((state) => state.cart.cart)
+/*  console.log("cartCount.length",cartCount.length); */
  const location = useLocation();
  const handlLogOut=()=>{
   localStorage.clear();
@@ -100,7 +105,7 @@ export default function BackToTop({children,props,handleDrawerToggle}) {
              خروج از پنل مدیریت</Button> */} 
            
           
-          <Link /* variant="h6" */ className={classes.root} to="/" >فروشگاه فلان</Link>
+          <Link /* variant="h6" */ className={classes.root} to="/" >فروشگاه دعوت</Link>
           
 
         
@@ -112,7 +117,7 @@ export default function BackToTop({children,props,handleDrawerToggle}) {
           <NavLink to="/admin/orders" className="tabs"  exact activeClassName="link_active"/* component={Price} */ > سفارش ها </NavLink></>:null}
 
           </div>
-          <Badge badgeContent={count} color="primary" anchorOrigin={{
+          <Badge badgeContent={cartCount?.length} color="primary" anchorOrigin={{
     vertical: 'top',
     horizontal: 'left',
   }}>

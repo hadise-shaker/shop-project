@@ -2,14 +2,16 @@
 import React, {useEffect,useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
-import EmptyCart from "../components/EmptyCart";
 import {setCartItems, setTotal,removeItem,decreaseAmount,increaseAmount} from "../redux/actions/cart.reducer";
 import {Table,TableBody,Modal,TableCell,TableContainer,TableHead,TableRow,Paper,Button,Avatar,TablePagination,makeStyles,withStyles} from '@material-ui/core';
 import {getCart,getAitem,deletecart} from "../redux/actions/cartActions"
 import Header from "../components/Header"
+import { useHistory } from 'react-router-dom';
 import Typography from "@material-ui/core/Typography"
 import DeleteIcon from '@material-ui/icons/Delete';
 import shoppingBasket from "../assets/shopping-basket-2-512.png"
+import EmptyCart from "../assets/EmptyCart3.png"
+import FullCart from "../assets/EmptyCart4.png"
 function Cart() {
   const useStyles = makeStyles((theme)=>({
     table: {
@@ -63,7 +65,7 @@ console.log("cart",cart);
 
         // Cart Items
         let newCartItems = cart.reduce((total, cartItem) => {
-            return (total += cartItem.amount)
+            return (total += cartItem.number)
         }, 0)
         dispatch(setCartItems(newCartItems))
 
@@ -86,99 +88,104 @@ console.log("cart",cart);
   } */
 
 /*     if (cart.length === 0) return <EmptyCart/> */
-
+const history = useHistory()
     return (
       <>
      {/*  <Header/> */}
         <section className="cart-items section">
          
-            <Typography component="h4" variant="h4" align="center">
+            <Typography component="h4" variant="h5" align="center">
            
-           
-            <img src={shoppingBasket} style={{width:"100px",marginTop:"20px"}} />
+          
+           {/*  <img src={shoppingBasket} style={{width:"100px",marginTop:"50px"}} /> */}
             <br></br>
-            {cart.length===0?"سبد خرید شما خالی است ! " : "سبد خرید شما" }
-             {/* سبد خرید شما */}
+
+            {cart.length===0?<><img style={{width:"30%",margin:"auto"}} src={EmptyCart}/>  <Typography component="h4" variant="h5" align="center"> سبد خرید شما خالی است !</Typography> </>
+            
+            :
+            <><img style={{width:"15%",margin:"auto"}} src={FullCart}/>  <Typography component="h4" variant="h5" align="center"> سبد خرید شما !</Typography> </>
+            }
+
               
               </Typography>
              
-             
-<Paper style={{width:"100%",margin:"auto"}} square="true" >
+         {cart.length>0&&
+         <>
+         <Paper style={{width:"100%",margin:"auto"}} square="true" >
 
 
-               <Table className={classes.table} aria-label="simple table">
-                 <TableHead >
-                   <TableRow  className={classes.root}>
-                     <TableCell align="center" /* className={classes.root} */>نام کالا :)</TableCell>
-                     <TableCell align="center">قیمت </TableCell>
-                     <TableCell align="center">تعداد </TableCell>
-                     <TableCell align="center">حذف </TableCell>
-         {/*             <TableCell align="right">description :) &nbsp;</TableCell>
-                     <TableCell align="right">category :) &nbsp;</TableCell>
-                     <TableCell align="right">edit :) &nbsp;</TableCell> */}
-                   </TableRow>
-                 </TableHead>
-                 <TableBody>
-                      {cart?.slice(page*rowsPerPage,page*rowsPerPage+rowsPerPage).map((row) => (
-                     <StyledTableRow key={row.id}>
+<Table className={classes.table} aria-label="simple table">
+  <TableHead >
+    <TableRow  className={classes.root}>
+      <TableCell align="center" /* className={classes.root} */>نام کالا :)</TableCell>
+      <TableCell align="center">قیمت </TableCell>
+      <TableCell align="center">تعداد </TableCell>
+      <TableCell align="center">حذف </TableCell>
+{/*             <TableCell align="right">description :) &nbsp;</TableCell>
+      <TableCell align="right">category :) &nbsp;</TableCell>
+      <TableCell align="right">edit :) &nbsp;</TableCell> */}
+    </TableRow>
+  </TableHead>
+  <TableBody>
+       {cart?.slice(page*rowsPerPage,page*rowsPerPage+rowsPerPage).map((row) => (
+      <StyledTableRow key={row.id}>
 {/*                          <TableCell align="center">
-                         <Avatar alt="Remy Sharp" src={row.image} className={classes.large} />
-                       </TableCell> */}
-                       <TableCell align="center"/* component="th" scope="row" */>
-                         {row.title}
-                       </TableCell>
-         {/*               <TableCell align="center">{row.price}</TableCell>
-                       <TableCell align="center">{row.description}</TableCell> */}
-                       <TableCell align="center">   {(Number(row.price)).toLocaleString()} تومان</TableCell>
-                       <TableCell align="center">{row.amount}</TableCell>
-                       
-                       <TableCell align="center">
-                         
-                         <Button style={{cursor:"pointer"}}onClick={() => dispatch(removeItem(row.id))} ><DeleteIcon/></Button>
-         
-                       
-                       
-                       </TableCell>
+          <Avatar alt="Remy Sharp" src={row.image} className={classes.large} />
+        </TableCell> */}
+        <TableCell align="center"/* component="th" scope="row" */>
+          {row.title}
+        </TableCell>
+{/*               <TableCell align="center">{row.price}</TableCell>
+        <TableCell align="center">{row.description}</TableCell> */}
+        <TableCell align="center">   {(Number(row.price)).toLocaleString()} تومان</TableCell>
+        <TableCell align="center">{row.amount}</TableCell>
+        
+        <TableCell align="center">
+          
+          <Button style={{cursor:"pointer"}}onClick={() => dispatch(removeItem(row.id))} ><DeleteIcon/></Button>
+
+        
+        
+        </TableCell>
 {/*                        <TableCell align="center">
-                         
-                         <Button style={{cursor:"pointer"}}  onClick={()=>action(row)}><EditIcon/></Button>
-                       
-                        
-                       </TableCell> */}
-                       
+          
+          <Button style={{cursor:"pointer"}}  onClick={()=>action(row)}><EditIcon/></Button>
+        
          
-                     </StyledTableRow>
-                    
-                   ))}
-                    </TableBody>
-                 
-               </Table>
-         {/*       <Modal
-                 open={open}
-                 onClose={handleClose}
-                 aria-labelledby="simple-modal-title"
-                 aria-describedby="simple-modal-description" 
-                 children={<EditProduct handleClose={handleClose} action={handleEditSubmit}/> }
-               >
-                
-               </Modal> */}
-                                <TablePagination
-                 rowsPerPageOptions={[5, 10, 15,{ label: 'All', value: -1 }]}
-                 component="div"
-                 count={cart?.length}
-                 rowsPerPage={rowsPerPage}
-                 page={page}
-                 onChangePage={handleChangePage}
-                 onChangeRowsPerPage={handleChangeRowsPerPage}
-                 dir="rtl"
-                 style={{margin:"auto"}}
-                 labelRowsPerPage='تعداد سطر های هر صفحه'
-               />
-                 </Paper>
-                  
+        </TableCell> */}
+        
+
+      </StyledTableRow>
+     
+    ))}
+     </TableBody>
+  
+</Table>
+{/*       <Modal
+  open={open}
+  onClose={handleClose}
+  aria-labelledby="simple-modal-title"
+  aria-describedby="simple-modal-description" 
+  children={<EditProduct handleClose={handleClose} action={handleEditSubmit}/> }
+>
+ 
+</Modal> */}
+                 <TablePagination
+  rowsPerPageOptions={[5, 10, 15,{ label: 'All', value: -1 }]}
+  component="div"
+  count={cart?.length}
+  rowsPerPage={rowsPerPage}
+  page={page}
+  onChangePage={handleChangePage}
+  onChangeRowsPerPage={handleChangeRowsPerPage}
+  dir="rtl"
+  style={{margin:"auto"}}
+  labelRowsPerPage='تعداد سطر های هر صفحه'
+/>
+  </Paper>
                 
                 <div>
-                <Button  disabled={cart.length===0} style={{float:"left"}} variant="contained" color="primary">نهایی کردن سبد خرید</Button>
+                <Button  onClick={()=>history.push("/finalShop")} disabled={cart.length===0} style={{float:"left"}} variant="contained" color="primary">نهایی کردن سبد خرید</Button>
                   <h2 >  جمع : {(Number(total)).toLocaleString()} تومان</h2>
                 </div>
 
@@ -190,7 +197,12 @@ console.log("cart",cart);
                     :
                     <Link to="/login" className="btn btn-primary btn-block">login</Link>
             } */}
+            </>
+          } 
         </section>
+        
+
+
         </>
     )
 }

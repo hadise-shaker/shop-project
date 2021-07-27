@@ -20,6 +20,12 @@ export const setProducts = (products) => {
     payload: products,
   };
 };
+export const setProducts2 = (products) => {
+  return {
+    type: ActionTypes.SET_PRODUCT,
+    payload: products,
+  };
+};
 
 export const selectedProduct = (product) => {
   return {
@@ -47,6 +53,12 @@ export const editItem = (product) => {
   };
 };
 
+export const setProductsByCategory = (category) => {
+  return {
+    type: ActionTypes.SET_PRODUCTS_BY_CATEGORY,
+    payload: category,
+  };
+};
 /* export function GetNumberCart() {
   return {
     type: "GET_NUMBER_CART",
@@ -98,9 +110,17 @@ export function DecreaseQuantity(payload) {
 //   });
 // };
 
+export const setCategory = (category) => async (dispatch) => {
+  const res = await getAllProducts();
+  let response = res.data.sort((a, b) => (new Date(a) < new Date(b) ? 1 : -1));
+  dispatch(setProducts2(response));
+  dispatch(setProductsByCategory(category));
+};
+
 export const getProducts = () => async (dispatch, getState) => {
   let res = await getAllProducts();
-  dispatch(setProducts(res.data));
+  let response = res.data.sort((a, b) => (new Date(a) < new Date(b) ? 1 : -1));
+  dispatch(setProducts(response));
 };
 
 export const getAProduct = (id) => async (dispatch) => {

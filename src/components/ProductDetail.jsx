@@ -136,13 +136,13 @@ const ProductDetail = ({image,title,description,action}) => {
       dispatch(setCount(count+1))
       const {id, image, title, price,number} = product
       const item = cart.find(item => item.id === id)
-/*       if (item) {
+      if (item) {
           cart.map(item => item.id === id && dispatch(increaseAmount(item.id)))
-      } else { */
-          const newItem = {id, image, title, price, amount: amount1}
+      } else {
+          const newItem = {id, image, title, price, number: amount1}
           dispatch(addToCart(newItem))
-/*           
-      } */
+          
+      }
 /*       history.push("/cart") */
   }
 

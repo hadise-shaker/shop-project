@@ -20,8 +20,9 @@ import {COLORS} from "../styles/constantsVariables"
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import Link from '@material-ui/core/Link';
 import ProductCard from "../components/ProductCard"
-import TestDrawer from "./TestDrawer"
-import ResponsiveDrawer from"./ResponsiveDrawer"
+import { NavLink, useParams,  } from "react-router-dom";
+
+import CategoriesDrawer from"./CategoriesDrawer"
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -71,7 +72,8 @@ const AllProductsInGroup=()=> {
   const categories = products.map((cat,i)=>cat.category);
   let AllCategories = [...new Set(categories)]
   const LimitedProducts2=products?.map((cat,i)=>cat.category).reduce((val,i)=>val.includes(i)?val:[...val,i],[])
-
+  const { category } = useParams()
+  console.log("params",category);
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -79,7 +81,7 @@ const AllProductsInGroup=()=> {
          <Header />
       </AppBar> */}
 
-<ResponsiveDrawer product={products}/>
+<CategoriesDrawer product={products} category={category}/>
     </div>
   );
 }

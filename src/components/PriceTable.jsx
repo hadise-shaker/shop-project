@@ -110,25 +110,19 @@ export default function DataGridDemo() {
     const handleEditCellChange = ({ id, field, props }) => {
 
       let updatedObj = { field, value: props.value }
-      // console.log(updatedObj);
       let obj = products.filter((item) => item.id === id)
-  
       if (updatedObj.field === "number") {
-  
         obj[0].number = updatedObj.value
-  
       } else {
         obj[0].price = updatedObj.value
       }
-  
       setupdatedata([...updatedata, ...obj])
-  
     }
     const handleEdit = () => {
-      updatedata.map(product => update(product.id, product)
+      Promise.all(updatedata.map(product => update(product.id, product)
         .then(res => console.log(res.data))
         .catch(err => console.log(err))
-      )
+      ))
     }
   return (
 
