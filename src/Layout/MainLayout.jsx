@@ -7,7 +7,7 @@ const MainLayout = (props) => {
         <div>
 
 
-         <Header />
+         <Header/>
 
         {props.children}
 

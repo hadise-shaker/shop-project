@@ -80,7 +80,7 @@ const UserProductTable = ({products}) => {
                  تومان
               </TableCell>
               <TableCell align="center">
-                 {order.number}
+             { Number(order.number)}
               </TableCell>
 
 

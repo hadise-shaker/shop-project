@@ -10,7 +10,9 @@ import { StylesProvider, jssPreset } from "@material-ui/core/styles";
 import Bnazanin from "./styles/fonts/BNazanin.woff2";
 import store from "./redux/store";
 import { Provider } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
 import "./styles/fonts/font.css";
+import "react-toastify/dist/ReactToastify.css";
 const raleway = {
   fontFamily: "B Nazanin",
   fontStyle: "normal",
@@ -45,6 +47,7 @@ ReactDOM.render(
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <StylesProvider jss={jss}>
+          <ToastContainer />
           <App />
         </StylesProvider>
       </ThemeProvider>

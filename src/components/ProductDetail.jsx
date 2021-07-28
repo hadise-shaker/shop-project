@@ -22,12 +22,14 @@ import { addToCart,increaseAmount,setCount} from "../redux/actions/cart.reducer"
 /* import {AddCart,increaseAmount} from "../redux/actions/cartActions" */
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    width: "80%",
+/*     display: 'flex',
+    width: "80%", */
+    /* minWidth:400, */
     padding: "10px",
-    justifyContent:"center",
-    alignItems:"center",
-    border: "2px solid",
+    boxShadow:"-2px 7px 13px 10px #c3c3c3",
+/*     justifyContent:"center", */
+/*     alignItems:"center", */
+   /*  border: "2px solid", */
     /* border:`3px solid ${COLORS.mainColor}`, */
 /*     margin:"0 0 10px 10px", */
 /*     backgroundColor:"aqua", */
@@ -46,15 +48,14 @@ const useStyles = makeStyles((theme) => ({
     flex: '1 0 auto',
   },
   cover: {
-    width: "30%",
-   /*  height:"400px", */
-   border:"2px solid black",
-   boxShadow: "0px 0px 7px 5px #ca7c1c",
+    width: "77%",
+/*     height:"100%", */
+/*    border:"2px solid black", */
+   boxShadow:"-2px 7px 13px 10px #c3c3c3",
    /* padding:"10px" */
-   marginLeft:"20px",
-   height: "50%",
+  /*  marginLeft:"20px", */
    borderRadius: "10px",
-   /* align-items: center; */
+   alignItems: "center",
    alignSelf: "center",
   },
   controls: {
@@ -84,12 +85,13 @@ const useStyles = makeStyles((theme) => ({
     width:"25%"
   },
   container:{
-    width: "75%",
-    display: "flex",
+    width: "100%",
+/*     display: "flex",
     flexWrap: "wrap",
     boxSizing: "border-box",
-
-    margin: "20px 20px",
+    alignItems:"center" */
+margin:"5% auto"
+   /*  margin: "20px 20px", */
 
 
   },
@@ -150,28 +152,30 @@ const ProductDetail = ({image,title,description,action}) => {
     return (
       <>
      {/*  <Header count={count}/> */}
-      <br></br>
+      {/* <br></br> */}
 
 {/*         <Grid container spacing={3}> */}
 {/*           <Grid item xs={12}> */}
 
-          <div style={{display:"flex",width:"70%",margin:"auto"}}>
+         {/*  <div style={{display:"flex",width:"70%",margin:"auto"}}> */}
 
-          
+         <Grid className={classes.container} container  justify="center">
 {/*           <Card className={classes.root}> */}
+<Grid item xs={6} md={3} /* sm={3} */ spacing={3} >
 {product?.image? <img className={classes.cover} src={product?.image}/>
 :
 
 null
 }
-<Grid className={classes.container} container  justify="center">
-           <Grid className={classes.container2} container justify="center" item xs={12} spacing={4} >
+
+</Grid>
+<Grid item xs={12} md={3} >
 <Card className={classes.root} >
 
    {/*  <img className={classes.cover} src={product?.image}/> */}
-        <div className={classes.details}>
+       {/*  <div className={classes.details}> */}
           <CardContent className={classes.content}>
-            <Typography className={classes.space} component="h2" variant="h2">
+            <Typography className={classes.space} component="h4" variant="h4">
               {product?.title}
             </Typography>
             <Typography className={classes.space} component="h5" variant="h5">
@@ -217,7 +221,7 @@ null
             </Typography>
            
 
-            <Button disabled={product?.number==="0"} onClick={handleAddToCartClick}
+            <Button disabled={product?.number===0} onClick={handleAddToCartClick}
 
              className={classes.btn} variant="contained" color="primary">
 
@@ -225,16 +229,31 @@ null
              
             </Button>
            
-{product?.number ==="0"? <Typography variant="h5" component="h5" style={{color:"red"}}>اتمام موجودی</Typography> : null}
+{product?.number ===0? <Typography variant="h5" component="h5" style={{color:"red"}}>اتمام موجودی</Typography> : null}
           </CardContent>
 
-        </div>
+        {/* </div> */}
 
 
       </Card>
       </Grid>
-         </Grid>
-         </div>
+      <Grid item xs={12} style={{ boxShadow:"-2px 7px 13px 10px #c3c3c3",padding:"20px",marginTop:"10px"}} spacing={1}>
+      <Typography variant="h3" component="h3" >
+        توضیحات:
+
+        </Typography>
+      <Typography variant="h5" component="h5" >
+       
+      لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+        </Typography>
+      </Grid>
+
+</Grid> 
+
+
+
+       {/*   </Grid> */}
+        {/*  </div> */}
         </>
     )
 }

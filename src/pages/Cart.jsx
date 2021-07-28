@@ -65,13 +65,13 @@ console.log("cart",cart);
 
         // Cart Items
         let newCartItems = cart.reduce((total, cartItem) => {
-            return (total += cartItem.number)
+            return Number(total += cartItem.number)
         }, 0)
         dispatch(setCartItems(newCartItems))
 
         // Cart Total
         let newTotal = cart.reduce((total, cartItem) => {
-          return total += (cartItem.amount * cartItem.price)
+          return total += Number(cartItem.number * cartItem.price)
       }, 0)
 
       newTotal = parseFloat(newTotal.toFixed(2))
@@ -138,7 +138,7 @@ const history = useHistory()
 {/*               <TableCell align="center">{row.price}</TableCell>
         <TableCell align="center">{row.description}</TableCell> */}
         <TableCell align="center">   {(Number(row.price)).toLocaleString()} تومان</TableCell>
-        <TableCell align="center">{row.amount}</TableCell>
+        <TableCell align="center">{row.number}</TableCell>
         
         <TableCell align="center">
           

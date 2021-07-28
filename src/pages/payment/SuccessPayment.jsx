@@ -1,8 +1,8 @@
 import React from 'react'
 import {Box,Button,Container,Grid,Typography} from '@material-ui/core'
-import Failed from "../../assets/failed2.png"
+import Success from "../../assets/successPayment.png"
 import { makeStyles } from "@material-ui/core/styles";
-const FailedPayment = () => {
+const SuccessPayment = () => {
     const useStyles = makeStyles({
         container:{
             margin:"30px auto"
@@ -21,15 +21,15 @@ const FailedPayment = () => {
     return (
         
         <Container maxWidth="lg" className={classes.container}>
-            <Typography align="center" component="h4" variant="h4"> پرداخت شما موفقیت آمیز نبود !   </Typography>
-            <Typography align="center" component="p" /* variant="h4" */> لطفا برای پرداخت دوباره اقدام نمایید   </Typography>
+            <Typography align="center" component="h4" variant="h4"> پرداخت شما با موفقیت انجام شد!   </Typography>
+            <Typography align="center" component="p" /* variant="h4" */> سفارش شما در صف تحویل قرار دارد   </Typography>
             <Grid container className={classes.grid}>
                     <Grid xs={12}>
-                        <img src={Failed} className={classes.img} alt="پرداخت ناموفق"/>
+                        <img src={Success} className={classes.img} alt="پرداخت موفق"/>
                     </Grid>
             </Grid>
         </Container>
     )
 }
 
-export default FailedPayment
+export default SuccessPayment

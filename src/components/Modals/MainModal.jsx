@@ -88,6 +88,8 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
   const [title, setTitle] = useState(selectedProduct.title);
   const [category, setCategory] = useState(selectedProduct.category);
   const [description, setDescription] = useState(selectedProduct.description);
+  const [price, setPrice] = useState(selectedProduct.price);
+  const [number, setNumber] = useState(selectedProduct.number);
   const [image, setImage] = useState(selectedProduct.image);
   const dispatch = useDispatch();
 /*   let imageUrl ;
@@ -126,8 +128,8 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
         category:category,
         description:description,
         image: filesContent[0]?.content,
-        number:"",
-        price:""
+        number:number,
+        price:price
       }))/* .then(dispatch(getProducts())) */;
      
     }
@@ -209,6 +211,8 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
           {/* <input placeholder="قیمت" value={price} onChange={(e)=>setPrice(e.target.value)}/> */}
           
           <TextField className={classes.root} label="توضیحات" value={description} onChange={(e)=>setDescription(e.target.value)} fullWidth/>
+          <TextField className={classes.root} label="قیمت" value={price} onChange={(e)=>setPrice(e.target.value)} fullWidth/>
+          <TextField className={classes.root} label="تعداد" value={number} onChange={(e)=>setNumber(e.target.value)} fullWidth/>
 {/*           <TextField
                   variant="outlined"
                   name="image"

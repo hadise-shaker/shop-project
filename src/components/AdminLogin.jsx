@@ -14,9 +14,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {loginUseStyle} from "../styles/index"
 import { useHistory } from 'react-router-dom';
+import { ToastContainer, toast } from "react-toastify";
 import {login} from "../api/login"
 import Header from "./Header"
-
+import "react-toastify/dist/ReactToastify.css";
 export default function SignIn() {
 
   const [email,setEmail]=useState();
@@ -28,23 +29,28 @@ export default function SignIn() {
     if (email,password) {
       login(email, password)
       .then((res) => {
+        if (res.status === 400) {
+          toast.error("ایمیل و پسورد را به درستی وارد کنید ");
+        }
         console.log("res :",res.data);
         localStorage.setItem("token", res.data.token);
         history.push("/admin")
         /* window.location.reload(); */
       })
-      .catch((err) => console.error(err));
-    }else{
-        console.log('email and password in empty')
+      .catch((err) => toast.error('ایمیل و رمز عبور را به درستی وارد نمایید'));
+    }/* else{
+      toast.error('ایمیل و رمز عبور را به درستی وارد نمایید')
     }
- 
+  */
 };
 /*   let history=useHistory(); */
 /*   console.log(useHistory()); */
   return (
   <>
+{/*  <ToastContainer/> */}
 {/*     <Header/> */}
     <Container component="main" maxWidth="xs" color="primary"  className={classes.container}>
+   
       {/* <CssBaseline /> */}
       <div className={classes.paper}>
         <Avatar className={classes.avatar }>

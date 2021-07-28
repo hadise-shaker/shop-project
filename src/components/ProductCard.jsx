@@ -16,15 +16,22 @@ import {COLORS} from "../styles/constantsVariables"
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import Link from '@material-ui/core/Link';
 import Box from "@material-ui/core/Box"
+import Paper from "@material-ui/core/Paper"
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
 const useStyles = makeStyles((theme) => ({
     root: {
-      /* display: 'flex', */
-      width: "230px",
+      display: 'flex',
+     /*  width: "230px", */
+      
+        maxWidth: 385,
+     
 /*       height: "230px", */
       padding: "10px 10px 10px 30px",
       borderRadius:"10px",
-      border:`3px solid #2196f3`,
-      margin:"0 0 10px 10px"
+     /*  border:`3px solid #2196f3`, */
+      margin:"0 0 10px 10px",
+      boxShadow:"-2px 7px 13px 10px #c3c3c3"
     },
     details: {
       display: 'flex',
@@ -59,11 +66,17 @@ const useStyles = makeStyles((theme) => ({
       textAlign:"center",
       background:"white"
   },
-  img:{
+/*   img:{
     objectFit:"cover",
     objectPosition:"center",
     height:"100%",
     width:"80%"
+    }, */
+    paper:{
+      maxWidth:""
+    },
+    media: {
+      height: 180,
     },
   }));
 const ProductCard = ({item}) => {
@@ -73,20 +86,25 @@ const ProductCard = ({item}) => {
       <>
 
         <Card className={classes.root} >
-{/*         <CardMedia
-      className={classes.cover}
-      
-      image={item.image}
-      
-      title="Live from space album cover"
-    /> */}
-                                   {/*  <Box className={classes.box}> */}
-                                    <img className={classes.img}
-                                        //  style={{ width: "80%", height: "100Px" ,margin:"auto"}}
-                                        src={item.image} alt="کالا" />
-                                                <div className={classes.details}>
-          <CardContent className={classes.content}>
-            <Typography component="h5" variant="h5">
+        <CardActionArea>
+        <CardMedia
+        component="img"
+          className={classes.media}
+          image={item.image}
+          title="Contemplative Reptile"
+          height="180"
+        />
+{/*                                          <Grid item xs>
+                                     <img className={classes.img} src={item.image} alt="کالا" />
+                                     </Grid> */}
+        <CardContent>
+
+        
+                                  {/*  <Grid container wrap="nowrap" spacing={2}> */}
+    
+                                    
+                                   {/*   <Grid item xs zeroMinWidth> */}
+                                     <Typography gutterBottom  component="h5" variant="h5">
               {item.title}
             </Typography>
             <Typography variant="subtitle1" color="primary">
@@ -94,14 +112,15 @@ const ProductCard = ({item}) => {
            
               تومان
             </Typography>
-          </CardContent>
-
-        </div>
-                             {/*    </Box> */}
-        <br></br>
+       {/*    </Grid> */}
+          
+                                  
 
 
 
+        {/* </Grid> */}
+        </CardContent>
+       </CardActionArea>
       </Card>
       </>
     )

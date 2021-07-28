@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { toast } from "react-toastify";
 export const getAllProducts = async () => {
   let res = await axios({
     method: "get",
@@ -65,7 +65,17 @@ export const addAproduct = async (product) => {
     url: `http://localhost:5000/products`,
     headers: { "content-type": "application/json" },
     data: product,
-  }).catch((err) => console.log(err));
+  });
+  if (res.status === 404) {
+    toast.error("404 Not Found");
+  }
+  if (res.status === 500) {
+    toast.error("Network");
+  }
+  if (res.status === 201) {
+    toast.success("Successful");
+  }
+
   return res;
 
   /*   return await axios.post(`http://localhost:5000/products`, data); */

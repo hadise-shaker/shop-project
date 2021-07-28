@@ -13,7 +13,7 @@ export const setOrders = (orders) => {
     payload: orders,
   };
 };
-export function setNewOrder(newOrder) {
+export function saveNewOrder(newOrder) {
   return {
     type: ActionTypes.SET_NEW_ORDER,
     payload: newOrder,

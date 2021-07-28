@@ -5,12 +5,25 @@ import pic2 from "../assets/2.jpg"
 import pic3 from "../assets/3.jpg"
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 function Item({item}) {
   return (
-    <div style={{ width: "100%", /* height: "100%" */marginTop:"20px" }}>   <img style={{width:"100%",borderRadius:"20px"}} src={item.pic} alt=""/> </div>
+    <Grid /* style={{ width: "100%", marginTop:"20px" }} */  xs={12} spacing={3}>   <img style={{width:"100%",borderRadius:"20px"}} src={item.pic} alt=""/> </Grid>
   );
 }
+const useStyles=makeStyles((theme)=>({
 
+container:{
+  width: "80%",
+    display: "flex",
+    flexWrap: "wrap",
+    boxSizing: "border-box",
+    margin: "25px 19% auto",
+}
+
+
+}))
 export default function MainCarousel() {
   var items = [
     {
@@ -26,16 +39,20 @@ export default function MainCarousel() {
       pic: pic3
     }
   ];
-
+  const classes=useStyles();
   const [index, setIndex] = React.useState(0);
 
   const handleChange = (cur,  prev) => {
     setIndex(cur);
-    console.log(cur, prev);
   };
 
   return (
-    <div style={{display:"flex",alignItems:"center",width:"45%",margin:"20px auto"}}>
+    <div style={{width:"100%",margin:"auto"}}>
+
+
+    <Grid container direction="row" className={classes.container} /* justify="center"  alignItems="center" *//* spacing={3} */>
+
+<Grid item xs={6}  >
 
 
       <Carousel
@@ -56,18 +73,20 @@ export default function MainCarousel() {
           <Item key={i} item={item} />
         ))}
       </Carousel>
-{/*       <div style={{padding:"30px",height:"490px"}}>
-      <img style={{width:"420px",borderRadius:"20px"}} src={pic1} alt=""/>
-      <img style={{width:"420px",borderRadius:"20px"}} src={pic2} alt=""/>
-      </div> */}
-{/*       {items.map((item, i) => (
-        <button
-          onClick={() => setIndex(i)}
-          style={{ background: i === index ? "#ccc" : "#fff" }}
-        >
-          {i}
-        </button>
-      ))} */}
+      </Grid>
+
+    
+ <Grid item xs={6} direction="column"  style={{flexBasis:"75%",paddingRight:"20px"}}/* justify="center"  alignItems="center" *//* spacing={3} */>
+{/*         <Grid item xs={6} > */}
+        <img style={{width:"50%",borderRadius:"20px"}} src={pic3} alt=""/>
+{/*         </Grid> */}
+{/*         <Grid item xs={6} > */}
+        <img style={{width:"51%",borderRadius:"20px"}} src={pic2} alt=""/>
+{/*         </Grid> */}
+
+
+</Grid>
+</Grid>
 
     </div>
   );

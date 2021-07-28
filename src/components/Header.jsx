@@ -67,7 +67,7 @@ ScrollTop.propTypes = {
   window: PropTypes.func,
 };
 
-export default function BackToTop({children,props,handleDrawerToggle}) {
+export default function BackToTop({props,handleDrawerToggle}) {
   let history = useHistory()
   const classes = loginUseStyle();
   const [search, setSearch] = useState("")
@@ -142,22 +142,6 @@ export default function BackToTop({children,props,handleDrawerToggle}) {
       </AppBar>
       
       <Toolbar id="back-to-top-anchor" />
-{/*       <Container>
-        <Box my={2}>
-          {[...new Array(12)]
-            .map(
-              () => `Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
-            )
-            .join('\n')}
-        </Box>
-      </Container> */}
       <ScrollTop {...props}>
         <Fab /* className={classes.backgroundColor} */ style={{backgroundColor:"blueviolet",color:"white"}} size="small" aria-label="scroll back to top">
           <KeyboardArrowUpIcon  />

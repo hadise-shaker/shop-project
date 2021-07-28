@@ -6,8 +6,10 @@ import JalaliUtils from "@date-io/jalaali";
 import { useDispatch, useSelector } from 'react-redux';
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import {setNewOrder,addNewOrder} from "../redux/actions/userActions"
+import {saveNewOrder,addNewOrder} from "../redux/actions/userActions"
 import { Redirect, useHistory } from "react-router-dom"
+import {toast} from "react-toastify"
+import FillingForm from "../assets/Project_16-244.png"
 jMoment.loadPersian({ dialect: "persian-modern", usePersianDigits: true });
 const useStyles=makeStyles((theme)=>({
 
@@ -16,9 +18,9 @@ const useStyles=makeStyles((theme)=>({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        // minWidth:"300px",
-        padding:theme.spacing(6),
-        width:"70%"
+/*         padding:theme.spacing(6), */
+        width:"70%",
+        boxShadow:"0px -2px 13px 4px gray"
       },
 
 }))
@@ -32,61 +34,54 @@ const FinalShop = () => {
     const [isRedirect, setIsRedirect] = useState(false)
     const dispatch=useDispatch();
     const cartItems = useSelector((state) => state.cart.cart)
-console.log("cartItems",cartItems);
-    const productSum = cartItems.map(item => item.price * item.number)
-    // console.log(productSum);
+    console.log("cartItems",cartItems);
+    const productSum = cartItems.map(item => Number(item.price * item.number))
     const total = productSum.reduce((sum, item) => (sum += item))
     const handleNewOrder = (e) => {
 
         e.preventDefault();
         const fullName = `${name}  ${lastName}`
         const orderTime = new Date().toLocaleDateString('fa-IR')
-        // const regex = RegExp(
-        //     /$d{9}\09^/
-        // );
         const regex = RegExp(
-            /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
+            '^(\\+98|0)?9\\d{9}$'
         );
         if (name && lastName && address && phone && selectedDate) {
             if (!regex.test(phone)) {
-                alert("لطفا شماره تماس را  به درستی وارد کنید");
+                toast.error("لطفا شماره تماس را  به درستی وارد کنید");
             } else {
-                // console.log(selectedDate.format("jYYYY/jMM/jDD"));
 
-                let newOrder = { username: fullName, address: address, phone: phone, ordertime: orderTime, handleTime: selectedDate.format("jYYYY/jMM/jDD"), products: cartItems, total: total, isDelivered: false };
-                dispatch(setNewOrder(newOrder));
+                let savedOrder = { username: fullName, address: address, phone: phone, ordertime: orderTime, handleTime: selectedDate.format("jYYYY/jMM/jDD"), products: cartItems, total: total, isDelivered: false };
+                dispatch(saveNewOrder(savedOrder));
+                toast.error("اطلاعات شما ثبت شد");
                 setIsRedirect(true)
-               
-              /*   dispatch(removeItem(row.id)) */
-                /* setShouldRedirect(true) */
-                //   history.push(`/shaparak/payment`)
-                // console.log(newOrder);
-
-                // dispatch(addNewProduct(newProduct))
-                // handleClose();
             }
 
 
         } else {
-            alert("لطفا تمام اطلاعات را وارد کنید");
-            // console.error("err")
+           toast.error("اطلاعات را تکمیل نمایید");
         }
     };
 
     return (
         <MuiPickersUtilsProvider utils={JalaliUtils} locale="fa">
             <Container component="main" maxWidth="md">
-                <Card className={classes.paper}>
+
+            <Card className={classes.paper}>
+{/*              <Grid item xs={12} md={6}> */}
+                <img style={{width:"60%",marginTop:"-20px",marginBottom:"-10px"}} src={FillingForm} alt=""/>
+{/*              </Grid> */}
                 <Typography component="h1" variant="h5" /* className={classes.title} */>
+
              نهایی کردن خرید
           </Typography>
-                
+
         <div /* style={{width:"50%",margin:"auto"}} */>
         <form style={{padding:"30px"}} onSubmit={(e)=>e.preventDefault()}>
         <Grid container column spacing={2}>
+
         <Grid item xs={12} sm={6} md={6}>
                 <TextField  label="نام" fullWidth
-                
+                required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 />
@@ -95,7 +90,7 @@ console.log("cartItems",cartItems);
         <Grid item xs={12} sm={6} md={6}>
        
 
-        <TextField  label="نام خانوادگی" fullWidth                                         value={lastName}
+        <TextField  label="نام خانوادگی" fullWidth          required                               value={lastName}
                                         onChange={(e) => setLastName(e.target.value)}/>
 
 
@@ -116,13 +111,14 @@ console.log("cartItems",cartItems);
                
       </Grid>
         <Grid item xs={12} sm={6} md={6}>
-        <TextField label="تلفن همراه"fullWidth                                         value={phone}
+        <TextField label="تلفن همراه (جهت هماهنگی ارسال سفارش)"fullWidth             required                            value={phone}
                                         onChange={(e) => setPhone(e.target.value)}/>
                
       </Grid>
         <Grid item xs={12} sm={6} md={6}>
         <DatePicker
         clearable
+        label="تاریخ تحویل"
         okLabel="تأیید"
         cancelLabel="لغو"
         clearLabel="پاک کردن"
@@ -130,23 +126,27 @@ console.log("cartItems",cartItems);
         value={selectedDate}
         onChange={handleDateChange}
         fullWidth
+        required
       />
                
       </Grid>
 
 
 
+      <Grid item xs={12} sm={6} md={6} spacing={3}>
+      <Button variant="contained" color="primary" fullWidth  onClick={handleNewOrder}>
 
+             پرداخت
+      </Button>
       </Grid>
-      <Button variant="contained" color="primary"  onClick={handleNewOrder}>
+      </Grid>
 
-پرداخت
-</Button>
+
         </form>
         </div>
         </Card>
         </Container>
-        {isRedirect&&<Redirect to='/shaparak/payment' />}
+        {isRedirect&&<Redirect to='/payment' />}
         </MuiPickersUtilsProvider>
     )
 }

@@ -80,13 +80,18 @@ console.log("AllCategories",AllCategories);
 
 
     return (
-        <div>
-            <Link /* href="/AllProductsInGroup" */ >    <Typography variant="h4" style={{display:"flex",alignItems:"center"}}>{AllCategories[0]} <ArrowLeftIcon style={{fontSize:"30px"}}  /></Typography>   </Link>
-            <div className={classes.container} >
+        <>
+            <Link /* href="/AllProductsInGroup" */ >    <Typography variant="h4" style={{display:"flex",alignItems:"center",marginBottom:"30px"}}>{AllCategories[0]} <ArrowLeftIcon style={{fontSize:"30px"}}  /></Typography>   </Link>
+           {/*  <div className={classes.container} > */}
            
-           <br></br>
       
-           <Grid container  justify="center">
+          {/*  <Grid container  justify="center"> */}
+          <Grid
+  container
+  direction="row"
+  justifyContent="center"
+  alignItems="center"
+>
            <Grid container justify="center" item xs={12} spacing={3}>
 {/*            <OutlinedInput
                                     variant="outlined"
@@ -110,8 +115,8 @@ console.log("AllCategories",AllCategories);
                        )} 
                                  </Grid>
          </Grid>
-         </div>
-        </div>
+       {/*   </div> */}
+        </>
     )
 }
 

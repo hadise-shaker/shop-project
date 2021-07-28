@@ -2,7 +2,7 @@
 body {
   margin: 0;
   font-size: 1.5rem !important;
-/*   font-family: 'B Nazanin'!important; */
+  font-family: 'B Nazanin'!important;
 /*   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
 
@@ -10,4 +10,7 @@ body {
 
 code {
 /*   font-family: 'B Nazanin' !important; */
+}
+.Toastify__toast{
+    font-family: 'B Nazanin' !important;
 }

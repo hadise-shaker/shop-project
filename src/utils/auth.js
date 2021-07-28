@@ -16,7 +16,7 @@ export const Logout = () => {
    * Clear localStorage
    */
 
-  localStorage.clear();
+  localStorage.removeItem("token");
   window.location.reload();
   /*   history.push("/home"); */
 };

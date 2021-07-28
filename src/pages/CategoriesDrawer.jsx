@@ -1,25 +1,20 @@
 import React,{useEffect} from "react";
 import PropTypes from "prop-types";
-import AppBar from "@material-ui/core/AppBar";
+
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
-import IconButton from "@material-ui/core/IconButton";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
+
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import MailIcon from "@material-ui/icons/Mail";
-import MenuIcon from "@material-ui/icons/Menu";
-import Toolbar from "@material-ui/core/Toolbar";
+
 import Typography from "@material-ui/core/Typography";
 import Header from "../components/Header"
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useDispatch,useSelector } from "react-redux";
 import {addProduct,getProducts,deleteproduct,editItem}from "../redux/actions/productActions"
-import {getCategoryList} from "../api/products"
+
 import routes from "../CategoriesRoutes/routes";
 
 import { BrowserRouter as Router, Route, Link,NavLink } from "react-router-dom";
@@ -50,7 +45,8 @@ const useStyles = makeStyles(theme => ({
   },
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth,
+    marginTop:"80px"
   },
   content: {
     flexGrow: 1,
@@ -78,9 +74,6 @@ const CategoriesDrawer = props => {
       dispatch(getProducts());
 
     }, []); 
-/*   useEffect(() => {
-    getCategoryList();
-    }, []); */ 
   const { container } = props;
   const classes = useStyles();
   const theme = useTheme();
@@ -95,17 +88,12 @@ const CategoriesDrawer = props => {
 
   const drawer = (
     <div>
-      <div className={classes.toolbar} />
       <Divider />
       <List>
         {routes.map((route) => {
           return(
             <>
 <NavLink exact to={route.path} className={classes.NavLink}  activeClassName={classes.categoryTitle}>
-            {/*   <ListItem button key={route.name}> */}
-  {/*               <ListItemIcon>
-                  <InboxIcon />
-                </ListItemIcon> */}
                 <ListItem > 
                <Typography component="h4" variant="h5">
                {route.name}
@@ -116,16 +104,13 @@ const CategoriesDrawer = props => {
                   {route.sub.map(item=>
                 
                   (              
-                      <Typography style={{padding:"5px 10px 0 0"}} /* component="h5" variant="h6" */>
+                      <Typography style={{padding:"5px 10px 0 0"}} >
                           {item}
                       </Typography>
                       ))}
-  
-              {/* </ListItem> */}
+
             </>
             
-           
-          
              )
          })}
 
@@ -142,9 +127,6 @@ const CategoriesDrawer = props => {
     <Router>
       <div className={classes.root}>
         <CssBaseline />
-
-         
-
 
         <nav className={classes.drawer}>
           <Hidden smUp implementation="css">

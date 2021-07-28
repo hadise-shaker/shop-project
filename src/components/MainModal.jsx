@@ -18,6 +18,7 @@ import {COLORS}from "../styles/constantsVariables"
 import Avatar from '@material-ui/core/Avatar';
 import Box from "@material-ui/core/Box"
 import Fab from "@material-ui/core/Fab";
+import { ToastContainer, toast } from "react-toastify";
 import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 import { useFilePicker } from "use-file-picker";
 const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
@@ -89,6 +90,8 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
   const [category, setCategory] = useState(selectedProduct.category);
   const [description, setDescription] = useState(selectedProduct.description);
   const [image, setImage] = useState(selectedProduct.image);
+/*   const [price, setPrice] = useState(selectedProduct.price);
+  const [number, setNumber] = useState(selectedProduct.number); */
   const dispatch = useDispatch();
 /*   let imageUrl ;
 
@@ -121,18 +124,23 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
     {option?      
         dispatch(editProduct(selectedProduct.id,updatedProductObj)).then(dispatch(getProducts()))
         :
-      dispatch(addProduct({
-        title:title,
-        category:category,
-        description:description,
-        image: filesContent[0]?.content,
-        number:"",
-        price:""
-      }))/* .then(dispatch(getProducts())) */;
+        title && category ?
+          dispatch(addProduct({
+            title:title,
+            category:category,
+            description:description,
+            image: filesContent[0]?.content,
+            number:0,
+            price:0
+          })): toast.error("لطفا برای افزودن نام کالا و دسته بندی را مشخص نمایید");
+         /*  window.location.reload() */
+          
+
+        
      
     }
     dispatch(getProducts())
-/*   window.location.reload(); */
+;
     handleClose();
 
   }
@@ -209,6 +217,8 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
           {/* <input placeholder="قیمت" value={price} onChange={(e)=>setPrice(e.target.value)}/> */}
           
           <TextField className={classes.root} label="توضیحات" value={description} onChange={(e)=>setDescription(e.target.value)} fullWidth/>
+{/*           <TextField className={classes.root} label="قیمت" value={price} onChange={(e)=>setPrice(e.target.value)} fullWidth/>
+          <TextField className={classes.root} label="تعداد" value={number} onChange={(e)=>setNumber(e.target.value)} fullWidth/> */}
 {/*           <TextField
                   variant="outlined"
                   name="image"

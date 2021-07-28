@@ -104,7 +104,7 @@ const ProductDetail = ({image,title,description,action}) => {
   const theme = useTheme()
   const { id } = useParams();
 /*   const [count, setCount] = useState(0); */
-  const [amount1, setAmount1] = useState(1)
+  const [amount1, setAmount1] = useState(0)
   const dispatch = useDispatch();
       useEffect(() => {
 
@@ -212,8 +212,9 @@ null
                  e.preventDefault();
                  }}  */
                 /*  defaultValue={1} */
-                 value={amount1}
+                 /* value={amount1} */
                   className={classes.input}/>
+                  
             </Typography>
            
 

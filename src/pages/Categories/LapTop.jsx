@@ -50,14 +50,14 @@ const LapTop = () => {
     const classes = useStyles();
     return (
         <div>
-            <Link /* href="/AllProductsInGroup" */ >    <Typography variant="h4" style={{display:"flex",alignItems:"center",padding:"10px 10px 20px 0"}}>{AllCategories[1]} <ArrowLeftIcon style={{fontSize:"30px"}}  /></Typography>   </Link>
+            <Link /* href="/AllProductsInGroup" */ >    <Typography variant="h4" style={{display:"flex",alignItems:"center",padding:"10px 10px 20px 0"}}>{AllCategories[2]} <ArrowLeftIcon style={{fontSize:"30px"}}  /></Typography>   </Link>
             <div className={classes.container} >
            
            <br></br>
       
            <Grid container  justify="center">
            <Grid container justify="center" item xs={12} spacing={3}>
-            {products?.filter(person=>person.category===AllCategories[1])?.map((filtered)=>{
+            {products?.filter(person=>person.category===AllCategories[2])?.map((filtered)=>{
               return(
                 <Link href={`/AllProductsInGroup/${filtered.id}`}>
                 <ProductCard item={filtered}/>

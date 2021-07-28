@@ -6,7 +6,7 @@ export const loginUseStyle = makeStyles((theme) => ({
     backgroundColor: COLORS.mainColor,
     flexGrow: 1,
     marginBottom: "20px",
-    zIndex: "999999",
+    /* zIndex: "999999", */
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -54,7 +54,7 @@ export const loginUseStyle = makeStyles((theme) => ({
     /*     marginBottom: "20px", */
     /*  backgroundColor: COLORS.mainColor, */
     marginBottom: theme.spacing(2),
-    zIndex: "99999",
+    /* zIndex: "99999", */
   },
   root: {
     flexGrow: 1,

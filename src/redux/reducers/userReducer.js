@@ -9,7 +9,7 @@ export const userReducer = (state = initialState, { type, payload }) => {
       return { ...state.orders, orders: payload };
     case ActionTypes.SET_NEW_ORDER:
       return {
-        ...state.orders,
+        ...state,
         newOrder: payload,
       };
     case ActionTypes.ADD_ORDER:

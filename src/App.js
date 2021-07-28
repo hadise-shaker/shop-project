@@ -26,6 +26,8 @@ import NotFound from "./pages/NotFound";
 import FinalShop from "./components/FinalShop";
 import CategoriesDrawer from "./pages/CategoriesDrawer";
 import Payment from "./pages/payment/Payment";
+import SuccessPayment from "./pages/payment/SuccessPayment";
+import FailedPayment from "./pages/payment/FailedPayment";
 function App() {
   return (
     <div className="App">
@@ -42,11 +44,7 @@ function App() {
               component={ProductDetail}
             />
             <Route path="/cart" exact component={Cart} />
-            <Route
-              path="/categorylist/:category"
-              exact
-              component={CategoriesDrawer}
-            />
+
             <Route path="/finalShop" exact component={FinalShop} />
 
             {/*           <Route path="/test" exact component={ResponsiveDrawer}>
@@ -60,10 +58,19 @@ function App() {
             <Route exact path="/admin" component={ProductsTablePage} />
             <Route exact path="/admin/price" component={Price} />
             <Route exact path="/admin/orders" component={OrdersManagment} />
-            <Route exact path="/shaparak/payment" component={Payment} />
+            <Route exact path="/payment" component={Payment} />
+            <Route exact path="/payment/success" component={SuccessPayment} />
+            <Route exact path="/payment/failed" component={FailedPayment} />
             {/*           <Route path="*" exact component={NotFound}></Route> */}
           </Switch>
         </MainLayout>
+        <Switch>
+          <Route
+            path="/categorylist/:category"
+            exact
+            component={CategoriesDrawer}
+          />
+        </Switch>
       </Router>
     </div>
   );

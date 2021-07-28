@@ -15,10 +15,10 @@ const CartReducer = createSlice({
       state.cart.push(action.payload);
     },
     increaseAmount: (state, action) => {
-      state.cart.map((item) => item.id === action.payload && item.amount++);
+      state.cart.map((item) => item.id === action.payload && item.number++);
     },
     decreaseAmount: (state, action) => {
-      state.cart.map((item) => item.id === action.payload && item.amount--);
+      state.cart.map((item) => item.id === action.payload && item.number--);
     },
     removeItem: (state, action) => {
       state.cart = state.cart.filter((item) => item.id !== action.payload);
@@ -32,6 +32,9 @@ const CartReducer = createSlice({
     setCount: (state, action) => {
       state.count = action.payload;
     },
+    clearAllCart: (state, action) => {
+      state.cart = action.payload;
+    },
   },
 });
 
@@ -43,6 +46,7 @@ export const {
   setCartItems,
   setTotal,
   setCount,
+  clearAllCart,
 } = CartReducer.actions;
 
 export default CartReducer.reducer;

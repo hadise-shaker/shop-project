@@ -27,11 +27,13 @@ const dispatch = useDispatch();
         },
         root:{
           fontSize:"30px",
-          backgroundColor:"#6980fc"
+          backgroundColor:"#6980fc",
+          margin: "auto"
         },
         large: {
             width: theme.spacing(8),
             height: theme.spacing(8),
+            margin: "auto"
           },
           pagination:{
             width:"35%"
