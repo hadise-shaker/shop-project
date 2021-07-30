@@ -1,4 +1,16 @@
 import React, { useEffect,useState } from "react";
+import PropTypes from 'prop-types';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import PhoneIcon from '@material-ui/icons/Phone';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import PersonPinIcon from '@material-ui/icons/PersonPin';
+import HelpIcon from '@material-ui/icons/Help';
+import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
+import ThumbDown from '@material-ui/icons/ThumbDown';
+import ThumbUp from '@material-ui/icons/ThumbUp';
+import Box from '@material-ui/core/Box';
 import {useParams, useHistory} from "react-router-dom";
 import { getAProduct,getProducts } from "../redux/actions/productActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,12 +33,12 @@ import { SettingsCellOutlined } from "@material-ui/icons";
 import { addToCart,increaseAmount,setCount} from "../redux/actions/cart.reducer";
 /* import {AddCart,increaseAmount} from "../redux/actions/cartActions" */
 const useStyles = makeStyles((theme) => ({
-  root: {
+  root1: {
 /*     display: 'flex',
     width: "80%", */
     /* minWidth:400, */
     padding: "10px",
-    boxShadow:"-2px 7px 13px 10px #c3c3c3",
+    /* boxShadow:"-2px 7px 13px 10px #c3c3c3", */
 /*     justifyContent:"center", */
 /*     alignItems:"center", */
    /*  border: "2px solid", */
@@ -34,9 +46,19 @@ const useStyles = makeStyles((theme) => ({
 /*     margin:"0 0 10px 10px", */
 /*     backgroundColor:"aqua", */
 /*     backgroundImage: "linear-gradient(180deg, #b06ab3,#4568dc)", */
-
+border:"none",
     transition: "backgroundImage 0.2s linear",
 
+  },
+  elevation1:{
+    boxShadow:"none",
+    textAlign:"center",
+  },
+  root: {
+    flexGrow: 1,
+    width: '100%',
+    backgroundColor: theme.palette.background.paper,
+    fontSize:"32px"
   },
   details: {
     display: 'flex',
@@ -48,10 +70,11 @@ const useStyles = makeStyles((theme) => ({
     flex: '1 0 auto',
   },
   cover: {
+    backgroundColor:"pink",
     width: "77%",
 /*     height:"100%", */
 /*    border:"2px solid black", */
-   boxShadow:"-2px 7px 13px 10px #c3c3c3",
+  /*  boxShadow:"-2px 7px 13px 10px #c3c3c3", */
    /* padding:"10px" */
   /*  marginLeft:"20px", */
    borderRadius: "10px",
@@ -100,8 +123,45 @@ margin:"5% auto"
     textAlign:"center"
   }
 }));
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`scrollable-prevent-tabpanel-${index}`}
+      aria-labelledby={`scrollable-prevent-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `scrollable-prevent-tab-${index}`,
+    'aria-controls': `scrollable-prevent-tabpanel-${index}`,
+  };
+}
 const ProductDetail = ({image,title,description,action}) => {
   const classes = useStyles();
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   const history = useHistory()
   const theme = useTheme()
   const { id } = useParams();
@@ -159,7 +219,7 @@ const ProductDetail = ({image,title,description,action}) => {
 
          {/*  <div style={{display:"flex",width:"70%",margin:"auto"}}> */}
 
-         <Grid className={classes.container} container  justify="center">
+         <Grid className={classes.container} container /*  justify="center" */>
 {/*           <Card className={classes.root}> */}
 <Grid item xs={6} md={3} /* sm={3} */ spacing={3} >
 {product?.image? <img className={classes.cover} src={product?.image}/>
@@ -170,7 +230,7 @@ null
 
 </Grid>
 <Grid item xs={12} md={3} >
-<Card className={classes.root} >
+<Card className={classes.elevation1} >
 
    {/*  <img className={classes.cover} src={product?.image}/> */}
        {/*  <div className={classes.details}> */}
@@ -181,9 +241,10 @@ null
             <Typography className={classes.space} component="h5" variant="h5">
               {product?.category}
             </Typography>
-            <Typography className={classes.space} variant="subtitle1" >
+           
+{/*             <Typography className={classes.space} variant="subtitle1" >
             {product?.description}
-            </Typography>
+            </Typography> */}
             <Typography className={classes.space} variant="h4" >
               {product?.price?  (Number(product?.price)).toLocaleString() : " - "}
            {/*  {(Number(product?.price)).toLocaleString()} */}
@@ -237,16 +298,32 @@ null
 
       </Card>
       </Grid>
-      <Grid item xs={12} style={{ boxShadow:"-2px 7px 13px 10px #c3c3c3",padding:"20px",marginTop:"10px"}} spacing={1}>
-      <Typography variant="h3" component="h3" >
+     {/*  <Grid item xs={12} style={{ boxShadow:"-2px 7px 13px 10px #c3c3c3",padding:"20px",marginTop:"10px"}} spacing={1}> */}
+{/*       <Typography variant="h3" component="h3" >
         توضیحات:
 
-        </Typography>
-      <Typography variant="h5" component="h5" >
-       
-      لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-        </Typography>
-      </Grid>
+        </Typography> */}
+        <div className={classes.root}>
+        <AppBar position="static" color="default">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          indicatorColor="primary"
+          textColor="primary"
+         /*  variant="fullWidth" */
+          aria-label="scrollable prevent tabs example"
+        >
+
+          <Tab /* style={{fontSize:"32px"}} */ label="توضیحات" /* icon={<HelpIcon />} */  aria-label="help" {...a11yProps(0)} />
+          
+
+        </Tabs>
+      </AppBar>
+      <TabPanel value={value} index={0}>
+      {product?.description}
+      </TabPanel>
+      </div>
+      {/* </Grid> */}
 
 </Grid> 
 

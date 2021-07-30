@@ -27,6 +27,16 @@ export const getCategoryList = async (category) => {
   // console.log(res.data);
   // setData(res.data)
 };
+export const getChangeList = async (sort, order) => {
+  let res = await axios({
+    method: "get",
+    url: `"http://localhost:5000/products?&_sort=${sort}&_order=${order}&_limit=4`,
+    headers: { "content-type": "application/json" },
+  }).catch((err) => console.log(err));
+  return res;
+  // console.log(res.data);
+  // setData(res.data)
+};
 /* export const updateProduct = async (id, updateProduct) => {
   try {
     let res = await axiosConfig({

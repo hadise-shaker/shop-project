@@ -54,7 +54,11 @@ function App() {
             <Route path="/login" exact component={AdminLogin}></Route>
             {/*               </>
             )} */}
-
+            <Route
+              exact
+              path="/categorylist/:category"
+              component={CategoriesDrawer}
+            />
             <Route exact path="/admin" component={ProductsTablePage} />
             <Route exact path="/admin/price" component={Price} />
             <Route exact path="/admin/orders" component={OrdersManagment} />
@@ -64,13 +68,6 @@ function App() {
             {/*           <Route path="*" exact component={NotFound}></Route> */}
           </Switch>
         </MainLayout>
-        <Switch>
-          <Route
-            path="/categorylist/:category"
-            exact
-            component={CategoriesDrawer}
-          />
-        </Switch>
       </Router>
     </div>
   );

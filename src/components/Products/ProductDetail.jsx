@@ -98,8 +98,46 @@ const useStyles = makeStyles((theme) => ({
     textAlign:"center"
   }
 }));
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`scrollable-prevent-tabpanel-${index}`}
+      aria-labelledby={`scrollable-prevent-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `scrollable-prevent-tab-${index}`,
+    'aria-controls': `scrollable-prevent-tabpanel-${index}`,
+  };
+}
 const ProductDetail = ({image,title,description,action}) => {
   const classes = useStyles();
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   const history = useHistory()
   const theme = useTheme()
   const { id } = useParams();
@@ -177,9 +215,26 @@ null
             <Typography className={classes.space} component="h5" variant="h5">
               {product?.category}
             </Typography>
-            <Typography className={classes.space} variant="subtitle1" >
+            <AppBar position="static">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          variant="scrollable"
+          scrollButtons="off"
+          aria-label="scrollable prevent tabs example"
+        >
+
+          <Tab icon={<HelpIcon />} aria-label="help" {...a11yProps(3)} />
+
+        </Tabs>
+      </AppBar>
+      <TabPanel value={value} index={3}>
+      {product?.description}
+      </TabPanel>
+
+{/*             <Typography className={classes.space} variant="subtitle1" >
             {product?.description}
-            </Typography>
+            </Typography> */}
             <Typography className={classes.space} variant="h4" >
               {product?.price?  (Number(product?.price)).toLocaleString() : " - "}
            {/*  {(Number(product?.price)).toLocaleString()} */}

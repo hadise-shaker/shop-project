@@ -18,4 +18,6 @@ export const ActionTypes = {
   SET_ORDERS: "SET_ORDERS",
   SET_NEW_ORDER: "SET_NEW_ORDER",
   ADD_ORDER: "ADD_ORDER",
+  CLEAR_CART: "CLEAR_CART",
+  SET_COUNT: "SET_COUNT",
 };

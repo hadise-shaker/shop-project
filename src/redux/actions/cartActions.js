@@ -10,7 +10,7 @@ import {
 
 import { ActionTypes } from "../types/actionTypes";
 
-export function setProduct(items) {
+export function addToCart(items) {
   return {
     type: ActionTypes.ADD_CART,
     payload: items,
@@ -48,14 +48,19 @@ export function setTotal1(payload) {
     payload,
   };
 }
-export function createItem(data) {
+export function clearCart() {
   return {
-    type: ActionTypes.ADD_CART,
-    payload: data,
+    type: ActionTypes.CLEAR_CART,
+  };
+}
+export function setCount(payload) {
+  return {
+    type: ActionTypes.SET_COUNT,
+    payload,
   };
 }
 
-export const getCart = () => async (dispatch, getState) => {
+/* export const getCart = () => async (dispatch, getState) => {
   let res = await getAllCart();
   dispatch(setProduct(res.data));
 };
@@ -63,13 +68,13 @@ export const increaseAmount = (data) => async (dispatch, getState) => {
   let res = await increaseAmount2(data);
   dispatch(increaseAmount1(res));
 };
-
+ */
 /* export const getAProduct = (id) => async (dispatch) => {
   let res = await getAProductById(id);
   dispatch(selectedProduct(res.data));
 }; */
 
-export const deletecart = (id) => async (dispatch) => {
+/* export const deletecart = (id) => async (dispatch) => {
   await deleteAcart(id).then((res) => console.log("res", res));
   dispatch(removeItem1(id));
 };
@@ -77,10 +82,11 @@ export const AddCart = (data) => async (dispatch) => {
   await createItem(data);
   dispatch(addAcart(data));
   console.log("data", data);
-  /*   dispatch(addAcart(data)); */
-};
+    dispatch(addAcart(data));
+}; */
 
-export const getAitem = (id) => async (dispatch) => {
+/* export const getAitem = (id) => async (dispatch) => {
   let res = await getAitemById(id);
   dispatch(setCartItems1(res.data));
 };
+ */

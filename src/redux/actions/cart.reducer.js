@@ -33,7 +33,7 @@ const CartReducer = createSlice({
       state.count = action.payload;
     },
     clearAllCart: (state, action) => {
-      state.cart = action.payload;
+      state = action.payload;
     },
   },
 });

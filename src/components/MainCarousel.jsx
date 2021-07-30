@@ -15,11 +15,11 @@ function Item({item}) {
 const useStyles=makeStyles((theme)=>({
 
 container:{
-  width: "80%",
+  /* width: "85%", */
     display: "flex",
     flexWrap: "wrap",
     boxSizing: "border-box",
-    margin: "25px 19% auto",
+    marginTop: "25px ",
 }
 
 
@@ -47,15 +47,37 @@ export default function MainCarousel() {
   };
 
   return (
-    <div style={{width:"100%",margin:"auto"}}>
+    <div /* style={{width:"100%",margin:"auto"}} */>
 
 
-    <Grid container direction="row" className={classes.container} /* justify="center"  alignItems="center" *//* spacing={3} */>
+    <Grid container direction="row"  justify="center"/* className={classes.container} */ /* justify="center"  alignItems="center" *//* spacing={3} */>
 
-<Grid item xs={6}  >
+{/* <Grid item xs={6}  > */}
 
 
-      <Carousel
+{/*       <Carousel
+        index={index}
+        onChange={handleChange}
+        interval={6000}
+        animation="slide"
+        indicators={false}
+        stopAutoPlayOnHover
+        navButtonsAlwaysVisible={true}
+        swipe
+        className="my-carousel"
+        NextIcon={<ChevronLeftIcon/>}
+        PrevIcon={<ChevronRightIcon/>}
+        
+      >
+        {items.map((item, i) => (
+          <Item key={i} item={item} />
+        ))}
+      </Carousel> */}
+{/*       </Grid> */}
+
+    
+ <Grid item xs={8} direction="row"  style={{marginTop:"20px"}}/* justify="center"  alignItems="center" *//* spacing={3} */>
+ <Carousel
         index={index}
         onChange={handleChange}
         interval={6000}
@@ -73,18 +95,17 @@ export default function MainCarousel() {
           <Item key={i} item={item} />
         ))}
       </Carousel>
-      </Grid>
-
-    
- <Grid item xs={6} direction="column"  style={{flexBasis:"75%",paddingRight:"20px"}}/* justify="center"  alignItems="center" *//* spacing={3} */>
 {/*         <Grid item xs={6} > */}
-        <img style={{width:"50%",borderRadius:"20px"}} src={pic3} alt=""/>
+{/* <div style={{display:"flex"}}> */}
+
+
+       {/*  <img style={{width:"50%",borderRadius:"20px"}} src={pic3} alt=""/> */}
 {/*         </Grid> */}
 {/*         <Grid item xs={6} > */}
-        <img style={{width:"51%",borderRadius:"20px"}} src={pic2} alt=""/>
+        {/* <img style={{width:"51%",borderRadius:"20px"}} src={pic2} alt=""/> */}
 {/*         </Grid> */}
 
-
+{/* </div> */}
 </Grid>
 </Grid>
 

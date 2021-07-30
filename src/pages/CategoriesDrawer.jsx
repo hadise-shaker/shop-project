@@ -1,11 +1,11 @@
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import PropTypes from "prop-types";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
-
+import {useParams, useHistory} from "react-router-dom";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 
@@ -14,10 +14,10 @@ import Header from "../components/Header"
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useDispatch,useSelector } from "react-redux";
 import {addProduct,getProducts,deleteproduct,editItem}from "../redux/actions/productActions"
-
+import ProductCategory from "./Categories/ProductCategory"
 import routes from "../CategoriesRoutes/routes";
-
-import { BrowserRouter as Router, Route, Link,NavLink } from "react-router-dom";
+import MyDrawer from "./MyDrawer"
+import { BrowserRouter as Router, Route, Link,NavLink,Switch } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -69,12 +69,19 @@ const useStyles = makeStyles(theme => ({
 
 const CategoriesDrawer = props => {
   const dispatch = useDispatch();
+  const [myCategory, setMyCategory] = useState("")
   useEffect(() => {
 
       dispatch(getProducts());
 
     }, []); 
   const { container } = props;
+    const {category}=useParams()
+   
+    useEffect(() => {
+      console.log(category);
+     setMyCategory(category)
+    }, [])
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -92,8 +99,15 @@ const CategoriesDrawer = props => {
       <List>
         {routes.map((route) => {
           return(
+          
+              <Switch>
+
+             
             <>
-<NavLink exact to={route.path} className={classes.NavLink}  activeClassName={classes.categoryTitle}>
+           
+
+           
+<NavLink exact to={`/categorylist/${route.name}`} className={classes.NavLink}  activeClassName={classes.categoryTitle}>
                 <ListItem > 
                <Typography component="h4" variant="h5">
                {route.name}
@@ -110,6 +124,8 @@ const CategoriesDrawer = props => {
                       ))}
 
             </>
+            </Switch>
+           
             
              )
          })}
@@ -124,8 +140,9 @@ const CategoriesDrawer = props => {
   return (
     <>
     <Header  className={classes.appBar} handleDrawerToggle={handleDrawerToggle}/>
-    <Router>
+   
       <div className={classes.root}>
+      <Router>
         <CssBaseline />
 
         <nav className={classes.drawer}>
@@ -143,7 +160,8 @@ const CategoriesDrawer = props => {
                 keepMounted: true // Better open performance on mobile.
               }}
             >
-              {drawer}
+                {drawer}
+              <Drawer/>
             </Drawer>
           </Hidden>
           <Hidden xsDown implementation="css">
@@ -155,22 +173,34 @@ const CategoriesDrawer = props => {
               open
             >
               {drawer}
+             {/*  <MyDrawer category={category}/> */}
             </Drawer>
           </Hidden>
         </nav>
 
         <main className={classes.content}>
+     
+         {/*  <Switch> */}
+
+         
           {routes.map((route, index) => (
             <Route
-              key={index}
-              path={route.path}
-              exact={route.exact}
-              component={route.main}
-            />
-          ))}
+              exact
+              path={`/categorylist/${route.name}`}
+              
+              /* component={()=><Men category={c}/>} */
+              render={props=><ProductCategory {...props} category={route.name}/>}
+            >
+             {/*  <Men category={myCategory}/> */}
+            </Route>
+           
+          
+        ))}
+          
         </main>
+        </Router>
       </div>
-    </Router>
+  
     </>
   );
 };

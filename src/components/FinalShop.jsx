@@ -1,13 +1,17 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import {Input,TextField,Button,Grid, Container, Paper, Card,Typography} from "@material-ui/core"
 import moment from "moment";
 import jMoment from "moment-jalaali";
 import JalaliUtils from "@date-io/jalaali";
-import { useDispatch, useSelector } from 'react-redux';
+
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {saveNewOrder,addNewOrder} from "../redux/actions/userActions"
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts,editProduct } from "../redux/actions/productActions";
+import{ decreaseAmount,clearAllCart} from "../redux/actions/cart.reducer"
 import { Redirect, useHistory } from "react-router-dom"
+
 import {toast} from "react-toastify"
 import FillingForm from "../assets/Project_16-244.png"
 jMoment.loadPersian({ dialect: "persian-modern", usePersianDigits: true });
@@ -34,6 +38,20 @@ const FinalShop = () => {
     const [isRedirect, setIsRedirect] = useState(false)
     const dispatch=useDispatch();
     const cartItems = useSelector((state) => state.cart.cart)
+    useEffect(() => {
+
+        dispatch(getProducts());
+      }, []);
+    let obj = cartItems.map((item)=>(item.id))
+    console.log("cartItems.id",obj);
+    const products = useSelector((state) => state.allProducts.products);
+    const { image, title, price,number,category,description} = products
+    const id = products.map((item)=>item.id)
+    console.log("id",id);
+    let updatedProductObj={...products, title,image,category,description,price,number:number-1};
+
+    const mahsolBaId=products.filter((item) => item.id === obj)
+    console.log("mahsolBaId",mahsolBaId);
     console.log("cartItems",cartItems);
     const productSum = cartItems.map(item => Number(item.price * item.number))
     const total = productSum.reduce((sum, item) => (sum += item))
@@ -52,7 +70,12 @@ const FinalShop = () => {
 
                 let savedOrder = { username: fullName, address: address, phone: phone, ordertime: orderTime, handleTime: selectedDate.format("jYYYY/jMM/jDD"), products: cartItems, total: total, isDelivered: false };
                 dispatch(saveNewOrder(savedOrder));
-                toast.error("اطلاعات شما ثبت شد");
+               
+                let test=  products.find((item)=>item.id===cartItems.map((mahsol)=>Number(mahsol.id)));
+                console.log("test",test);
+               
+                dispatch(editProduct(updatedProductObj,obj));
+                toast.success("اطلاعات شما ثبت شد");
                 setIsRedirect(true)
             }
 
@@ -111,8 +134,13 @@ const FinalShop = () => {
                
       </Grid>
         <Grid item xs={12} sm={6} md={6}>
-        <TextField label="تلفن همراه (جهت هماهنگی ارسال سفارش)"fullWidth             required                            value={phone}
-                                        onChange={(e) => setPhone(e.target.value)}/>
+        <TextField 
+        label="تلفن همراه (جهت هماهنگی ارسال سفارش)" 
+        fullWidth
+        required  
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
+         />
                
       </Grid>
         <Grid item xs={12} sm={6} md={6}>

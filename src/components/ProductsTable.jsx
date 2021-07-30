@@ -18,7 +18,7 @@ const dispatch = useDispatch();
 
         dispatch(getProducts());
       }, []);
-      console.log("products:",products);
+/*       console.log("products:",products); */
       const useStyles = makeStyles((theme)=>({
         table: {
           minWidth: 650,
