@@ -27,10 +27,10 @@ export const getCategoryList = async (category) => {
   // console.log(res.data);
   // setData(res.data)
 };
-export const getChangeList = async (sort, order) => {
+export const getChangeList = async (page) => {
   let res = await axios({
     method: "get",
-    url: `"http://localhost:5000/products?&_sort=${sort}&_order=${order}&_limit=4`,
+    url: `"http://localhost:5000/products?page[number]=${page}`,
     headers: { "content-type": "application/json" },
   }).catch((err) => console.log(err));
   return res;

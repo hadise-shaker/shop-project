@@ -16,10 +16,30 @@ import TextField from '@material-ui/core/TextField';
 import {getChangeList} from "../../api/products"
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
+import NoResult from "../../assets/No_results.png"
+import ReactPaginate from 'react-paginate'
+import { CallMissedSharp } from '@material-ui/icons';
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
+    },
+    pagination: {
+      margin: "15px auto",
+      display: "flex",
+      listStyle: "none",
+      outline: "none",
+      '&>active > a': {
+          background: "rgb(103,182,108)",
+          borderColor: "rgb(103,182,108)",
+          color: "#fff"
+      },
+      '&>li > a': {
+          border: "1px solid rgb(103,182,108)",
+          padding: "5px 10px",
+          outline: "none",
+          cursor: "pointer"
+      },
     },
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
@@ -105,9 +125,14 @@ const useStyles = makeStyles((theme) => ({
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: '20ch',
+      width: '80ch',
     },
   },
+  img:{
+    width:"40%",
+    marginTop:"-40px",
+    margin:"auto"
+  }
   }));
 const ProductCategory = ({category}) => {
 /*   const {category}=useParams() */
@@ -138,6 +163,15 @@ console.log("category",category);
     const [sortParam, setSortParam] = useState('id')
     const [order, setOrder] = useState('desc')
     const [empty, setEmpty] = useState([])
+    const [page, setPage] = useState(1)
+    const handlePageClick = (e) => {
+        const selectedPage = e.selected;
+        // console.log(selectedPage);
+        setPage(selectedPage + 1)
+    }
+    const pageCount = Math.ceil(Number(data?.length) / 4)
+    console.log("page",page);
+    console.log("pageCount",pageCount);
     const handleSort = (e) => {
         setValueSort(e.target.value)
 /*         if (e.target.value === 'جدید ترین') {
@@ -177,17 +211,21 @@ console.log("category",category);
           setData(filteredData)
 
       } else {
-  /*         getChangeList( sortParam, order).then(res => {
-              console.log(res);
+/*           getChangeList(page).then(res => {
+              console.log("res",res);
               setData(res.data)
           }) */
+          console.log("data",data);
          /*  setEmpty(!empty) */
           setData(products)
           setEmpty(products)
       }
      
-  }, [ search, products,sortParam,order,valueSort])
-
+  }, [ search, products,sortParam,order,valueSort,page])
+/*   getChangeList().then(res => {
+    console.log("res",res);
+    setData(res.data)
+}) */
 
     return (
         <>
@@ -205,6 +243,17 @@ console.log("category",category);
            <Grid container /* justify="center" */   spacing={3}>
           
              <Grid item xs={12} spacing={1} justify="center" className={classes.searchContainer}>
+             <ReactPaginate
+                                previousLabel={"قبلی"}
+                                nextLabel={"بعدی"}
+                                
+                                pageCount={pageCount}
+                                marginPagesDisplayed={2}
+                                pageRangeDisplayed={5}
+                                onPageChange={handlePageClick}
+                                containerClassName={classes.pagination}
+                               
+                                /* activeClassName={active} */ />
 {/*              <Input
                                     
                                     placeholder="جستجو... "
@@ -246,14 +295,14 @@ console.log("category",category);
                                        <option value={"ارزان ترین"}>ارزان ترین</option>
                                    </Select>
              </Grid>
-             <Link /* href="/AllProductsInGroup" */ >    <Typography variant="h4" style={{display:"flex",alignItems:"center",marginBottom:"30px"}}>{category} <ArrowLeftIcon style={{fontSize:"30px"}}  /></Typography>   </Link>
+            {empty?.length!==0&&<Link /* href="/AllProductsInGroup" */ >    <Typography variant="h4" style={{display:"flex",alignItems:"center",marginBottom:"30px"}}>{category} <ArrowLeftIcon style={{fontSize:"30px"}}  /></Typography>   </Link>} 
             
              <Grid container justify="center" xs={12}>
 
-             {empty?.length===0&& <Typography variant="h4" component="h4" color="error">کالایی یافت نشد !</Typography>}
+             {empty?.length===0&& <div style={{display:"flex",flexDirection:"column",justifyContent:"center"}}> <img src={NoResult} alt="" className={classes.img}/><Typography variant="h4" component="h4" color="error" align="center">کالایی یافت نشد !</Typography></div>}
             
             {data?.filter((person)=>person.category===category)?.map((filtered)=>{
-              
+             /*  console.log("filtered",filtered); */
               return(
                 <Link href={`/AllProductsInGroup/${filtered.id}`}>
 

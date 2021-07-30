@@ -20,6 +20,7 @@ import doubleArrow from "../assets/double-left.png"
 import MainCarousel from "../components/MainCarousel"
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
+import NoResult from "../assets//No_results.png"
 /* import Link from '@material-ui/core/Link'; */
 import ProductCard from "./ProductCard"
 import { useHistory,Link } from 'react-router-dom';
@@ -138,6 +139,10 @@ const useStyles = makeStyles((theme) => ({
     NoData:{
       textAlign:"center"
       
+    },  img:{
+      width:"40%",
+      marginTop:"-40px",
+      margin:"auto"
     }
 
 
@@ -201,9 +206,9 @@ else{
               inputProps={{ 'aria-label': 'search' }}
               onChange={(e)=>setSearch(e.target.value)}
             />
-             {data.length<0&& <Typography variant="h4" component="h4">کالایی یافت نشد</Typography>}
+             
           </div>
-         
+        {/*  <img src={NoResult} alt=""/> */}
           {data.length>0?
             AllCategories.map((val,i)=>{
               /*                   const product = products?.map((item)=>item.category).find((item) => item.category===parseInt(LimitedProducts2))
@@ -267,7 +272,7 @@ else{
                         })
                           
 :
-<Typography className={classes.NoData} color="error" variant="h4" component="h4">کالایی یافت نشد !</Typography>
+<div style={{display:"flex",flexDirection:"column",justifyContent:"center"}}><Typography variant="h4" component="h4" color="error" align="center">کالایی یافت نشد !</Typography> <img src={NoResult} alt="" className={classes.img}/></div>
           }
           
         </>
