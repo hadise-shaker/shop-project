@@ -4,6 +4,7 @@ const initialState = {
   products: [],
   selectedProduct: {},
   productsByCategory: {},
+  loading: true,
 };
 
 export const productReducer = (state = initialState, { type, payload }) => {
@@ -28,6 +29,9 @@ export const productReducer = (state = initialState, { type, payload }) => {
         ...state,
         products: state.products.filter(({ id }) => id !== payload),
       };
+    case ActionTypes.LOADING:
+      return { ...state, loading: false };
+
     case ActionTypes.SET_PRODUCTS_BY_CATEGORY:
       return {
         ...state,

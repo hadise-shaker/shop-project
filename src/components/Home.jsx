@@ -21,6 +21,8 @@ import MainCarousel from "../components/MainCarousel"
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import NoResult from "../assets//No_results.png"
+import Loading from "./Loading"
+import loadingsvg from "../assets/loading.svg"
 /* import Link from '@material-ui/core/Link'; */
 import ProductCard from "./ProductCard"
 import { useHistory,Link } from 'react-router-dom';
@@ -155,11 +157,13 @@ const Home = () => {
     const [search, setSearch] = useState("")
     const [data, setData] = useState([])
     const products = useSelector((state) => state.allProducts.products);
+    const loading=useSelector((state)=>state.allProducts.loading);
+    console.log("Loading",loading);
 /*     console.log("products.category",products.map((item)=>item.category)); */
     const categories = products?.map((cat,i)=>cat.category);
     let AllCategories = [...new Set(categories)]
     let LimitedProducts={}
-     LimitedProducts=products.filter((val,i)=>val.category===AllCategories[0])
+     LimitedProducts=products?.filter((val,i)=>val.category===AllCategories[0])
     const LimitedProducts2=products?.map((cat,i)=>cat.category).reduce((val,i)=>val.includes(i)?val:[...val,i],[])
 /*     console.log("LimitedProducts2",LimitedProducts2); */
     const LimitedProducts3=products.filter((val,i)=>val.category===AllCategories[2])
@@ -193,6 +197,8 @@ else{
         <>
             {/* <Header/> */}
 <MainCarousel/>
+{/* <img src={loadingsvg} alt=""/> */}
+{/* <Loading/> */}
 <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -208,53 +214,45 @@ else{
             />
              
           </div>
-        {/*  <img src={NoResult} alt=""/> */}
+{loading&&<Loading/>}
+
+{!loading&&<>
+
           {data.length>0?
             AllCategories.map((val,i)=>{
-              /*                   const product = products?.map((item)=>item.category).find((item) => item.category===parseInt(LimitedProducts2))
-                                console.log("test category ",product) */
                           return(
                             <div  key={i}>
                               <div className={classes.title}>
-              
-                        
-                            <Link to={`/categorylist/${val}`}  className={classes.categoryListContainer} >    <Typography variant="h4" style={{fontSize:"2.5rem",display:"flex",alignItems:"center",/* padding:"30px 10px 20px 0", */textAlign:"center"}}>{val} {/* <ArrowLeftIcon style={{fontSize:"30px"}}  /> */}</Typography>   </Link>
+
+                            <Link to={`/categorylist/${val}`}  className={classes.categoryListContainer}>   
+                             <Typography variant="h4" style={{fontSize:"2.5rem",display:"flex",alignItems:"center",textAlign:"center"}}>
+                               {val}
+                               </Typography>  
+                             </Link>
                             </div>
                             <div className={classes.container} >
                          
                          <br></br>
                     
                          <Grid container  justify="center">
-                         <Grid container justify="center" item xs={12} spacing={3}>
-                         {data.length>0&&data.filter(person=>person.category===val).filter((val,i)=>i<6).map((filtered)=>{
+                             <Grid container justify="center" item xs={12} spacing={3}>
+                                  {data.length>0&&data.filter(person=>person.category===val).filter((val,i)=>i<6).map((filtered)=>{
                              return(
-                              
-                           
+
                          <>
-                              
-                                  
-                                {/*   {console.log("filtered id",filtered)} */}
-                                 
+  
                                   <Link   className={classes.ProductCardContainer}   to={`/AllProductsInGroup/${filtered.id}`}>
                                 
-                                  <ProductCard item={filtered}/>
+                                        <ProductCard item={filtered}/>
                                  
                                   </Link>
-                              
-                          
-                                   
-              
-                                  
-                                              
-                                              
+       
                                   </>    
-                                            
-                                             
+               
                             )} ) 
-                                     
-                                     
-                                    
+
                                      }
+
                                      {
                                        data.length>0&&                      
                                          <div  className={classes.SeeMoreContainer} >
@@ -271,10 +269,14 @@ else{
                           )
                         })
                           
-:
-<div style={{display:"flex",flexDirection:"column",justifyContent:"center"}}><Typography variant="h4" component="h4" color="error" align="center">کالایی یافت نشد !</Typography> <img src={NoResult} alt="" className={classes.img}/></div>
-          }
-          
+         :
+               <div style={{display:"flex",flexDirection:"column",justifyContent:"center"}}>
+                  <Typography variant="h4" component="h4" color="error" align="center">کالایی یافت نشد !</Typography> 
+                 <img src={NoResult} alt="" className={classes.img}/>
+              </div>
+       }
+          </>}
+
         </>
     )
 }

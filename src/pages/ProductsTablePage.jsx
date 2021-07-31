@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {update,addAproduct}from "../api/products"
 import MainModal from "../components/MainModal"
 import {addProduct,getProducts,deleteproduct,editItem}from "../redux/actions/productActions"
+import Loading from '../components/Loading';
 const useStyles = makeStyles((theme)=>({
     table: {
       minWidth: 650,
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme)=>({
 
 const Products = () => {
 
- const products = useSelector((state) => state.allProducts.products);
+ const loading=useSelector((state)=>state.allProducts.loading);
 const dispatch = useDispatch();
     useEffect(() => {
 
@@ -63,30 +64,21 @@ const dispatch = useDispatch();
 
         
       };
+     
     
-/*       const handleClose2 = () => {
-        setOpen2(false);
-      }; */
   
     return (
         <div >
             
 
-
-           <ProductsTable action={handleEdit} handleOpen={()=>handleOpen()} />
-{/*            <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description" 
-        children={<AddProduct handleClose={handleClose} />}
-      >
-
-       
-      </Modal> */}
+{loading&&<Loading/>}
+{!loading&&
+<>
+    <ProductsTable action={handleEdit} handleOpen={()=>handleOpen()} />
 {open&&(<MainModal openModal={open} handleClose={handleClose} selectedProduct={selectedProduct} option={option}/>)}
-         
 
+</>
+}
 
         </div>
     )

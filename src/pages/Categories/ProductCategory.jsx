@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
-import {getChangeList} from "../../api/products"
+import {getAllProducts} from "../../api/products"
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import NoResult from "../../assets/No_results.png"
@@ -25,21 +25,31 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
     },
     pagination: {
-      margin: "15px auto",
       display: "flex",
+      justifyContent:" space-between",
       listStyle: "none",
-      outline: "none",
-      '&>active > a': {
-          background: "rgb(103,182,108)",
-          borderColor: "rgb(103,182,108)",
-          color: "#fff"
-      },
-      '&>li > a': {
-          border: "1px solid rgb(103,182,108)",
-          padding: "5px 10px",
-          outline: "none",
-          cursor: "pointer"
-      },
+      cursor: "pointer",
+      margin: "15px auto",
+    },
+
+    pagination_a:{
+/*       backgroundColor:" #3a9bff", */
+      borderRadius: "5px",
+      fontWeight:"bold",
+      border: "2px solid #9fceff",
+      height: "40px",
+     /*  color: "#6c7ac9", */
+     marginRight:"10px",
+      padding: " 0px 12px",
+      /* fontSize:"13px" */
+    },
+    pagination_active:{
+      backgroundColor:"#3a9bff",
+    },
+    pagination_disable:{
+      color: "rgb(198, 197, 202)",
+      border: "1px solid rgb(198, 197, 202)",
+      
     },
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
@@ -136,16 +146,17 @@ const useStyles = makeStyles((theme) => ({
   }));
 const ProductCategory = ({category}) => {
 /*   const {category}=useParams() */
-  console.log("category",category);
+ /*  console.log("category",category); */
   const [data, setData] = useState([])
   const [search, setSearch] = useState("")
+  const [productsCategory, setProductsCategory] = useState([])
   const [Mycategory, setMyCategory] = useState("")
   const dispatch = useDispatch();
   const products = useSelector((state) => state.allProducts.products);
   const test = products?.sort((a, b) => (new Date(a) < new Date(b) ? 1 : -1))
   const categories = products.map((cat,i)=>cat.category);
   let AllCategories = [...new Set(categories)]
-console.log("AllCategories",AllCategories);
+/* console.log("AllCategories",AllCategories); */
   const classes = useStyles();
   useEffect(() => {
       dispatch(getProducts());
@@ -163,15 +174,6 @@ console.log("category",category);
     const [sortParam, setSortParam] = useState('id')
     const [order, setOrder] = useState('desc')
     const [empty, setEmpty] = useState([])
-    const [page, setPage] = useState(1)
-    const handlePageClick = (e) => {
-        const selectedPage = e.selected;
-        // console.log(selectedPage);
-        setPage(selectedPage + 1)
-    }
-    const pageCount = Math.ceil(Number(data?.length) / 4)
-    console.log("page",page);
-    console.log("pageCount",pageCount);
     const handleSort = (e) => {
         setValueSort(e.target.value)
 /*         if (e.target.value === 'جدید ترین') {
@@ -203,25 +205,50 @@ console.log("category",category);
     useEffect(() => {
         
       if (search !== '') {
-          console.log("search");
+         /*  console.log("search"); */
           const filteredData = products.filter(item => item.title.toLowerCase().includes(search.toLowerCase()))
-          console.log(filteredData);
+         /*  console.log(filteredData); */
           
           setEmpty(filteredData)
           setData(filteredData)
 
       } else {
-/*           getChangeList(page).then(res => {
-              console.log("res",res);
-              setData(res.data)
-          }) */
-          console.log("data",data);
-         /*  setEmpty(!empty) */
+
           setData(products)
           setEmpty(products)
       }
      
-  }, [ search, products,sortParam,order,valueSort,page])
+  }, [ search, products,sortParam,order,valueSort])
+
+const [currentPage, setCurrentPage] = useState(1)
+const [postsPerPage, setPostsPerPage] = useState(10)
+const handlePageClick = (e) => {
+  const selectedPage = e.selected;
+  // console.log(selectedPage);
+  setCurrentPage(selectedPage + 1)
+}
+
+useEffect(() => {
+  const categoryPosts=[];
+  data?.filter((person)=>person.category===category)?.map((filtered)=>{
+/*     for (let i = 0; i <= filtered.length; i++) { */
+      categoryPosts.push(filtered)
+      console.log("categoryPosts",categoryPosts);
+     
+/*       
+    } */
+   
+  })
+  setProductsCategory(categoryPosts)
+  console.log("ProductsCategory",productsCategory);
+}, [products,data,valueSort])
+
+/* cusom pagination */
+
+      const indexOfLastPost=currentPage * postsPerPage;
+      const indexOfFirstPost=indexOfLastPost- postsPerPage;
+      const currentPosts=productsCategory?.slice(indexOfFirstPost,indexOfLastPost)
+      const pageCount = Math.ceil(Number(productsCategory?.length/postsPerPage) )
 /*   getChangeList().then(res => {
     console.log("res",res);
     setData(res.data)
@@ -243,17 +270,7 @@ console.log("category",category);
            <Grid container /* justify="center" */   spacing={3}>
           
              <Grid item xs={12} spacing={1} justify="center" className={classes.searchContainer}>
-             <ReactPaginate
-                                previousLabel={"قبلی"}
-                                nextLabel={"بعدی"}
-                                
-                                pageCount={pageCount}
-                                marginPagesDisplayed={2}
-                                pageRangeDisplayed={5}
-                                onPageChange={handlePageClick}
-                                containerClassName={classes.pagination}
-                               
-                                /* activeClassName={active} */ />
+           
 {/*              <Input
                                     
                                     placeholder="جستجو... "
@@ -269,7 +286,7 @@ console.log("category",category);
             </div>
             <InputBase
             onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search…"
+              placeholder="جستجو..."
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
@@ -296,12 +313,12 @@ console.log("category",category);
                                    </Select>
              </Grid>
             {empty?.length!==0&&<Link /* href="/AllProductsInGroup" */ >    <Typography variant="h4" style={{display:"flex",alignItems:"center",marginBottom:"30px"}}>{category} <ArrowLeftIcon style={{fontSize:"30px"}}  /></Typography>   </Link>} 
-            
+
              <Grid container justify="center" xs={12}>
 
              {empty?.length===0&& <div style={{display:"flex",flexDirection:"column",justifyContent:"center"}}> <img src={NoResult} alt="" className={classes.img}/><Typography variant="h4" component="h4" color="error" align="center">کالایی یافت نشد !</Typography></div>}
             
-            {data?.filter((person)=>person.category===category)?.map((filtered)=>{
+            {currentPosts?.filter((person)=>person.category===category)?.map((filtered)=>{
              /*  console.log("filtered",filtered); */
               return(
                 <Link href={`/AllProductsInGroup/${filtered.id}`}>
@@ -313,8 +330,25 @@ console.log("category",category);
                        
 
                        )} 
+
                         </Grid>
+                        <ReactPaginate
+                                previousLabel={"قبلی →"}
+                                nextLabel={"بعدی ←"}
+                                
+                                pageCount={pageCount}
+                                marginPagesDisplayed={2}
+                                pageRangeDisplayed={5}
+                                onPageChange={handlePageClick}
+                                containerClassName={classes.pagination}
+                                activeLinkClassName={classes.pagination_active}
+                                pageLinkClassName={classes.pagination_a}
+                                nextClassName={classes.pagination_a}
+                                previousClassName={classes.pagination_a}
+                                disabledClassName={classes.pagination_disable}
+                                />
                                  </Grid>
+
          </Grid>
        {/*   </div> */}
         </>

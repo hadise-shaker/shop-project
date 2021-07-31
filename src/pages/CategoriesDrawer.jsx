@@ -18,6 +18,7 @@ import ProductCategory from "./Categories/ProductCategory"
 import routes from "../CategoriesRoutes/routes";
 import MyDrawer from "./MyDrawer"
 import { BrowserRouter as Router, Route, Link,NavLink,Switch } from "react-router-dom";
+import Loading from "../components/Loading";
 
 const drawerWidth = 240;
 
@@ -86,6 +87,7 @@ const CategoriesDrawer = props => {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const products = useSelector((state) => state.allProducts.products);
+  const loading=useSelector((state)=>state.allProducts.loading);
   const categories = products.map((cat,i)=>cat.category);
   let AllCategories = [...new Set(categories)]
 
@@ -139,8 +141,9 @@ const CategoriesDrawer = props => {
 
   return (
     <>
-    <Header  className={classes.appBar} handleDrawerToggle={handleDrawerToggle}/>
    
+    <Header  className={classes.appBar} handleDrawerToggle={handleDrawerToggle}/>
+    {loading&&<Loading/>}
       <div className={classes.root}>
       <Router>
         <CssBaseline />
@@ -178,26 +181,29 @@ const CategoriesDrawer = props => {
           </Hidden>
         </nav>
 
+{!loading&&
         <main className={classes.content}>
      
-         {/*  <Switch> */}
+        {/*  <Switch> */}
 
+        
+         {routes.map((route, index) => (
+           <Route
+             exact
+             path={`/categorylist/${route.name}`}
+             
+             /* component={()=><Men category={c}/>} */
+             render={props=><ProductCategory {...props} category={route.name}/>}
+           >
+            {/*  <Men category={myCategory}/> */}
+           </Route>
+          
          
-          {routes.map((route, index) => (
-            <Route
-              exact
-              path={`/categorylist/${route.name}`}
-              
-              /* component={()=><Men category={c}/>} */
-              render={props=><ProductCategory {...props} category={route.name}/>}
-            >
-             {/*  <Men category={myCategory}/> */}
-            </Route>
-           
-          
-        ))}
-          
-        </main>
+       ))}
+         
+       </main>
+}
+
         </Router>
       </div>
   

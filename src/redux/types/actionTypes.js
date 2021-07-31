@@ -20,4 +20,5 @@ export const ActionTypes = {
   ADD_ORDER: "ADD_ORDER",
   CLEAR_CART: "CLEAR_CART",
   SET_COUNT: "SET_COUNT",
+  LOADING: "LOADING",
 };

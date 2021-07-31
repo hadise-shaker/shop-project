@@ -8,6 +8,7 @@ export const getAllProducts = async () => {
   }).catch((err) => console.log(err));
   return res;
 };
+
 export const update = async (id, product) => {
   const data = await axios
     .put(`http://localhost:5000/products/${id}`, product)
@@ -27,16 +28,7 @@ export const getCategoryList = async (category) => {
   // console.log(res.data);
   // setData(res.data)
 };
-export const getChangeList = async (page) => {
-  let res = await axios({
-    method: "get",
-    url: `"http://localhost:5000/products?page[number]=${page}`,
-    headers: { "content-type": "application/json" },
-  }).catch((err) => console.log(err));
-  return res;
-  // console.log(res.data);
-  // setData(res.data)
-};
+
 /* export const updateProduct = async (id, updateProduct) => {
   try {
     let res = await axiosConfig({
@@ -77,13 +69,13 @@ export const addAproduct = async (product) => {
     data: product,
   });
   if (res.status === 404) {
-    toast.error("404 Not Found");
+    return toast.error("404 Not Found");
   }
   if (res.status === 500) {
-    toast.error("Network");
+    return toast.error("Network");
   }
   if (res.status === 201) {
-    toast.success("Successful");
+    return toast.success("Successful");
   }
 
   return res;

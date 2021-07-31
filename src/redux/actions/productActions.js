@@ -109,6 +109,12 @@ export function DecreaseQuantity(payload) {
 //     dispatch(setProducts(res.data));
 //   });
 // };
+export function setLoading() {
+  return {
+    type: ActionTypes.LOADING,
+    // payload:
+  };
+}
 
 export const setCategory = (category) => async (dispatch) => {
   const res = await getAllProducts();
@@ -121,6 +127,7 @@ export const getProducts = () => async (dispatch, getState) => {
   let res = await getAllProducts();
   let response = res.data.sort((a, b) => (new Date(a) < new Date(b) ? 1 : -1));
   dispatch(setProducts(response));
+  dispatch(setLoading());
 };
 
 export const getAProduct = (id) => async (dispatch) => {
