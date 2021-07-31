@@ -1,40 +1,87 @@
 import React,{useState} from 'react';
 import PropTypes from 'prop-types';
 import {useDispatch, useSelector} from "react-redux";
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import {AppBar,Toolbar,Typography,CssBaseline,useScrollTrigger,Box,Container,Fab,Zoom,IconButton,Badge,Button} from '@material-ui/core';
 import { makeStyles,alpha } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import Zoom from '@material-ui/core/Zoom';
 import { Link, NavLink, useHistory } from 'react-router-dom';
 import {loginUseStyle} from "../styles/index"
 import {ShoppingCartTwoTone} from '@material-ui/icons/';
 import logo from "../styles/img/online-shop2.png"
-import "../assets/header.css"
-import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import Badge from '@material-ui/core/Badge';
-import Button from '@material-ui/core/Button';
-
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AddIcon from '@material-ui/icons/Add'
 import {isLoggedIn} from "../utils/auth"
-
 import { useLocation } from "react-router-dom"
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-/* import {img} from "../styles/img/download.jfif" */
+import { COLORS, FONTS } from "../styles/constantsVariables";
+const useStyles=makeStyles((theme)=>({
+  header: {
+    position: "fixed",
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+  },
+  link: {
+    fontSize: "22px",
+    fontWeight: "bold",
+    color: " white",
+    justifyContent: "center",
+    color: "white",
+    textDecoration: "none",
+    /* margin: "0 0px 0 40px", */
+
+  },
+  backgroundColor: {
+    backgroundColor: COLORS.mainColor,
+    flexGrow: 1,
+    marginBottom: "20px",
+    /* zIndex: "999999", */
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
+    },
+  },
+  root: {
+    flexGrow: 1,
+    fontWeight: "bold",
+    color: "white",
+  },
+  img: {
+    width: "80px",
+    height: "80px",
+    cursor: "pointer",
+  },
+  link_active: {
+    color: "rgb(120, 0, 178)  !important",
+    fontSize: "20px",
+    paddingBottom: "5px",
+    borderBottom: "2px solid  rgb(120, 0, 178)",
+    fontWeight: "bold",
+  },
+  tabs: {
+    margin: "20px",
+    color: "white",
+    textDecoration: "none",
+    margin: "0 0px 0 40px",
+    fontWeight: "bold",
+  },
+  color: {
+    color: "white",
+    fontWeight: "bold",
+    justifyContent: "center",
+    marginRight: "30px",
+        [theme.breakpoints.down("sm")]: {
+      fontSize: "18px",
+      textAlign:"center",
+      width: "40%",
+    },
+  },
+}))
 function ScrollTop(props) {
   const { children, window } = props;
-  const classes = loginUseStyle();
-  // Note that you normally won't need to set the window ref as useScrollTrigger
-  // will default to window.
-  // This is only being set here because the demo is in an iframe.
+  const classes = useStyles();
   const trigger = useScrollTrigger({
     target: window ? window() : undefined,
     disableHysteresis: true,
@@ -67,25 +114,20 @@ ScrollTop.propTypes = {
   window: PropTypes.func,
 };
 
-export default function BackToTop({props,handleDrawerToggle}) {
+export default function Header({props,handleDrawerToggle}) {
   let history = useHistory()
-  const classes = loginUseStyle();
-  const [search, setSearch] = useState("")
- /*   const [count, setCount] = React.useState(1); */
-/*  const count = useSelector(state => state.cart.count) */
+  const classes = useStyles();
  const cartCount = useSelector((state) => state.cart.cart)
-/*  console.log("cartCount.length",cartCount.length); */
  const location = useLocation();
  const handlLogOut=()=>{
-  localStorage.clear();
+  localStorage.removeItem("token");
   history.push("/");
-/*   window.location.reload(); */
+
 }
   return (
-    <React.Fragment /* className={classes.root} */>
-    {/*   <CssBaseline /> */}
+    <React.Fragment >
       <AppBar className={classes.backgroundColor}>
-        <Toolbar className="link">
+        <Toolbar className={classes.link}>
          
         
           <IconButton
@@ -96,54 +138,38 @@ export default function BackToTop({props,handleDrawerToggle}) {
             >
               <MenuIcon />
             </IconButton>
-           <img className="img" src={logo} onClick={()=>history.push("/")} />
-
-{/*            <Button variant="contained" color="primary" className="left" onClick={handlLogOut}>
-          <ExitToAppIcon/>
-            
-            
-             خروج از پنل مدیریت</Button> */} 
+           <img className={classes.img} src={logo} onClick={()=>history.push("/")} />
            
-          
           <Link /* variant="h6" */ className={classes.root} to="/" >فروشگاه دعوت</Link>
-          
 
-        
-          <div style={{width:"35%",margin:"auto"}}>
+          <div style={{width:"40%",margin:"auto"}}>
 
              {window.location.href.indexOf("admin")>-1? <>          
-          <NavLink to="/admin" /* className={classes.root} */ exact activeClassName="link_active" /* component={Products} */> کالا</NavLink>
-          <NavLink to="/admin/price" className="tabs"  exact activeClassName="link_active"/* component={Price} */ > قیمت </NavLink>
-          <NavLink to="/admin/orders" className="tabs"  exact activeClassName="link_active"/* component={Price} */ > سفارش ها </NavLink></>:null}
+                <NavLink to="/admin" className={classes.tabs} exact activeClassName={classes.link_active} /* component={Products} */> کالا</NavLink>
+                <NavLink to="/admin/price" className={classes.tabs}  exact activeClassName={classes.link_active}/* component={Price} */ > قیمت </NavLink>
+                <NavLink to="/admin/orders" className={classes.tabs}  exact activeClassName={classes.link_active}/* component={Price} */ > سفارش ها </NavLink></>:null}
 
           </div>
-          <Badge badgeContent={cartCount?.length} color="primary" anchorOrigin={{
-    vertical: 'top',
-    horizontal: 'left',
-  }}>
-          <ShoppingCartTwoTone/>
+
+          <NavLink to="/cart" className={classes.color} activeClassName={classes.link_active} exact>
+          <Badge  /* showZero={true} */ badgeContent={cartCount?.length} color="primary" anchorOrigin={{vertical: 'top',horizontal: 'left',}}>
+            <ShoppingCartTwoTone/>
           </Badge>
-          <Link to="/cart" activeClassName="link_active" exact>سبد خرید</Link>
-          <Link  to={!isLoggedIn()?"/login":"/admin"} exact activeClassName="link_active">  {window.location.href.indexOf("admin")>-1?           <Button variant="contained" color="primary" /* className="left" */ onClick={handlLogOut}>
-          <ExitToAppIcon/>
-            
-            
-             خروج از پنل مدیریت</Button> :"مدیریت کالا"}    </Link>
- 
-
-            
+            سبد خرید
+          </NavLink>
+          <NavLink  to={!isLoggedIn()?"/login":"/admin"} className={classes.color} exact activeClassName={classes.link_active}>
+              {window.location.href.indexOf("admin")>-1?         
+                <Button variant="contained" color="primary" onClick={handlLogOut}>
+                    <ExitToAppIcon/>
+                   خروج از پنل مدیریت
+                 </Button> :
+                 "مدیریت کالا"}  
+                   </NavLink>
         </Toolbar>
-
-
-          
-
-
-        
       </AppBar>
-      
       <Toolbar id="back-to-top-anchor" />
       <ScrollTop {...props}>
-        <Fab /* className={classes.backgroundColor} */ style={{backgroundColor:"blueviolet",color:"white"}} size="small" aria-label="scroll back to top">
+        <Fab  style={{backgroundColor:"blueviolet",color:"white"}} size="small" aria-label="scroll back to top">
           <KeyboardArrowUpIcon  />
         </Fab>
       </ScrollTop>

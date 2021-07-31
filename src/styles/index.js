@@ -2,6 +2,42 @@ import { makeStyles, createStyle } from "@material-ui/core";
 import { COLORS, FONTS } from "./constantsVariables";
 import "./fonts/font.css";
 export const loginUseStyle = makeStyles((theme) => ({
+  link: {
+    fontSize: "22px",
+    fontWeight: "bold",
+    color: " white",
+    justifyContent: "center",
+
+    color: "white",
+    textDecoration: "none",
+    margin: "0 0px 0 40px",
+  },
+  color: {
+    color: "white",
+    fontWeight: "bold",
+    justifyContent: "center",
+    marginRight: "10px",
+  },
+  img: {
+    width: "80px",
+    height: "80px",
+    cursor: "pointer",
+  },
+  link_active: {
+    color: "rgb(120, 0, 178)  !important",
+    fontSize: "20px",
+    paddingBottom: "5px",
+    borderBottom: "2px solid  rgb(120, 0, 178)",
+    fontWeight: "bold",
+  },
+  tabs: {
+    margin: "20px",
+    color: "white",
+    textDecoration: "none",
+    margin: "0 0px 0 40px",
+    fontWeight: "bold",
+  },
+
   backgroundColor: {
     backgroundColor: COLORS.mainColor,
     flexGrow: 1,
@@ -31,7 +67,7 @@ export const loginUseStyle = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
     backgroundColor: COLORS.mainColor,
-    color: "green",
+    /* color: "green" */
     fontSize: "2rem",
     /*     fontFamily: FONTS.mainFont, */
   },
@@ -40,10 +76,7 @@ export const loginUseStyle = makeStyles((theme) => ({
     border: `2px solid ${COLORS.lightMainColor}`,
     borderRadius: "7px",
   },
-  text: {
-    color: "green",
-    /*     fontFamily: FONTS.mainFont, */
-  },
+
   /*   input: {
     color: COLORS.lightMainColor,
   }, */
@@ -54,11 +87,15 @@ export const loginUseStyle = makeStyles((theme) => ({
     /*     marginBottom: "20px", */
     /*  backgroundColor: COLORS.mainColor, */
     marginBottom: theme.spacing(2),
+    /*     color: "white",
+    textDecoration: "none",
+    margin: "0 0px 0 40px", */
     /* zIndex: "99999", */
   },
   root: {
     flexGrow: 1,
     fontWeight: "bold",
+    color: "white",
   },
   link: {
     marginRight: theme.spacing(3),

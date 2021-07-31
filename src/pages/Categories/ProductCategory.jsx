@@ -333,9 +333,8 @@ useEffect(() => {
 
                         </Grid>
                         <ReactPaginate
-                                previousLabel={"قبلی →"}
-                                nextLabel={"بعدی ←"}
-                                
+                                previousLabel={" →"}
+                                nextLabel={" ←"}
                                 pageCount={pageCount}
                                 marginPagesDisplayed={2}
                                 pageRangeDisplayed={5}

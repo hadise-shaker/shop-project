@@ -31,7 +31,10 @@ const useStyles = makeStyles((theme) => ({
       borderRadius:"10px",
      /*  border:`3px solid #2196f3`, */
       margin:"0 0 10px 10px",
-      boxShadow:"-2px 7px 13px 10px #c3c3c3"
+      boxShadow:"-2px 7px 13px 10px #c3c3c3",
+      '&:hover':{
+        boxShadow:"-2px 7px 13px 10px #9dc5ff",
+      },
     },
     details: {
       display: 'flex',

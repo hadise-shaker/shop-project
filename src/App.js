@@ -3,7 +3,7 @@ import React from "react";
 import "./App.css";
 import AdminLogin from "./components/AdminLogin";
 import Header from "./components/Header";
-import Home from "./components/Home";
+import Home from "./pages/HomePage/Home";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { isLoggedIn } from "./utils/auth";
 import ControlPanel from "./pages/ControlPanel";
@@ -20,7 +20,8 @@ import Cart from "./pages/Cart";
 import MainLayout from "./Layout/MainLayout";
 import ControlPanelLayout from "./Layout/ControlPanelLayout";
 import AllProductsInGroup from "./pages/AllProductsInGroup";
-import ProductDetail from "./components/ProductDetail";
+import ProductDetail from "./components/Products/ProductDetail";
+
 import ResponsiveDrawer from "./pages/CategoriesDrawer";
 import NotFound from "./pages/NotFound";
 import FinalShop from "./components/FinalShop";
@@ -65,7 +66,7 @@ function App() {
             <Route exact path="/payment" component={Payment} />
             <Route exact path="/payment/success" component={SuccessPayment} />
             <Route exact path="/payment/failed" component={FailedPayment} />
-            {/*           <Route path="*" exact component={NotFound}></Route> */}
+            <Route path="*" exact component={NotFound}></Route>
           </Switch>
         </MainLayout>
       </Router>
