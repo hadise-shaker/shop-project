@@ -14,7 +14,7 @@ import Box from '@material-ui/core/Box';
 import {useParams, useHistory} from "react-router-dom";
 import { getAProduct,getProducts } from "../../redux/actions/productActions";
 import { useDispatch, useSelector } from "react-redux";
-import Header from "../Header"
+import Header from "../MainComponents/Header"
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';

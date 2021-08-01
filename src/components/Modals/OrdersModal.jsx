@@ -7,12 +7,12 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
-import {COLORS}from "../styles/constantsVariables"
+import {COLORS}from "../../styles/constantsVariables"
 import CancelIcon from '@material-ui/icons/Cancel';
 import { useDispatch, useSelector } from "react-redux";
-import {addProduct,getProducts,editItem,editProduct}from "../redux/actions/productActions"
+import {addProduct,getProducts,editItem,editProduct}from "../../redux/actions/productActions"
 import MenuItem from '@material-ui/core/MenuItem';
-import UserProductTable from "./UserProductTable"
+import ModalTableProduct from "../AdminManagment/ModalTableProduct"
 import Typography from "@material-ui/core/Typography"
 const OrdersModal = ({ openModal,handleClose,selectedProduct,isDeliver,action}) => {
 /*   const orders = useSelector((state) => state.userOrders); */
@@ -50,32 +50,7 @@ const OrdersModal = ({ openModal,handleClose,selectedProduct,isDeliver,action}) 
       }
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
-/*   const [title, setTitle] = useState(selectedProduct.title);
-  const [category, setCategory] = useState(selectedProduct.category);
-  const [description, setDescription] = useState(selectedProduct.description);
-  const [image, setImage] = useState(selectedProduct.image);
-  const dispatch = useDispatch(); */
-  /* const handleSave = (id)=>{
-    {option?      
-        dispatch(editProduct({
-        title,
-        category,
-        description,
-        image,
-        id
-      })):
-      dispatch(addProduct({
-        title,
-        category,
-        description,
-        image,
-      }));
-    }
-    
-  window.location.reload();
-    handleClose();
 
-  } */
 
   return (
     <div>
@@ -90,33 +65,29 @@ const OrdersModal = ({ openModal,handleClose,selectedProduct,isDeliver,action}) 
         BackdropProps={{
           timeout: 500,
         }}
-        /* children={<UserProductTable products={selectedProduct.products}/>} */
       >
          <div style={modalStyle} className={classes.paper}>
         
-        <form /* onSubmit={(e)=>e.preventDefault()} */ >
-        <CancelIcon  color="primary"  onClick={handleClose} className={classes.closebtn} />
-        <Typography component="h5" variant="h5" >
-          نام مشتری :  {selectedProduct.username}
-      </Typography>
-      <Typography component="h5" variant="h5">
-        آدرس :  {selectedProduct.address}
-      </Typography>
-      <Typography component="h6" variant="h6">
-        تلفن : {selectedProduct.phone}
-      </Typography>
-      <Typography component="h6" variant="h6">
-        زمان تحویل :{selectedProduct.handleTime}
-      </Typography>
-      <Typography component="h6" variant="h6">
-       زمان سفارش :{selectedProduct.ordertime}
-      </Typography>   
- 
-         {/*  <button    onClick={()=>handleSave(selectedProduct.id)}> ذخیره</button> */}
+        <form  >
+            <CancelIcon  color="primary"  onClick={handleClose} className={classes.closebtn} />
+            <Typography component="h5" variant="h5" >
+              نام مشتری :  {selectedProduct.username}
+            </Typography>
+            <Typography component="h5" variant="h5">
+              آدرس :  {selectedProduct.address}
+            </Typography>
+            <Typography component="h6" variant="h6">
+              تلفن : {selectedProduct.phone}
+            </Typography>
+            <Typography component="h6" variant="h6">
+              زمان تحویل :{selectedProduct.handleTime}
+            </Typography>
+            <Typography component="h6" variant="h6">
+              زمان سفارش :{selectedProduct.ordertime}
+            </Typography>   
+
         </form>
-       
-        {/* <button onClick={handleClose}>close</button> */}
-        <UserProductTable products={selectedProduct.products}/>
+        <ModalTableProduct products={selectedProduct.products}/>
         {isDeliver&&<Button onClick={action} variant="contained" color="primary" >تحویل شد</Button>}
       </div>
       

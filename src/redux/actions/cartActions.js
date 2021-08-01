@@ -1,13 +1,3 @@
-import {
-  getAllCart,
-  addAcart,
-  deleteAcart,
-  addAproduct,
-  update,
-  getAitemById,
-  increaseAmount2,
-} from "../../api/cart";
-
 import { ActionTypes } from "../types/actionTypes";
 
 export function addToCart(items) {

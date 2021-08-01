@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getCartFromLocalStorage } from "../../utils/helpers";
-import { getAllCart } from "../../api/cart";
 
 const CartReducer = createSlice({
   name: "cart",

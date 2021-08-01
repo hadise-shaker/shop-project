@@ -1,30 +1,44 @@
 import React from "react";
-import { Typography, Box, Container } from "@material-ui/core";
+import { Typography, Box, Container,makeStyles } from "@material-ui/core";
 import FacebookIcon from '@material-ui/icons/Facebook';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import InstagramIcon from '@material-ui/icons/Instagram';
+const useStyles=makeStyles((theme)=>({
+footer:{
+  bottom: 0,
+    position: "absolute",
+    width: "100%",
+    height: "0%",
+  alignItems:"center"
+},
+  firstLayer:{
+    backgroundColor:"#c0c0c1"
+  },
+  firstLayerContainer:{
+   display:"flex",
+   justifyContent:"space-between",
+   alignItems:"center",
+   height:"60px"
+  },
+  secondLayer:{
+    backgroundColor:"#997af2"
+  }
 
+}))
 
 const Footer = () => {
-
+const classes=useStyles();
 
   return (
-    <footer
-    //  style={{margin:"60vh 0 0 0"}}
-    style={{bottom: 0,
-      position: "absolute",
-      width: "100%",
-      height: "0%",
-    alignItems:"center"}}
-     >
-      <Box style={{backgroundColor:"#c0c0c1"}} /* bgcolor="text.secondary" */ >
-        <Container style={{display:"flex",justifyContent:"space-between",alignItems:"center",height:"60px"}} maxWidth="lg">
+    <footer className={classes.footer}>
+      <Box  className={classes.firstLayer} >
+        <Container  className={classes.firstLayerContainer} maxWidth="lg">
           <Box >
             <Typography align="left" variant="h5" component="h5">فروشگاه دعوت</Typography>
           </Box>
-          <Box textAlign="center">
+{/*           <Box textAlign="center">
             <Typography>Footer</Typography>
-          </Box>
+          </Box> */}
           <Box textAlign="center">
           <FacebookIcon />
           <LinkedInIcon />
@@ -32,7 +46,7 @@ const Footer = () => {
           </Box>
         </Container>
       </Box>
-      <Box style={{backgroundColor:"#997af2"}}>
+      <Box className={classes.secondLayer}>
       <Container maxWidth="lg">
           <Box textAlign="center">
             <Typography variant="h6" component="h6">Designed By : Hadise Shaker</Typography>

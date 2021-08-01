@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react'
-import Header from "../../components/Header"
+import Header from "../../components/MainComponents/Header"
 import { useDispatch,useSelector } from "react-redux";
 import {addProduct,getProducts,deleteproduct,editItem}from "../../redux/actions/productActions"
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -7,12 +7,12 @@ import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid"
 import {COLORS} from "../../styles/constantsVariables"
 import doubleArrow from "../../assets/double-left.png"
-import MainCarousel from "../../components/MainCarousel"
+import MainCarousel from "../../components/MainComponents/MainCarousel"
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import NoResult from "../../assets//No_results.png"
-import Loading from "../../components/Loading"
-import ProductCard from "../../components/ProductCard"
+import Loading from "../../components/Loading/Loading"
+import ProductCard from "../../components/Products/ProductCard"
 import { useHistory,Link } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
     root: {

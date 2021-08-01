@@ -42,16 +42,13 @@ export const addedOrder = async (newOrder) => {
     });
 
     if (res.status === 404) {
-      // console.log("post data is ok");
-      // return toast.error("Not found")
     }
     if (res.status === 500) {
-      // return toast.error("Network error")
     }
     console.log("post api new order", res);
     return res;
   } catch (err) {
-    //  console.log(err)
+    console.log(err);
     throw err;
   }
 };

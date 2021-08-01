@@ -18,32 +18,6 @@ export const update = async (id, product) => {
     .catch((err) => console.log(err));
 };
 
-export const getCategoryList = async (category) => {
-  let res = await axios({
-    method: "get",
-    url: `"http://localhost:5000/products?category=${category}&start=0&_limit=6`,
-    headers: { "content-type": "application/json" },
-  }).catch((err) => console.log(err));
-  return res;
-  // console.log(res.data);
-  // setData(res.data)
-};
-
-/* export const updateProduct = async (id, updateProduct) => {
-  try {
-    let res = await axiosConfig({
-      method: "put",
-      url: `/products/${id}`,
-      headers: { "content-type": "application/json" },
-      data: updateProduct,
-    });
-    return res;
-  } catch (err) {
-    throw err;
-  }
-  // console.log("res put api",res);
-}; */
-
 export const getAProductById = async (id) => {
   let res = await axios({
     method: "get",
