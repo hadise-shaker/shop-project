@@ -7,13 +7,7 @@ import {
 } from "../../api/products";
 
 import { ActionTypes } from "../types/actionTypes";
-/* export const INCREASE_QUANTITY = "INCREASE_QUANTITY";
-export const DECREASE_QUANTITY = "DECREASE_QUANTITY";
-export const GET_ALL_PRODUCT = "GET_ALL_PRODUCT";
-export const GET_NUMBER_CART = "GET_NUMBER_CART";
-export const ADD_CART = "ADD_CART";
-export const UPDATE_CART = "UPDATE_CART";
-export const DELETE_CART = "DELETE_CART"; */
+
 export const setProducts = (products) => {
   return {
     type: ActionTypes.ADD_PRODUCT,
@@ -59,69 +53,12 @@ export const setProductsByCategory = (category) => {
     payload: category,
   };
 };
-/* export function GetNumberCart() {
-  return {
-    type: "GET_NUMBER_CART",
-  };
-}
 
-export function AddCart(payload) {
-  return {
-    type: "ADD_CART",
-    payload,
-  };
-}
-export function UpdateCart(payload) {
-  return {
-    type: "UPDATE_CART",
-    payload,
-  };
-}
-export function DeleteCart(payload) {
-  return {
-    type: "DELETE_CART",
-    payload,
-  };
-}
-
-export function IncreaseQuantity(payload) {
-  return {
-    type: "INCREASE_QUANTITY",
-    payload,
-  };
-}
-export function DecreaseQuantity(payload) {
-  return {
-    type: "DECREASE_QUANTITY",
-    payload,
-  };
-} */
-
-/* export const setEdit = () => {
-  return {
-    type: ActionTypes.SET_EDIT,
-  };
-}; */
-
-// export const getProducts = () => (dispatch, getState) => {
-//   getAllProducts().then((res) => {
-//     console.log(res.data);
-//     dispatch(setProducts(res.data));
-//   });
-// };
 export function setLoading() {
   return {
     type: ActionTypes.LOADING,
-    // payload:
   };
 }
-
-export const setCategory = (category) => async (dispatch) => {
-  const res = await getAllProducts();
-  let response = res.data.sort((a, b) => (new Date(a) < new Date(b) ? 1 : -1));
-  dispatch(setProducts2(response));
-  dispatch(setProductsByCategory(category));
-};
 
 export const getProducts = () => async (dispatch, getState) => {
   let res = await getAllProducts();

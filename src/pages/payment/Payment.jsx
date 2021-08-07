@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory,Redirect } from "react-router-dom";
 import {addNewOrder} from "../../redux/actions/userActions"
 import clearAllCart from "../../redux/actions/cart.reducer"
-import {clearCart} from"../../redux/actions/cartActions"
 const useStyles = makeStyles({
     container:{
         margin:"50px auto"
@@ -28,7 +27,7 @@ const Payment = () => {
         localStorage.removeItem("cart")
        /*  dispatch(clearAllCart()) */
         
-        window.location.reload()
+        /* window.location.reload() */
         setSuccess(true)
         }
     const failedPayment=()=>{

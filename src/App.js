@@ -44,14 +44,6 @@ function App() {
 
             <Route path="/finalShop" exact component={FinalShop} />
             <Route path="/login" exact component={AdminLogin} />
-
-            {/*           <Route path="/test" exact component={ResponsiveDrawer}>
-          </Route> */}
-            {/*             {!isLoggedIn() && (
-              <> */}
-
-            {/*               </>
-            )} */}
             <Route
               exact
               path="/categorylist/:category"

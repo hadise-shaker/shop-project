@@ -31,7 +31,6 @@ import Input from "@material-ui/core/Input"
 import {COLORS} from "../../styles/constantsVariables"
 import { SettingsCellOutlined } from "@material-ui/icons";
 import { addToCart,increaseAmount,setCount} from "../../redux/actions/cart.reducer";
-/* import {AddCart,increaseAmount} from "../redux/actions/cartActions" */
 const useStyles = makeStyles((theme) => ({
   root1: {
 /*     display: 'flex',
@@ -53,6 +52,7 @@ border:"none",
   elevation1:{
     boxShadow:"none",
     textAlign:"center",
+    background:"transparent"
   },
   root: {
     flexGrow: 1,
@@ -68,6 +68,7 @@ border:"none",
   },
   content: {
     flex: '1 0 auto',
+    background:"transparent"
   },
   cover: {
     backgroundColor:"pink",

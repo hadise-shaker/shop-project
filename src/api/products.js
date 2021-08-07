@@ -53,8 +53,6 @@ export const addAproduct = async (product) => {
   }
 
   return res;
-
-  /*   return await axios.post(`http://localhost:5000/products`, data); */
 };
 export const deleteAproduct = async (id) => {
   /*   fetch(`http://localhost:5000/products/${taskId}`, {

@@ -9,6 +9,8 @@ const initialState = {
 
 export const productReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case ActionTypes.LOADING:
+      return { ...state, loading: false };
     case ActionTypes.SET_PRODUCT:
       return { ...state.products, products: payload };
     case ActionTypes.ADD_PRODUCT:
@@ -29,8 +31,6 @@ export const productReducer = (state = initialState, { type, payload }) => {
         ...state,
         products: state.products.filter(({ id }) => id !== payload),
       };
-    case ActionTypes.LOADING:
-      return { ...state, loading: false };
 
     case ActionTypes.SET_PRODUCTS_BY_CATEGORY:
       return {

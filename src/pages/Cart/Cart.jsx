@@ -5,7 +5,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {setCartItems, setTotal,removeItem,decreaseAmount,increaseAmount} from "../../redux/actions/cart.reducer";
 import {Table,TableBody,Modal,TableCell,TableContainer,TableHead,TableRow,Paper,Button,Avatar,TablePagination,makeStyles,withStyles} from '@material-ui/core';
-import {getCart,getAitem,deletecart} from "../../redux/actions/cartActions"
 import Header from "../../components/MainComponents/Header"
 import { useHistory } from 'react-router-dom';
 import Typography from "@material-ui/core/Typography"
