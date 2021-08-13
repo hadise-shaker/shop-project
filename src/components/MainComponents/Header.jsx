@@ -13,6 +13,7 @@ import AddIcon from '@material-ui/icons/Add'
 import {isLoggedIn} from "../../utils/auth"
 import { useLocation } from "react-router-dom"
 import { COLORS, FONTS } from "../../styles/constantsVariables";
+import SettingsIcon from '@material-ui/icons/Settings';
 const useStyles=makeStyles((theme)=>({
   header: {
     position: "fixed",
@@ -36,16 +37,31 @@ const useStyles=makeStyles((theme)=>({
     marginBottom: "20px",
     /* zIndex: "999999", */
   },
+  root:{
+    display: "flex",
+    zIndex:" 1100",
+    boxSizing: "border-box",
+    flexShrink: 0,
+    flexDirection: "column",
+    backgroundColor: COLORS.mainColor,
+    flexGrow: 1,
+    marginBottom: "20px",
+  },
   menuButton: {
     marginRight: theme.spacing(2),
     [theme.breakpoints.up("sm")]: {
       display: "none",
     },
   },
-  root: {
+  root1: {
     flexGrow: 1,
     fontWeight: "bold",
     color: "white",
+    display:"contents",
+    [theme.breakpoints.down("xs")]: {
+      display:"none"
+    },
+    
   },
   img: {
     width: "80px",
@@ -65,18 +81,26 @@ const useStyles=makeStyles((theme)=>({
     textDecoration: "none",
     margin: "0 0px 0 40px",
     fontWeight: "bold",
+    
   },
   color: {
     color: "white",
     fontWeight: "bold",
     justifyContent: "center",
     marginRight: "30px",
-        [theme.breakpoints.down("sm")]: {
+    
+/*         [theme.breakpoints.down("sm")]: {
       fontSize: "18px",
       textAlign:"center",
       width: "40%",
-    },
+    }, */
   },
+  cart:{
+    display:"contents",
+    [theme.breakpoints.down("xs")]: {
+      display:"none"
+    },
+  }
 }))
 function ScrollTop(props) {
   const { children, window } = props;
@@ -125,7 +149,10 @@ export default function Header({props,handleDrawerToggle}) {
 }
   return (
     <React.Fragment >
-      <AppBar className={classes.backgroundColor}>
+      <div style={{width:"100%"}}>
+
+      
+      <AppBar className={classes.root}>
         <Toolbar className={classes.link}>
          
         
@@ -139,7 +166,7 @@ export default function Header({props,handleDrawerToggle}) {
             </IconButton>
            <img className={classes.img} src={logo} onClick={()=>history.push("/")} />
            
-          <Link /* variant="h6" */ className={classes.root} to="/" >فروشگاه دعوت</Link>
+          <Link /* variant="h6" */ className={classes.root1} to="/" >فروشگاه دعوت</Link>
 
           <div style={{width:"40%",margin:"auto"}}>
 
@@ -154,7 +181,10 @@ export default function Header({props,handleDrawerToggle}) {
           <Badge  /* showZero={true} */ badgeContent={cartCount?.length} color="primary" anchorOrigin={{vertical: 'top',horizontal: 'left',}}>
             <ShoppingCartTwoTone/>
           </Badge>
-            سبد خرید
+          <span className={classes.cart}>
+          سبد خرید
+          </span>
+            
           </NavLink>
           <NavLink  to={!isLoggedIn()?"/login":"/admin"} className={classes.color} exact activeClassName={classes.link_active}>
               {window.location.href.indexOf("admin")>-1?         
@@ -162,8 +192,15 @@ export default function Header({props,handleDrawerToggle}) {
                     <ExitToAppIcon/>
                    خروج از پنل مدیریت
                  </Button> :
-                 "مدیریت کالا"}  
-                   </NavLink>
+                <>
+                 <SettingsIcon style={{verticalAlign: "middle"}}/>
+                 <div className={classes.cart}>
+                 
+                 مدیریت کالا
+                 </div>
+                 </>
+                 }  
+            </NavLink>
         </Toolbar>
       </AppBar>
       <Toolbar id="back-to-top-anchor" />
@@ -173,7 +210,7 @@ export default function Header({props,handleDrawerToggle}) {
         </Fab>
       </ScrollTop>
 
-
+      </div>
     </React.Fragment>
   );
 }

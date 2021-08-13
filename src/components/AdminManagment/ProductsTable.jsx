@@ -17,12 +17,12 @@ const dispatch = useDispatch();
 
  const useStyles = makeStyles((theme)=>({
         table: {
-          minWidth: 650,
+          minWidth: 300,
           width:"80%",
           margin:"auto",
         },
         TableContainer:{
-          height: 400,
+          /* height: 400, */
            width: '100%',
            marginTop:"20px"
         },
