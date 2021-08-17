@@ -36,9 +36,7 @@ const classes=useStyles();
           <Box >
             <Typography align="left" variant="h5" component="h5">فروشگاه دعوت</Typography>
           </Box>
-{/*           <Box textAlign="center">
-            <Typography>Footer</Typography>
-          </Box> */}
+
           <Box textAlign="center">
           <FacebookIcon />
           <LinkedInIcon />

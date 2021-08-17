@@ -55,13 +55,6 @@ export const addAproduct = async (product) => {
   return res;
 };
 export const deleteAproduct = async (id) => {
-  /*   fetch(`http://localhost:5000/products/${taskId}`, {
-    method: "DELETE",
-  }); */
-  /*   const res = await axios.delete("http://localhost:5000/products", {
-    data: { id },
-  });
-  return res.data.json; */
   await axios.delete(`http://localhost:5000/products/${id}`).then((res) => {
     console.log(res);
   });

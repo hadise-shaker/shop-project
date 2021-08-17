@@ -88,6 +88,7 @@ const useStyles=makeStyles((theme)=>({
     fontWeight: "bold",
     justifyContent: "center",
     marginRight: "30px",
+    textAlign:"center",
     
 /*         [theme.breakpoints.down("sm")]: {
       fontSize: "18px",
@@ -168,7 +169,7 @@ export default function Header({props,handleDrawerToggle}) {
            
           <Link /* variant="h6" */ className={classes.root1} to="/" >فروشگاه دعوت</Link>
 
-          <div style={{width:"40%",margin:"auto"}}>
+          <div style={{margin:"auto"}}>
 
              {window.location.href.indexOf("admin")>-1? <>          
                 <NavLink to="/admin" className={classes.tabs} exact activeClassName={classes.link_active} /* component={Products} */> کالا</NavLink>
