@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import {Box,Button,Container,Grid,Typography} from '@material-ui/core'
 import { makeStyles } from "@material-ui/core/styles";
-import dargah from "../../assets/dargah.jpg"
+import dargah from "../../assets/img/dargah.jpg"
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory,Redirect } from "react-router-dom";
 import {addNewOrder} from "../../redux/actions/userActions"

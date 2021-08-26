@@ -1,19 +1,16 @@
 import React,{useEffect,useState} from 'react'
-import Header from "../../components/MainComponents/Header"
 import { useDispatch,useSelector } from "react-redux";
-import {addProduct,getProducts,deleteproduct,editItem}from "../../redux/actions/productActions"
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Grid from "@material-ui/core/Grid"
+import {getProducts}from "../../redux/actions/productActions"
+import { makeStyles } from '@material-ui/core/styles';
+import {Typography,Grid,InputBase} from '@material-ui/core';
 import {COLORS} from "../../styles/constantsVariables"
-import doubleArrow from "../../assets/double-left.png"
+import doubleArrow from "../../assets/img/double-left.png"
 import MainCarousel from "../../components/MainComponents/MainCarousel"
 import SearchIcon from '@material-ui/icons/Search';
-import InputBase from '@material-ui/core/InputBase';
-import NoResult from "../../assets//No_results.png"
+import NoResult from "../../assets/img/No_results.png"
 import Loading from "../../components/Loading/Loading"
 import ProductCard from "../../components/Products/ProductCard"
-import { useHistory,Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',

@@ -1,30 +1,9 @@
 import React,{useEffect,useState} from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import {Modal ,Button} from '@material-ui/core';
 import ProductsTable from "../../components/AdminManagment/ProductsTable"
 import { useDispatch, useSelector } from "react-redux";
-import {update,addAproduct}from "../../api/products"
 import MainModal from "../../components/Modals/MainModal"
-import {addProduct,getProducts,deleteproduct,editItem}from "../../redux/actions/productActions"
+import {getProducts}from "../../redux/actions/productActions"
 import Loading from '../../components/Loading/Loading';
-const useStyles = makeStyles((theme)=>({
-    table: {
-      minWidth: 650,
-    },
-    root:{
-      fontSize:"30px",
-    }, 
-     paper: {
-      position: 'absolute',
-      width: 400,
-      backgroundColor: theme.palette.background.paper,
-      border: '2px solid #000',
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
-    },
-  }));
-  
-
 
 const Products = () => {
 
@@ -34,14 +13,8 @@ const dispatch = useDispatch();
 
         dispatch(getProducts());
       }, []); 
-
-
-      const classes = useStyles();
-/*       const [modalStyle] = React.useState(getModalStyle); */
       const [open, setOpen] = useState(false);
-      const [open2, setOpen2] = useState(false);
-      const [option, setOption] = useState(false)
-      const [selected, setSelected] = useState();
+      const [isEdit, setIsEdit] = useState(false)
       const [selectedProduct, setSelectedProduct] = useState({
         title:"",
         category:"",
@@ -57,7 +30,7 @@ const dispatch = useDispatch();
       };
       const handleEdit = (row) => {
         setSelectedProduct(row);
-        setOption(true);
+        setIsEdit(true);
         setOpen(true);
 
         
@@ -66,17 +39,19 @@ const dispatch = useDispatch();
     
   
     return (
-        <div >
+        <div>
             
 
-{loading&&<Loading/>}
-{!loading&&
-<>
-    <ProductsTable edit={handleEdit} handleOpen={()=>handleOpen()} />
-{open&&(<MainModal openModal={open} handleClose={handleClose} selectedProduct={selectedProduct} option={option}/>)}
+          {loading&&<Loading/>}
+          {!loading&&
+            <>
+              <ProductsTable edit={handleEdit} handleOpen={()=>handleOpen()} />
+              {open&&
+              <MainModal openModal={open} handleClose={handleClose} selectedProduct={selectedProduct} isEdit={isEdit}/>
+              }
 
-</>
-}
+            </>
+          }
 
         </div>
     )

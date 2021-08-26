@@ -1,19 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React,{useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import Button from "@material-ui/core/Button";
+import {Modal,Backdrop,Button,Typography} from "@material-ui/core";
 import {COLORS}from "../../styles/constantsVariables"
 import CancelIcon from '@material-ui/icons/Cancel';
-import { useDispatch, useSelector } from "react-redux";
-import {addProduct,getProducts,editItem,editProduct}from "../../redux/actions/productActions"
-import MenuItem from '@material-ui/core/MenuItem';
 import ModalTableProduct from "../AdminManagment/ModalTableProduct"
-import Typography from "@material-ui/core/Typography"
 const OrdersModal = ({ openModal,handleClose,selectedProduct,isDeliver,action}) => {
 /*   const orders = useSelector((state) => state.userOrders); */
 
@@ -49,7 +39,7 @@ const OrdersModal = ({ openModal,handleClose,selectedProduct,isDeliver,action}) 
         };
       }
   const classes = useStyles();
-  const [modalStyle] = React.useState(getModalStyle);
+  const [modalStyle] = useState(getModalStyle);
 
 
   return (

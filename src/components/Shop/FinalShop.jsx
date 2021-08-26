@@ -1,18 +1,15 @@
-import React,{useState,useEffect} from 'react'
-import {Input,TextField,Button,Grid, Container, Paper, Card,Typography} from "@material-ui/core"
+import React,{useState} from 'react'
+import {TextField,Button,Grid, Container, Paper, Card,Typography} from "@material-ui/core"
 import moment from "moment";
 import jMoment from "moment-jalaali";
 import JalaliUtils from "@date-io/jalaali";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import {saveNewOrder,addNewOrder} from "../../redux/actions/userActions"
+import { makeStyles } from '@material-ui/core/styles';
+import {saveNewOrder} from "../../redux/actions/userActions"
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts,editProduct } from "../../redux/actions/productActions";
-import{ decreaseAmount,clearAllCart} from "../../redux/actions/cart.reducer"
-import { Redirect, useHistory } from "react-router-dom"
-
+import { Redirect } from "react-router-dom"
 import {toast} from "react-toastify"
-import FillingForm from "../../assets/Project_16-244.png"
+import FillingForm from "../../assets/img/Project_16-244.png"
 jMoment.loadPersian({ dialect: "persian-modern", usePersianDigits: true });
 const useStyles=makeStyles((theme)=>({
 
@@ -21,7 +18,6 @@ const useStyles=makeStyles((theme)=>({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-/*         padding:theme.spacing(6), */
         width:"70%",
         boxShadow:"0px -2px 13px 4px gray"
       },
@@ -45,7 +41,7 @@ const FinalShop = () => {
     const [isRedirect, setIsRedirect] = useState(false)
     const dispatch=useDispatch();
     const cartItems = useSelector((state) => state.cart.cart)
-    console.log("cartItems",cartItems);
+    /* console.log("cartItems",cartItems) */;
     const productSum = cartItems.map(item => Number(item.price * item.number))
     const total = productSum.reduce((sum, item) => (sum += item))
     const handleSetNewOrder = (e) => {

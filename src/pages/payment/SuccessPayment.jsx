@@ -1,6 +1,6 @@
 import React from 'react'
 import {Box,Button,Container,Grid,Typography} from '@material-ui/core'
-import Success from "../../assets/successPayment.png"
+import Success from "../../assets/img/successPayment.png"
 import { makeStyles } from "@material-ui/core/styles";
 const SuccessPayment = () => {
     const useStyles = makeStyles({

@@ -1,27 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
-import TextField from "@material-ui/core/TextField";
-import InputLabel from "@material-ui/core/InputLabel";
-import Input from "@material-ui/core/Input"
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import Button from "@material-ui/core/Button";
-import NativeSelect from "@material-ui/core/NativeSelect"
+import {Modal,Backdrop,TextField,InputLabel,Button,NativeSelect,Avatar} from "@material-ui/core";
 import { useDispatch } from "react-redux";
-import {addProduct,getProducts,editItem,editProduct}from "../../redux/actions/productActions"
-import MenuItem from '@material-ui/core/MenuItem';
+import {addProduct,getProducts,editProduct}from "../../redux/actions/productActions"
 import CancelIcon from '@material-ui/icons/Cancel';
 import {COLORS}from "../../styles/constantsVariables"
-import Avatar from '@material-ui/core/Avatar';
-import Box from "@material-ui/core/Box"
-import Fab from "@material-ui/core/Fab";
 import { ToastContainer, toast } from "react-toastify";
-import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 import { useFilePicker } from "use-file-picker";
-const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
+const MainModal = ({ openModal, handleClose , selectedProduct , isEdit}) => {
 
 
     const useStyles = makeStyles((theme)=>({
@@ -84,54 +70,22 @@ const MainModal = ({ openModal, handleClose , selectedProduct , option}) => {
       useEffect(() => {
         dispatch(getProducts());
       }, [])
-  console.log(selectedProduct);
+/*   console.log(selectedProduct); */
   const classes = useStyles();
-  const [modalStyle] = React.useState(getModalStyle);
+  const [modalStyle] = useState(getModalStyle);
   const [title, setTitle] = useState(selectedProduct.title);
   const [category, setCategory] = useState(selectedProduct.category);
   const [description, setDescription] = useState(selectedProduct.description);
   const [image, setImage] = useState(selectedProduct.image);
 
   const dispatch = useDispatch();
-/* if (option) {
-  setTitle("")
-  setImage("")
-  setDescription("")
-  setCategory("")
-}
-else{
-  setTitle(selectedProduct.title)
-  setImage(selectedProduct.image)
-  setDescription(selectedProduct.description)
-  setCategory(selectedProduct.category)
-} */
   const handleSave = (id)=>{
 
       let updatedProductObj={...selectedProduct, title,image:filesContent[0]?.content || image ,category,description};
-   /*    if (option) {
-        dispatch(editProduct(selectedProduct.id,updatedProductObj)).then(dispatch(getProducts()))
-      }
-      else{
-
-        if (title && category) {
-          dispatch(addProduct({
-            title:title,
-            category:category,
-            description:description,
-            image: filesContent[0]?.content,
-            number:0,
-            price:0
-          }))
-        }else{
-          toast.error("لطفا برای افزودن نام کالا و دسته بندی را مشخص نمایید");
-        }
-      } */
-    {option?      
+    {isEdit?      
         dispatch(editProduct(selectedProduct.id,updatedProductObj)).then(dispatch(getProducts()))
         :
-
         title && category ?
-
           dispatch(addProduct({
             title:title,
             category:category,
@@ -140,14 +94,9 @@ else{
             number:0,
             price:0
           })): toast.error("لطفا برای افزودن نام کالا و دسته بندی را مشخص نمایید");
-          window.location.reload()
-          
-
-        
-     
+          window.location.reload()   
     }
-    dispatch(getProducts())
-;
+    dispatch(getProducts());
     handleClose();
 
   }

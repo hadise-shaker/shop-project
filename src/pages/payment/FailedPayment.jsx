@@ -1,6 +1,6 @@
 import React from 'react'
 import {Box,Button,Container,Grid,Typography} from '@material-ui/core'
-import Failed from "../../assets/failed2.png"
+import Failed from "../../assets/img/failed2.png"
 import { makeStyles } from "@material-ui/core/styles";
 const FailedPayment = () => {
     const useStyles = makeStyles({
@@ -9,7 +9,6 @@ const FailedPayment = () => {
         },
         img:{
             width:"100%",
-           /*  height:"400px" */
         },
         grid:{
             width:"50%",

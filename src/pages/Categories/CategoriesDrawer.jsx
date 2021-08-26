@@ -1,25 +1,14 @@
 import React,{useEffect,useState} from "react";
 import PropTypes from "prop-types";
-
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Divider from "@material-ui/core/Divider";
-import Drawer from "@material-ui/core/Drawer";
-import Hidden from "@material-ui/core/Hidden";
-import {useParams, useHistory} from "react-router-dom";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-
-import Typography from "@material-ui/core/Typography";
+import { BrowserRouter as Router, Route,NavLink,Switch } from "react-router-dom";
+import {CssBaseline,Divider,Drawer,Hidden,List,ListItem,Typography,} from "@material-ui/core";
 import Header from "../../components/MainComponents/Header"
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useDispatch,useSelector } from "react-redux";
-import {addProduct,getProducts,deleteproduct,editItem}from "../../redux/actions/productActions"
+import {getProducts}from "../../redux/actions/productActions"
 import ProductCategory from "./ProductCategory"
 import routes from "../../CategoriesRoutes/routes";
-import MyDrawer from "./MyDrawer"
-import { BrowserRouter as Router, Route, Link,NavLink,Switch } from "react-router-dom";
 import Loading from "../../components/Loading/Loading";
-
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -70,26 +59,17 @@ const useStyles = makeStyles(theme => ({
 
 const CategoriesDrawer = props => {
   const dispatch = useDispatch();
-  const [myCategory, setMyCategory] = useState("")
   useEffect(() => {
 
       dispatch(getProducts());
 
     }, []); 
   const { container } = props;
-    const {category}=useParams()
-   
-    useEffect(() => {
-      console.log(category);
-     setMyCategory(category)
-    }, [])
+
   const classes = useStyles();
   const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const products = useSelector((state) => state.allProducts.products);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const loading=useSelector((state)=>state.allProducts.loading);
-  const categories = products.map((cat,i)=>cat.category);
-  let AllCategories = [...new Set(categories)]
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -102,23 +82,17 @@ const CategoriesDrawer = props => {
         {routes.map((route) => {
           return(
           
-              <Switch>
-
-             
-            <>
-           
-
-           
-<NavLink exact to={`/categorylist/${route.name}`} className={classes.NavLink}  activeClassName={classes.categoryTitle}>
+        <Switch>
+            <>     
+              <NavLink exact to={`/categorylist/${route.name}`} className={classes.NavLink}  activeClassName={classes.categoryTitle}>
                 <ListItem > 
-               <Typography component="h4" variant="h5">
-               {route.name}
-               </Typography>
-               </ListItem>
-               </NavLink>
+                  <Typography component="h4" variant="h5">
+                      {route.name}
+                  </Typography>
+                </ListItem>
+              </NavLink>
   
                   {route.sub.map(item=>
-                
                   (              
                       <Typography style={{padding:"5px 10px 0 0"}} >
                           {item}
@@ -126,14 +100,13 @@ const CategoriesDrawer = props => {
                       ))}
 
             </>
-            </Switch>
+        </Switch>
            
             
              )
          })}
 
-
-  </List>
+      </List>
       <Divider />
     </div>  
     
@@ -143,66 +116,53 @@ const CategoriesDrawer = props => {
     <>
    
     <Header  className={classes.appBar} handleDrawerToggle={handleDrawerToggle}/>
-    {loading&&<Loading/>}
-      <div className={classes.root}>
-      <Router>
-        <CssBaseline />
+        {loading&&<Loading/>}
+        <div className={classes.root}>
+          <Router>
+            <CssBaseline />
 
-        <nav className={classes.drawer}>
-          <Hidden smUp implementation="css">
-            <Drawer
-              container={container}
-              variant="temporary"
-              anchor={theme.direction === "rtl" ? "left" : "right"}
-              open={mobileOpen}
-              onClose={handleDrawerToggle}
-              classes={{
-                paper: classes.drawerPaper
-              }}
-              ModalProps={{
-                keepMounted: true // Better open performance on mobile.
-              }}
-            >
-                {drawer}
-              <Drawer/>
-            </Drawer>
-          </Hidden>
-          <Hidden xsDown implementation="css">
-            <Drawer
-              classes={{
-                paper: classes.drawerPaper
-              }}
-              variant="permanent"
-              open
-            >
-              {drawer}
-             {/*  <MyDrawer category={category}/> */}
-            </Drawer>
-          </Hidden>
-        </nav>
+            <nav className={classes.drawer}>
+              <Hidden smUp implementation="css">
+                <Drawer
+                  container={container}
+                  variant="temporary"
+                  anchor={theme.direction === "rtl" ? "left" : "right"}
+                  open={mobileOpen}
+                  onClose={handleDrawerToggle}
+                  classes={{
+                  paper: classes.drawerPaper
+                  }}
+                  ModalProps={{
+                  keepMounted: true // Better open performance on mobile.
+                  }}
+                >
+                    {drawer}
+                    <Drawer/>
+                </Drawer>
+              </Hidden>
+              <Hidden xsDown implementation="css">
+                <Drawer classes={{paper: classes.drawerPaper}}
+                  variant="permanent"
+                  open
+                >
+                  {drawer}
+                </Drawer>
+              </Hidden>
+            </nav>
 
-{!loading&&
-        <main className={classes.content}>
-     
-        {/*  <Switch> */}
+            {!loading&&
+                <main className={classes.content}>
+                    {routes.map((route, index) => (
+                  <Route
+                  exact
+                  path={`/categorylist/${route.name}`}
+                  render={props=><ProductCategory {...props} category={route.name}/>}
+                  />
 
-        
-         {routes.map((route, index) => (
-           <Route
-             exact
-             path={`/categorylist/${route.name}`}
-             
-             /* component={()=><Men category={c}/>} */
-             render={props=><ProductCategory {...props} category={route.name}/>}
-           >
-            {/*  <Men category={myCategory}/> */}
-           </Route>
-          
+                  ))}
          
-       ))}
-         
-       </main>
-}
+                </main>
+             }
 
         </Router>
       </div>

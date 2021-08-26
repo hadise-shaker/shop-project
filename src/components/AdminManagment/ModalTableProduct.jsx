@@ -1,13 +1,9 @@
-import React,{useEffect,useState,useContext} from 'react'
-import { useDispatch, useSelector } from "react-redux";
-import {Orders}from "../../redux/actions/userActions"
-import DeleteIcon from '@material-ui/icons/Delete';
-import OrdersModal from "../Modals/OrdersModal"
+import React,{useState} from 'react'
 import {COLORS}from "../../styles/constantsVariables"
-import {Table,TableBody,Modal,TableCell,TableContainer,TableHead,TableRow,Paper,Button,Avatar,TablePagination,makeStyles,withStyles} from '@material-ui/core';
+import {Table,TableBody,TableCell,TableHead,TableRow,TablePagination,makeStyles,withStyles} from '@material-ui/core';
 const ModalTableProduct = ({products}) => {
 
-    console.log("user products",products);
+   /*  console.log("user products",products); */
 
     const useStyles = makeStyles((theme)=>({
         table: {
@@ -53,7 +49,7 @@ const ModalTableProduct = ({products}) => {
       };
     return (
         <div>
-           {/*  <Paper  square="true" > */}
+
 
       <Table className={classes.table} aria-label="simple table">
         <TableHead >
@@ -86,20 +82,20 @@ const ModalTableProduct = ({products}) => {
           ))}
            </TableBody>
            <TablePagination
-        rowsPerPageOptions={[5, 10, 15,{ label: 'کل', value: -1 }]}
-        component="div"
-        count={products?.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        className={classes.pagination}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-        dir="rtl"
-        style={{margin:"auto"}}
-        labelRowsPerPage='تعداد سطر های هر صفحه'
-      />
-      </Table>
-       {/*  </Paper> */}
+              rowsPerPageOptions={[5, 10, 15,{ label: 'کل', value: -1 }]}
+              component="div"
+              count={products?.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              className={classes.pagination}
+              onChangePage={handleChangePage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+              dir="rtl"
+              style={{margin:"auto"}}
+              labelRowsPerPage='تعداد سطر های هر صفحه'
+          />
+          </Table>
+
         </div>
     )
 }

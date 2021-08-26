@@ -1,12 +1,8 @@
-
 import React from "react";
 import {useDispatch, } from "react-redux";
-import {Link} from "react-router-dom";
 import {removeItem} from "../../redux/actions/cart.reducer";
 import {Table,TableBody,TableCell,TableHead,TableRow,Button,makeStyles,withStyles} from '@material-ui/core';
-
 import DeleteIcon from '@material-ui/icons/Delete';
-
 function CartTable({cart,page,rowsPerPage}) {
   const useStyles = makeStyles((theme)=>({
     table: {

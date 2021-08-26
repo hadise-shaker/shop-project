@@ -1,7 +1,7 @@
-import React,{useEffect,useState,useContext} from 'react'
-import { useDispatch, useSelector } from "react-redux";
+import React,{useEffect,useState} from 'react'
+import { useDispatch } from "react-redux";
 import {Orders}from "../../redux/actions/userActions"
-import {Table,TableBody,TableCell,TableHead,TableRow,Paper,Button,Avatar,TablePagination,makeStyles,withStyles} from '@material-ui/core';
+import {Table,TableBody,TableCell,TableHead,TableRow,Button,TablePagination,makeStyles,withStyles} from '@material-ui/core';
 const UserDeliveredOrder = ({orders,handleModal}) => {
     const dispatch = useDispatch();
     useEffect(() => {
@@ -38,16 +38,6 @@ const UserDeliveredOrder = ({orders,handleModal}) => {
       const classes = useStyles();
       const [page, setPage] = useState(0);
       const [rowsPerPage, setRowsPerPage] = useState(5);
-      const [selectedProduct, setSelectedProduct] = useState({
-        username:"",
-        address:"",
-        handleTime:"",
-        ordertime:"",
-        phone:"",
-        products: {},
-      });
-
-    const [open, setOpen] = useState(false)
       const handleChangePage = (event, newPage) => {
         setPage(newPage);
       };

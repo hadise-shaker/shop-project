@@ -1,15 +1,14 @@
-import React,{useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {useDispatch, useSelector} from "react-redux";
-import {AppBar,Toolbar,Typography,CssBaseline,useScrollTrigger,Box,Container,Fab,Zoom,IconButton,Badge,Button} from '@material-ui/core';
-import { makeStyles,alpha } from '@material-ui/core/styles';
+import {AppBar,Toolbar,useScrollTrigger,Fab,Zoom,IconButton,Badge,Button} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { Link, NavLink, useHistory } from 'react-router-dom';
 import {ShoppingCartTwoTone} from '@material-ui/icons/';
-import logo from "../../styles/img/online-shop2.png"
+import logo from "../../assets/img/online-shop2.png"
 import MenuIcon from "@material-ui/icons/Menu";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import AddIcon from '@material-ui/icons/Add'
 import {isLoggedIn} from "../../utils/auth"
 import { useLocation } from "react-router-dom"
 import { COLORS, FONTS } from "../../styles/constantsVariables";
@@ -131,10 +130,7 @@ function ScrollTop(props) {
 
 ScrollTop.propTypes = {
   children: PropTypes.element.isRequired,
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
+
   window: PropTypes.func,
 };
 

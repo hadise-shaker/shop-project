@@ -11,11 +11,6 @@ export const orderReducer = (state = initialState, { type, payload }) => {
       return { ...state.orders, orders: payload };
     /*     case ActionTypes.SET_LOADING:
       return { ...state, loading: false }; */
-    /*     case ActionTypes.SET_STATUS_ORDER:
-      return {
-        ...state,
-        orders: state.orders.splice(state.orders.findIndex(item => item.id === payload.id), 1, payload)
-      } */
     case ActionTypes.SET_NEW_ORDER:
       return {
         ...state.orders,

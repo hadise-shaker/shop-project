@@ -1,15 +1,14 @@
 import React from "react";
 import Carousel from "react-material-ui-carousel";
-import pic1 from "../../assets/1.jpg"
-import pic2 from "../../assets/2.jpg"
-import pic3 from "../../assets/3.jpg"
+import pic1 from "../../assets/img/1.jpg"
+import pic2 from "../../assets/img/2.jpg"
+import pic3 from "../../assets/img/3.jpg"
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Grid from '@material-ui/core/Grid';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
 function Item({item}) {
   return (
-    <Grid /* style={{ width: "100%", marginTop:"20px" }} */  xs={12} spacing={3}>   <img style={{width:"100%",borderRadius:"20px"}} src={item.pic} alt=""/> </Grid>
+    <Grid   xs={12} spacing={3}>   <img style={{width:"100%",borderRadius:"20px"}} src={item.pic} alt=""/> </Grid>
   );
 }
 

@@ -1,14 +1,8 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
-import Radio from '@material-ui/core/Radio';
+import React,{useState} from 'react';
+import {Radio,RadioGroup,FormControlLabel,FormControl} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import UserDeliveredOrder from "./UserDeliveredOrder"
 import UserWaitingOrder from "./UserWaitingOrder"
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 const useStyles = makeStyles((theme) => ({
     root: {
             display: "flex",
@@ -31,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 const OrdersManagment = () => {
     const classes = useStyles();
 
-    const [value, setValue] = React.useState('deliveredOrders');
+    const [value, setValue] = useState('deliveredOrders');
 
     const handleChange = (event) => {
       setValue(event.target.value);

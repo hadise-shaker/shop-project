@@ -14,12 +14,6 @@ export const setProducts = (products) => {
     payload: products,
   };
 };
-export const setProducts2 = (products) => {
-  return {
-    type: ActionTypes.SET_PRODUCT,
-    payload: products,
-  };
-};
 
 export const selectedProduct = (product) => {
   return {
@@ -44,13 +38,6 @@ export const editItem = (product) => {
   return {
     type: ActionTypes.EDIT_PRODUCT,
     payload: product,
-  };
-};
-
-export const setProductsByCategory = (category) => {
-  return {
-    type: ActionTypes.SET_PRODUCTS_BY_CATEGORY,
-    payload: category,
   };
 };
 
